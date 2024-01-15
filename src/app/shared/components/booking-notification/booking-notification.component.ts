@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { IBookingNotification } from '../../models/entities/interfaces/IBookingNotification';
+import { IBookingNotification } from '../../../models/entities/interfaces/IBookingNotification';
 import { BookingService } from '../../services/data-sharing/booking.service';
-import { Device } from '../../models/device.enum';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-booking-notification',
   templateUrl: './booking-notification.component.html',
   styleUrls: ['./booking-notification.component.scss']
 })
-export class BookingNotificationComponent implements OnInit {
+export class BookingNotificationComponent {
 
 
   public get bookingNotifications() : IBookingNotification[] {
@@ -20,9 +18,6 @@ export class BookingNotificationComponent implements OnInit {
   constructor(
     private bookingService: BookingService
   ) { }
-
-  ngOnInit() {
-  }
 
   createBooking(booking: IBookingNotification) {
     this.bookingService.addBooking(booking);
