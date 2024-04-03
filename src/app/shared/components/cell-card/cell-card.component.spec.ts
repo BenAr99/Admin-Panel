@@ -8,10 +8,9 @@ describe('CellCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CellCardComponent]
-    })
-    .compileComponents();
-    
+      declarations: [CellCardComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CellCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

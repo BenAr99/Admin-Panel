@@ -18,8 +18,8 @@ import { DeviceIconComponent } from '../../icons/device-icon/device-icon.compone
 export class GridComponent implements OnInit {
   public deviceType: typeof Device = Device;
 
-  public devicesPc: IDevice[] | any;
-  public devicesPs: IDevice[] | any;
+  public devicesPc: IDevice[] | unknown;
+  public devicesPs: IDevice[] | unknown;
 
   private devices: IDevice[] = [
     {
@@ -60,7 +60,7 @@ export class GridComponent implements OnInit {
       device.number,
     );
 
-    const dialogRef = this.dialog.open(DeviceBookingsComponent, {
+    this.dialog.open(DeviceBookingsComponent, {
       minWidth: '400px',
       maxWidth: '400px',
       data: {

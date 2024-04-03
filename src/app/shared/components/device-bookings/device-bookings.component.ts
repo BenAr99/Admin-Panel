@@ -9,7 +9,7 @@ import { IBookingNotification } from '../../../models/entities/interfaces/IBooki
   styleUrls: ['./device-bookings.component.scss'],
   standalone: true,
 })
-export class DeviceBookingsComponent implements OnInit {
+export class DeviceBookingsComponent {
   bookings: IBookingNotification[];
 
   constructor(
@@ -20,9 +20,5 @@ export class DeviceBookingsComponent implements OnInit {
     },
   ) {
     this.bookings = data.selectedDeviceBookings;
-  }
-
-  ngOnInit() {
-    // Fetch and display bookings for this.device
   }
 }

@@ -1,7 +1,8 @@
-import { Directive, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, HostBinding, Input, OnChanges } from '@angular/core';
 
 @Directive({
   selector: '[appCreateMap]',
+  standalone: true,
 })
 export class CreateMapDirective implements OnChanges {
   @Input() width?: number;
