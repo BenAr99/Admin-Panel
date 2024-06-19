@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
-import { HeaderService } from '../../services/header.service';
 
 @Component({
   selector: 'app-menu-item',

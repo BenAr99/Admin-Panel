@@ -1,16 +1,29 @@
 :host {
   display: flex;
-  flex-direction: column;
+  height: 100%;
 }
 
 .default-content {
+  background: #F4F4F4;
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  flex-direction: column;
 }
 
 .content {
-  width: 100%;
-  padding: 20px;
+  background: white;
+  height: 100%;
+  margin: 20px;
+  border-radius: 20px;
+}
+
+.content::-webkit-scrollbar {
+  width: 7px;
+  background-color: #272728;
+}
+
+.content::-webkit-scrollbar-track {
+  width: 7px;
+  background-color: #2e2e70;
 }
 

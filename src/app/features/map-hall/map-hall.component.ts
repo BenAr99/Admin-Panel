@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './map-hall.component.html',
   styleUrl: './map-hall.component.scss',
 })
-export class MapHallComponent {
-  title = 'r23';
-}
+export class MapHallComponent {}

@@ -17,9 +17,6 @@ export class ActiveHeaderComponent implements OnInit {
       next: (value) => {
         this.header = value;
         this.countUser = '';
-        if (this.header === 'Карта зала') {
-          this.countUser = 'Заполненно (временно)';
-        }
       },
     });
   }

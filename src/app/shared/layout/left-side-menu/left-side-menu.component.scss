@@ -15,9 +15,25 @@
   background: rgba(0, 119, 255, 0.04);
 }
 
+.buffer {
+  width: 100%;
+}
+
 @include media.mobile-only {
-  :host {
-    max-width: 103px;
+  .buffer {
+    height: 39px;
+  }
+}
+
+@include media.tablet-landscape-up {
+  .buffer {
+    height: 57px;
+  }
+}
+
+@include media.desktop-up {
+  .buffer {
+    height: 78px;
   }
 }
 

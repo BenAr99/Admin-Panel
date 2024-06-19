@@ -2,13 +2,7 @@
 :host {
   display: flex;
   width: 100%;
-}
-
-.buffer {
-  width: 100%;
-  flex: 0 1 264px;
-  min-width: 103px;
-  max-width: 264px;
+  background: white;
 }
 
 .add-user {

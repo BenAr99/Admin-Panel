@@ -18,11 +18,14 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { CellCardComponent } from './shared/components/cell-card/cell-card.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
-import { UserBookingComponent } from './shared/components/user-booking/user-booking.component';
+import { CellCardComponent } from './shared/components/cell-card/cell-card.component';
 import { DefaultModule } from './shared/layout/default.module';
+import { CreateMapDirective } from './shared/directives/create-map.directive';
+import { TableMapComponent } from './features/map-hall/table-map/table-map.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { DefaultModule } from './shared/layout/default.module';
     UsersComponent,
     NotificationModalComponent,
     CardBookingComponent,
+    TableMapComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,11 +48,13 @@ import { DefaultModule } from './shared/layout/default.module';
     MatDialogTitle,
     MatDialogClose,
     MatButtonModule,
-    CellCardComponent,
     MatDialogActions,
     MatGridListModule,
     MatIconModule,
-    UserBookingComponent,
+    CellCardComponent,
+    CreateMapDirective,
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

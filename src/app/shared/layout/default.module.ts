@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MenuItemComponent } from '../components/menu-item/menu-item.component';
 import { ProfileComponent } from '../components/profile/profile.component';
+import { CellCardComponent } from '../components/cell-card/cell-card.component';
 import { ActiveHeaderComponent } from '../components/active-header/active-header.component';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ActiveHeaderComponent } from '../components/active-header/active-header
     MatDialogModule,
     MatGridListModule,
     MenuItemComponent,
+    CellCardComponent,
     ProfileComponent,
     ActiveHeaderComponent,
   ],
