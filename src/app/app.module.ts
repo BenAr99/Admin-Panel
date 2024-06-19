@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MapHallComponent } from './features/map-hall/map-hall.component';
 import { ZoneTariffsComponent } from './features/zone-tariffs/zone-tariffs.component';
 import { HistoryComponent } from './features/history/history.component';
@@ -27,36 +27,29 @@ import { TableMapComponent } from './features/map-hall/table-map/table-map.compo
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    MapHallComponent,
-    ZoneTariffsComponent,
-    HistoryComponent,
-    UsersComponent,
-    NotificationModalComponent,
-    CardBookingComponent,
-    TableMapComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    DefaultModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatDialogContent,
-    MatDialogTitle,
-    MatDialogClose,
-    MatButtonModule,
-    MatDialogActions,
-    MatGridListModule,
-    MatIconModule,
-    CellCardComponent,
-    CreateMapDirective,
-    MatInputModule,
-    MatSelectModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        MapHallComponent,
+        ZoneTariffsComponent,
+        HistoryComponent,
+        UsersComponent,
+        NotificationModalComponent,
+        CardBookingComponent,
+        TableMapComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        DefaultModule,
+        BrowserAnimationsModule,
+        MatDialogContent,
+        MatDialogTitle,
+        MatDialogClose,
+        MatButtonModule,
+        MatDialogActions,
+        MatGridListModule,
+        MatIconModule,
+        CellCardComponent,
+        CreateMapDirective,
+        MatInputModule,
+        MatSelectModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {}
