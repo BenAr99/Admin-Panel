@@ -26,30 +26,44 @@ import { CreateMapDirective } from './shared/directives/create-map.directive';
 import { TableMapComponent } from './features/map-hall/table-map/table-map.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { CellComponent } from './shared/components/cell/cell.component';
+import { CellHoverComponent } from './shared/components/cell-hover/cell-hover.component';
 
-@NgModule({ declarations: [
-        AppComponent,
-        MapHallComponent,
-        ZoneTariffsComponent,
-        HistoryComponent,
-        UsersComponent,
-        NotificationModalComponent,
-        CardBookingComponent,
-        TableMapComponent,
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        DefaultModule,
-        BrowserAnimationsModule,
-        MatDialogContent,
-        MatDialogTitle,
-        MatDialogClose,
-        MatButtonModule,
-        MatDialogActions,
-        MatGridListModule,
-        MatIconModule,
-        CellCardComponent,
-        CreateMapDirective,
-        MatInputModule,
-        MatSelectModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+@NgModule({
+  declarations: [
+    AppComponent,
+    MapHallComponent,
+    ZoneTariffsComponent,
+    HistoryComponent,
+    UsersComponent,
+    NotificationModalComponent,
+    CardBookingComponent,
+    TableMapComponent,
+    CellComponent,
+    CellComponent,
+    CellHoverComponent,
+  ],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    DefaultModule,
+    BrowserAnimationsModule,
+    MatDialogContent,
+    MatDialogTitle,
+    MatDialogClose,
+    MatButtonModule,
+    MatDialogActions,
+    MatGridListModule,
+    MatIconModule,
+    CellCardComponent,
+    CreateMapDirective,
+    MatInputModule,
+    MatSelectModule,
+    FormsModule,
+    CellCardComponent,
+  ],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
+})
 export class AppModule {}

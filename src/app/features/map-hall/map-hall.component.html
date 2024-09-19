@@ -1,10 +1,17 @@
-<header>
+<header >
   <mat-form-field>
-    <mat-label>Favorite food</mat-label>
-    <mat-select>
 
+    <mat-label>Выберите карту</mat-label>
+    <mat-select [(ngModel)]="mapTypeValue" (selectionChange)="mapLoad($event)">
+      @for (item of this.mapMetas; track item) {
+        <mat-option [value]="item.uuid">{{item.name}}</mat-option>
+      }
     </mat-select>
   </mat-form-field>
 </header>
-<app-table-map></app-table-map>
+
+<div class="table">
+  <app-table-map [cells]="map"></app-table-map>
+</div>
+
 
