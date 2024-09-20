@@ -15,7 +15,7 @@
 
 .device-status {
   margin-top: 5px;
-  min-height: 30px;
+  min-height: 20px;
   width: 100%;
   overflow: hidden;
   text-align: center;
@@ -38,34 +38,3 @@
   z-index: 1;
 }
 
-.container-cell {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.block-cell {
-  display: flex;
-  flex-direction: column;
-  color: #171717;
-}
-
-.title-cell {
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.item-title {
-  font-size: 14px;
-  color: #828282;
-}
-
-.button-cell {
-  margin-top: 10px;
-}
-
-.footer-cell {
-  display: flex;
-  flex-direction: column;
-  margin: 15px;
-}

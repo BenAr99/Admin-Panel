@@ -22,8 +22,8 @@ export interface Device {
   uuid: string;
   type: string;
   name: string;
-  // user: User | null;
-  status: Status;
+  user: User | null;
+  status: DeviceStatus;
 }
 
 export interface User {
@@ -34,19 +34,9 @@ export interface User {
   level: number;
 }
 
+export enum DeviceStatus {
+  Free,
+  Busy = 'dsfsd',
+  Empty = 'void',
+}
 // возможно стоит в отделньый файл статусы
-interface FreeStatus {
-  status: false;
-  description: string;
-}
-interface BusyStatus {
-  status: true;
-  users: User;
-}
-
-type Status = FreeStatus | BusyStatus;
-
-// enum DeviceStatus {
-//   Free,
-//   Busy,
-// }

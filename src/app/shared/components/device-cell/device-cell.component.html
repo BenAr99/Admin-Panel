@@ -1,0 +1,19 @@
+@if (cell.type === 'pc') {
+  <img alt="" src="assets/icons/pc.svg" width="90px" height="90px">
+} @else if (cell.type === 'ps') {
+  <img alt="" src="assets/image/ps.png" width="90px" height="90px">
+}
+<!-- device-cell.status.status _ кринж, но не могу придумать -->
+@if (cell.status && cell.user) {
+  <div class="device-status" (mouseover)="hidden(true)" (mouseleave)="hidden(false)" >{{ cell.user.name }}</div>
+
+  <!-- В теории можно оптимизировать block-device-cell под ngFor, так карточка будет модульная, но нужно
+  и продумать карточку тогда, как она отображается при профиле с юзером и без него,
+  и как тогда будет отображаться отсутствие/наличие брони,
+   но чтобы это сделать, должен понимать, какие данные будут приходить-->
+  <div class="hover" *ngIf="hover" (mouseover)="hidden(true)"  (mouseleave)="hidden(false)">
+    <app-device-booking-preview [cell]="cell"></app-device-booking-preview>
+  </div>
+} @else if (cell.status === enums.DeviceStatus.Free ) {
+  <div class="device-status"><span>Доступен</span></div>
+}

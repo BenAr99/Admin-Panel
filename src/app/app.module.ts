@@ -27,8 +27,9 @@ import { TableMapComponent } from './features/map-hall/table-map/table-map.compo
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
-import { CellComponent } from './shared/components/cell/cell.component';
-import { CellHoverComponent } from './shared/components/cell-hover/cell-hover.component';
+import { DeviceCellComponent } from './shared/components/device-cell/device-cell.component';
+import { DeviceBookingPreviewComponent } from './shared/components/device-booking-preview/device-booking-preview.component';
+import { BookingPreviewBlockComponent } from './shared/components/booking-preview-block/booking-preview-block.component';
 
 @NgModule({
   declarations: [
@@ -40,9 +41,9 @@ import { CellHoverComponent } from './shared/components/cell-hover/cell-hover.co
     NotificationModalComponent,
     CardBookingComponent,
     TableMapComponent,
-    CellComponent,
-    CellComponent,
-    CellHoverComponent,
+    DeviceCellComponent,
+    DeviceBookingPreviewComponent,
+    BookingPreviewBlockComponent,
   ],
   bootstrap: [AppComponent],
   imports: [

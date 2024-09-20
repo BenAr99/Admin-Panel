@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { Device } from '../../../models/entities/interfaces/maps.interface';
+import { Device, DeviceStatus } from '../../../models/entities/interfaces/maps.interface';
 import { debounceTime, Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-cell',
-  templateUrl: './cell.component.html',
-  styleUrl: './cell.component.scss',
+  selector: 'app-device-cell',
+  templateUrl: './device-cell.component.html',
+  styleUrl: './device-cell.component.scss',
 })
-export class CellComponent {
+export class DeviceCellComponent {
   @Input() cell!: Device;
 
   hover?: boolean;
@@ -21,4 +21,8 @@ export class CellComponent {
     console.log(this.hover);
     this.mouseEnterSubject.next(value);
   }
+
+  enums = {
+    DeviceStatus,
+  };
 }
