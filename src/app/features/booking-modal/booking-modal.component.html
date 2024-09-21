@@ -1,0 +1,63 @@
+<span class="header">Забронировать вручную</span>
+<!--<mat-form-field class="example-full-width">-->
+<!--  <mat-label>Имя</mat-label>-->
+<!--  <input type="text" matInput>-->
+<!--&lt;!&ndash;  @if (createCardForm.get('title')?.hasError('required')) {&ndash;&gt;-->
+<!--&lt;!&ndash;    <mat-error>Требуется <strong>название</strong></mat-error>&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--</mat-form-field>-->
+
+<form [formGroup]="booking" class="example-form">
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Имя</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Телефон</mat-label>
+    <input matInput formControlName="phone">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Игровой пакет</mat-label>
+    <mat-select formControlName="packet">
+<!--          @for (test of enums.Packet; track test) {-->
+<!--            <mat-option [value]="test">{{test}}</mat-option>-->
+<!--          }-->
+<!--      <mat-option [value]="enums.Packet.one">{{enums.Packet.one}}</mat-option>-->
+<!--      <mat-option [value]="enums.Packet.three">{{enums.Packet.three}}</mat-option>-->
+<!--      <mat-option [value]="enums.Packet.night">{{enums.Packet.night}}</mat-option>-->
+<!--      <mat-option [value]="enums.Packet.allDay">{{enums.Packet.allDay}}</mat-option>-->
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Логин</mat-label>
+    <input matInput formControlName="login">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Зона</mat-label>
+    <mat-select formControlName="zone">
+      @for (map of mapMetas; track map) {
+        <mat-option [value]="map.uuid">{{ map.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Время</mat-label>
+    <input matInput formControlName="time">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Номер устройства</mat-label>
+    <input matInput formControlName="device">
+  </mat-form-field>
+</form>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Отменить</button>
+  <button mat-raised-button color="primary"  (click)="createBooking()">Подтвердить</button>
+</mat-dialog-actions>
