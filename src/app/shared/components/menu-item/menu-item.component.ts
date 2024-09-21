@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -7,6 +7,7 @@ import { MatBadgeModule } from '@angular/material/badge';
   selector: 'app-menu-item',
   templateUrl: './menu-item.component.html',
   styleUrl: './menu-item.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatButtonModule, MatIconModule, MatBadgeModule],
   standalone: true,
 })

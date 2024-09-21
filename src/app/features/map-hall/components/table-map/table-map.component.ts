@@ -1,4 +1,11 @@
-import { Component, ElementRef, HostBinding, Input, OnChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnChanges,
+} from '@angular/core';
 import { MapDetails } from '../../../../models/entities/interfaces/maps.interface';
 import { MapsService } from '../../services/maps.service';
 
@@ -6,6 +13,7 @@ import { MapsService } from '../../services/maps.service';
   selector: 'app-table-map',
   templateUrl: './table-map.component.html',
   styleUrl: './table-map.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MapsService],
 })
 export class TableMapComponent implements OnChanges {

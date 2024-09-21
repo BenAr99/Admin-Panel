@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MapsService } from './services/maps.service';
 import { MapDetails, MapMeta } from '../../models/entities/interfaces/maps.interface';
-import { filter } from 'rxjs';
 import { MapsStateService } from './services/maps-state.service';
 
 // SR: В модуль всю эту логику

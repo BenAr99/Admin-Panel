@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Device, DeviceStatus } from '../../../../models/entities/interfaces/maps.interface';
 import { debounceTime, Subject } from 'rxjs';
 
@@ -6,6 +6,7 @@ import { debounceTime, Subject } from 'rxjs';
   selector: 'app-device-cell',
   templateUrl: './device-cell.component.html',
   styleUrl: './device-cell.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeviceCellComponent {
   @Input() cell!: Device;

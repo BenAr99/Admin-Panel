@@ -12,7 +12,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "standalone": false
+          "standalone": false,
+          "changeDetection": "OnPush"
         },
         "@schematics/angular:directive": {
           "standalone": false

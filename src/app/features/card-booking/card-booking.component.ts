@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IBookingNotification } from '../../models/entities/interfaces/IBookingNotification';
 
 @Component({
   selector: 'app-card-booking',
   templateUrl: './card-booking.component.html',
   styleUrl: './card-booking.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardBookingComponent {
   @Input() booking?: IBookingNotification;

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   DeviceStatus,
@@ -7,9 +7,7 @@ import {
 } from '../../../models/entities/interfaces/maps.interface';
 import { map, Observable, of, timer } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MapsService {
   constructor(private http: HttpClient) {}
 

@@ -1,19 +1,23 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MapMeta } from '../../models/entities/interfaces/maps.interface';
 import { MapsService } from '../map-hall/services/maps.service';
 import { Booking, Packet } from '../../models/entities/interfaces/booking';
 import { MatDialogRef } from '@angular/material/dialog';
-import { extractResolvedTypeString } from '@angular/compiler-cli/src/ngtsc/docs/src/type_extractor';
 
 @Component({
   selector: 'app-booking-modal',
   templateUrl: './booking-modal.component.html',
   styleUrl: './booking-modal.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookingModalComponent {
   mapMetas!: MapMeta[];
   booking: FormGroup;
+
+  enums = {
+    Packet,
+  };
 
   constructor(
     private mapsService: MapsService,
@@ -23,7 +27,7 @@ export class BookingModalComponent {
     this.booking = new FormGroup<Booking>({
       name: new FormControl(null, [Validators.required]),
       phone: new FormControl(null, [Validators.required]),
-      packet: new FormControl(Packet.one, [Validators.required]),
+      packet: new FormControl(null, [Validators.required]),
       login: new FormControl(null, []),
       zone: new FormControl(null, [Validators.required]),
       time: new FormControl(null, [Validators.required]),
@@ -39,9 +43,4 @@ export class BookingModalComponent {
       this.booking.markAllAsTouched();
     }
   }
-
-  enums = {
-    Packet,
-  };
-  protected readonly extractResolvedTypeString = extractResolvedTypeString;
 }
