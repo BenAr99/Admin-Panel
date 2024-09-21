@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { LeftSideMenuComponent } from './left-side-menu/left-side-menu.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { DefaultComponent } from './default/default.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,7 +19,6 @@ import { ActiveHeaderComponent } from '../components/active-header/active-header
   imports: [
     CommonModule,
     RouterModule,
-    FlexLayoutModule,
     MatBadgeModule,
     MatIconModule,
     MatButtonModule,

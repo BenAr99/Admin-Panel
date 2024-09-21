@@ -36,13 +36,6 @@ export class MapHallComponent implements OnInit {
 
   mapLoad(event: { value: string }) {
     this.mapsStateService.mapTypeValue = event.value;
-    this.mapsService
-      .getMapNoBack(event.value)
-      .pipe(filter((value) => Boolean(value)))
-      .subscribe((value) => {
-        if (value) {
-          this.map = value;
-        }
-      });
+    this.mapsService.getMapNoBack(event.value);
   }
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { IBookingNotification } from '../../../models/entities/interfaces/IBookingNotification';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

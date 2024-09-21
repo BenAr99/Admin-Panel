@@ -8,12 +8,11 @@ describe('TableMapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TableMapComponent]
-    })
-    .compileComponents();
-    
+      declarations: [TableMapComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(TableMapComponent);
-    component = fixture.componentInstance;
+    component = fixture;
     fixture.detectChanges();
   });
 

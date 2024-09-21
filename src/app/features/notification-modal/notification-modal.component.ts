@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { IBookingNotification } from '../../models/entities/interfaces/IBookingNotification';
 import { BookingService } from '../../shared/services/data-sharing/booking.service';
 

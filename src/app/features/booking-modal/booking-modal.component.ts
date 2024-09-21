@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MapMeta } from '../../models/entities/interfaces/maps.interface';
 import { MapsService } from '../map-hall/services/maps.service';
 import { Booking, Packet } from '../../models/entities/interfaces/booking';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { extractResolvedTypeString } from '@angular/compiler-cli/src/ngtsc/docs/src/type_extractor';
 
 @Component({
