@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class BookingService {
+  // SR: Пофиксить в запрос
   public bookingNotifications: IBookingNotification[] = [
     {
       id: 1,
@@ -24,20 +25,4 @@ export class BookingService {
       timeTo: new Date(2023, 12, 12, 23, 30, 0),
     },
   ];
-
-  private bookingsSource = new BehaviorSubject<IBookingNotification[]>([]);
-  currentBookings = this.bookingsSource.asObservable();
-
-  constructor() {}
-
-  addBooking(booking: IBookingNotification) {
-    const currentBookings = this.bookingsSource.getValue();
-    this.bookingsSource.next([...currentBookings, booking]);
-  }
-
-  // getBookingsForDeviceTypeAndNumber(type: Device, number: number): IBookingNotification[] {
-  //   return this.bookingsSource
-  //     .getValue()
-  //     .filter((b) => b.device.type === type && b.device.number === number);
-  // }
 }

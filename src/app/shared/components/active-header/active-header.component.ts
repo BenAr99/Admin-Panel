@@ -8,15 +8,13 @@ import { HeaderService } from '../../services/header.service';
   standalone: true,
 })
 export class ActiveHeaderComponent implements OnInit {
-  header?: string;
-  countUser?: string;
+  header = '';
   constructor(private headerService: HeaderService) {}
 
   ngOnInit() {
     this.headerService.header.subscribe({
       next: (value) => {
         this.header = value;
-        this.countUser = '';
       },
     });
   }

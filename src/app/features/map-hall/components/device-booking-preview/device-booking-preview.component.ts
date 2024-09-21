@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Device } from '../../../models/entities/interfaces/maps.interface';
+import { Device } from '../../../../models/entities/interfaces/maps.interface';
 
 @Component({
   selector: 'app-device-booking-preview',

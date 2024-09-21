@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostBinding, Input, OnChanges } from '@angular/core';
-import { MapDetails } from '../../../models/entities/interfaces/maps.interface';
-import { MapsService } from '../../../services/maps.service';
+import { MapDetails } from '../../../../models/entities/interfaces/maps.interface';
+import { MapsService } from '../../services/maps.service';
 
 @Component({
   selector: 'app-table-map',

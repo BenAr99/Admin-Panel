@@ -5,6 +5,7 @@ import { routeHeaderTextDictionary } from '../../constants/route-header-text-dic
 import { HeaderService } from '../../services/header.service';
 import { filter, map, startWith } from 'rxjs';
 import { NotificationModalComponent } from '../../../features/notification-modal/notification-modal.component';
+import { BookingModalComponent } from '../../../features/booking-modal/booking-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +13,8 @@ import { NotificationModalComponent } from '../../../features/notification-modal
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  hidden = false;
-
+  notification = false;
+  booking = false;
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -34,12 +35,19 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  openDialog() {
-    this.hidden = !this.hidden;
-
+  openDialogNotification() {
     this.dialog.open(NotificationModalComponent, {
-      panelClass: 'modal-notification',
+      panelClass: 'modal-dialog',
       position: { top: '70px', right: '220px' },
+    });
+  }
+  openDialogBooking() {
+    this.booking = !this.booking;
+
+    this.dialog.open(BookingModalComponent, {
+      panelClass: 'modal-dialog',
+      autoFocus: false,
+      position: { top: '15%', right: '32%' },
     });
   }
 }

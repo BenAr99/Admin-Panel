@@ -20,16 +20,15 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
-import { CellCardComponent } from './shared/components/cell-card/cell-card.component';
 import { DefaultModule } from './shared/layout/default.module';
-import { CreateMapDirective } from './shared/directives/create-map.directive';
-import { TableMapComponent } from './features/map-hall/table-map/table-map.component';
+import { TableMapComponent } from './features/map-hall/components/table-map/table-map.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
-import { DeviceCellComponent } from './shared/components/device-cell/device-cell.component';
-import { DeviceBookingPreviewComponent } from './shared/components/device-booking-preview/device-booking-preview.component';
-import { BookingPreviewBlockComponent } from './shared/components/booking-preview-block/booking-preview-block.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DeviceCellComponent } from './features/map-hall/components/device-cell/device-cell.component';
+import { DeviceBookingPreviewComponent } from './features/map-hall/components/device-booking-preview/device-booking-preview.component';
+import { BookingPreviewBlockComponent } from './features/map-hall/components/booking-preview-block/booking-preview-block.component';
+import { BookingModalComponent } from './features/booking-modal/booking-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +43,7 @@ import { BookingPreviewBlockComponent } from './shared/components/booking-previe
     DeviceCellComponent,
     DeviceBookingPreviewComponent,
     BookingPreviewBlockComponent,
+    BookingModalComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -58,12 +58,10 @@ import { BookingPreviewBlockComponent } from './shared/components/booking-previe
     MatDialogActions,
     MatGridListModule,
     MatIconModule,
-    CellCardComponent,
-    CreateMapDirective,
     MatInputModule,
     MatSelectModule,
     FormsModule,
-    CellCardComponent,
+    ReactiveFormsModule,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
 })

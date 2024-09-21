@@ -48,16 +48,12 @@ body .mat-mdc-raised-button {
   border: 1px solid #2948e9;
 }
 
-.modal-notification {
+.modal-dialog {
   .mat-mdc-dialog-container,
   .mat-mdc-dialog-container .mdc-dialog__container,
   .mat-mdc-dialog-container .mdc-dialog__surface {
-    border: 0 solid #ffffff;
-    border-radius: 24px;
+    border-radius: 16px;
   }
-  min-height: 550px;
-  border: 0 solid #ffffff;
-  border-radius: 24px;
 }
 
 @include media.mobile-only {

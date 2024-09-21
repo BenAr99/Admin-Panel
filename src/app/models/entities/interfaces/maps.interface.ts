@@ -36,7 +36,7 @@ export interface User {
 
 export enum DeviceStatus {
   Free,
-  Busy = 'dsfsd',
-  Empty = 'void',
+  Busy,
+  Empty,
 }
 // возможно стоит в отделньый файл статусы

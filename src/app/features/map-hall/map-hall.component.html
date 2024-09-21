@@ -1,6 +1,5 @@
-<header >
+<header>
   <mat-form-field>
-
     <mat-label>Выберите карту</mat-label>
     <mat-select [(ngModel)]="mapTypeValue" (selectionChange)="mapLoad($event)">
       @for (item of this.mapMetas; track item) {
@@ -11,6 +10,7 @@
 </header>
 
 <div class="table">
+<!--  SR: Не cells а devices-->
   <app-table-map [cells]="map"></app-table-map>
 </div>
 

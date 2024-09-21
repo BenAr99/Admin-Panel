@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Device, DeviceStatus } from '../../../models/entities/interfaces/maps.interface';
+import { Device, DeviceStatus } from '../../../../models/entities/interfaces/maps.interface';
 import { debounceTime, Subject } from 'rxjs';
 
 @Component({

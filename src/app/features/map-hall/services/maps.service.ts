@@ -4,7 +4,7 @@ import {
   DeviceStatus,
   MapDetails,
   Organization,
-} from '../models/entities/interfaces/maps.interface';
+} from '../../../models/entities/interfaces/maps.interface';
 import { map, Observable, of, timer } from 'rxjs';
 
 @Injectable({
@@ -12,8 +12,6 @@ import { map, Observable, of, timer } from 'rxjs';
 })
 export class MapsService {
   constructor(private http: HttpClient) {}
-
-  test = 11;
 
   getMaps(id: string): Observable<Organization> {
     return this.http.get<Organization>(`http://localhost:8080/maps/${id}`);
