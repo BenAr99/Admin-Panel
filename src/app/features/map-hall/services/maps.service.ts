@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   DeviceStatus,
@@ -7,7 +7,9 @@ import {
 } from '../../../models/entities/interfaces/maps.interface';
 import { map, Observable, of, timer } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class MapsService {
   constructor(private http: HttpClient) {}
 
@@ -17,7 +19,7 @@ export class MapsService {
 
   // Берем карты всей организации, т.е тут id - индефикация организация
   getOrganizationNoBack(): Observable<Organization> {
-    return timer(1000).pipe(
+    return timer(100).pipe(
       map((): Organization => {
         return {
           uuid: '5ec0f1a9-c31b-472b-aa00-263098179b91',
@@ -50,7 +52,7 @@ export class MapsService {
   // Нужно продумать типы, особенно time
   getMapNoBack(uuid: string): Observable<MapDetails | null> {
     if (uuid === '4ab2ac8e-b459-411b-a15c-524b00945c6d') {
-      return timer(1000).pipe(
+      return timer(200).pipe(
         map((): MapDetails => {
           return {
             uuid: '4ab2ac8e-b459-411b-a15c-524b00945c6d',

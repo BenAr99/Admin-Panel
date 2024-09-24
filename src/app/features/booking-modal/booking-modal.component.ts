@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MapMeta } from '../../models/entities/interfaces/maps.interface';
+import { MapMeta, Organization } from '../../models/entities/interfaces/maps.interface';
 import { MapsService } from '../map-hall/services/maps.service';
 import { Booking, Packet } from '../../models/entities/interfaces/booking';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-booking-modal',
@@ -14,6 +15,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class BookingModalComponent {
   mapMetas!: MapMeta[];
   booking: FormGroup;
+  mapSubject: Observable<Organization>;
 
   enums = {
     Packet,
@@ -23,7 +25,7 @@ export class BookingModalComponent {
     private mapsService: MapsService,
     private dialog: MatDialogRef<BookingModalComponent>,
   ) {
-    this.mapsService.getOrganizationNoBack().subscribe((value) => (this.mapMetas = value.map));
+    this.mapSubject = this.mapsService.getOrganizationNoBack();
     this.booking = new FormGroup<Booking>({
       name: new FormControl(null, [Validators.required]),
       phone: new FormControl(null, [Validators.required]),

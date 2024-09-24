@@ -1,17 +1,22 @@
 <header>
-  <mat-form-field>
-    <mat-label>Выберите карту</mat-label>
-    <mat-select [(ngModel)]="mapTypeValue" (selectionChange)="mapLoad($event)">
-      @for (item of this.mapMetas; track item) {
-        <mat-option [value]="item.uuid">{{item.name}}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+  @if (mapMetas | async; as mapMetas ) {
+    <mat-form-field>
+      <mat-label>Выберите карту</mat-label>
+      <mat-select [(ngModel)]="mapTypeValue" (selectionChange)="mapLoad($event)">
+        @for (item of mapMetas.map; track item) {
+          <mat-option [value]="item.uuid">{{item.name}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
+
 </header>
 
 <div class="table">
 <!--  SR: Не cells а devices-->
-  <app-table-map [cells]="map"></app-table-map>
+  @if (mapSource | async; as map) {
+    <app-table-map [cells]="map"></app-table-map>
+  }
 </div>
 
 
