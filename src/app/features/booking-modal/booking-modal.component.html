@@ -46,6 +46,9 @@
   <mat-form-field class="example-full-width">
     <mat-label>Номер устройства</mat-label>
     <input matInput formControlName="device">
+    @if (booking.controls['device'].hasError('required')) {
+      <mat-error>Устройство не доступно</mat-error>
+    }
   </mat-form-field>
 </form>
 

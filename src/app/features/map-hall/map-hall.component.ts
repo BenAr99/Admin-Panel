@@ -1,16 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MapsService } from './services/maps.service';
-import { MapDetails, MapMeta, Organization } from '../../models/entities/interfaces/maps.interface';
+import { MapDetails, Organization } from '../../models/entities/interfaces/maps.interface';
 import { MapsStateService } from './services/maps-state.service';
-import { filter, Observable, Subject, switchMap } from 'rxjs';
-import { ChangeDetection } from '@angular/cli/lib/config/workspace-schema';
+import { Observable, Subject, switchMap } from 'rxjs';
 
 // SR: В модуль всю эту логику
 
@@ -31,7 +23,6 @@ export class MapHallComponent implements OnInit {
   constructor(
     private mapsService: MapsService,
     private mapsStateService: MapsStateService,
-    private changeDetectionRef: ChangeDetectorRef,
   ) {
     this.mapSource = this.mapSubject.pipe(
       switchMap((value) => {
