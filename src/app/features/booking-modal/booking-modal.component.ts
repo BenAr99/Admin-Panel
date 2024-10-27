@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Organization } from '../../models/entities/interfaces/maps.interface';
 import { MapsService } from '../map-hall/services/maps.service';
-import { BookingForm, Packet } from '../../models/entities/interfaces/bookingForm';
+import { BookingForm, Packet } from '../../models/entities/interfaces/bookingForm.interface';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 

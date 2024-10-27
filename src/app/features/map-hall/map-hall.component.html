@@ -1,6 +1,6 @@
 <header>
   @if (mapMetas | async; as mapMetas ) {
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Выберите карту</mat-label>
       <mat-select [(ngModel)]="mapTypeValue" (selectionChange)="mapLoad($event)">
         @for (item of mapMetas.map; track item) {

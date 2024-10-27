@@ -2,17 +2,17 @@
 
 <form [formGroup]="booking" class="example-form">
 
-  <mat-form-field class="example-full-width">
+  <mat-form-field appearance="outline" class="example-full-width">
     <mat-label>Имя</mat-label>
     <input matInput formControlName="name">
   </mat-form-field>
 
-  <mat-form-field class="example-full-width">
+  <mat-form-field appearance="outline" class="example-full-width">
     <mat-label>Телефон</mat-label>
     <input matInput formControlName="phone">
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Игровой пакет</mat-label>
     <mat-select formControlName="packet">
       <mat-option [value]="enums.Packet.one">{{ enums.Packet.one }}</mat-option>
@@ -22,12 +22,12 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field class="example-full-width">
+  <mat-form-field appearance="outline" class="example-full-width">
     <mat-label>Логин</mat-label>
     <input matInput formControlName="login">
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Зона</mat-label>
     <mat-select formControlName="zone">
       @if (mapSubject | async; as mapSubject) {
@@ -38,12 +38,12 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field class="example-full-width">
+  <mat-form-field appearance="outline" class="example-full-width">
     <mat-label>Время</mat-label>
     <input matInput formControlName="time">
   </mat-form-field>
 
-  <mat-form-field class="example-full-width">
+  <mat-form-field appearance="outline" class="example-full-width">
     <mat-label>Номер устройства</mat-label>
     <input matInput formControlName="device">
     @if (booking.controls['device'].hasError('required')) {

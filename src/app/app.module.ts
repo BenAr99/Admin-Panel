@@ -30,6 +30,11 @@ import { DeviceBookingPreviewComponent } from './features/map-hall/components/de
 import { BookingPreviewBlockComponent } from './features/map-hall/components/booking-preview-block/booking-preview-block.component';
 import { BookingModalComponent } from './features/booking-modal/booking-modal.component';
 import { DeviceStatus, MapDetails } from './models/entities/interfaces/maps.interface';
+import { RouterOutlet } from '@angular/router';
+import { AuthModule } from './auth/auth.module';
+import { AngularFireModule } from '@angular/fire/compat';
+import { firebaseConfig } from '../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -46,9 +51,11 @@ import { DeviceStatus, MapDetails } from './models/entities/interfaces/maps.inte
     BookingPreviewBlockComponent,
     BookingModalComponent,
   ],
-  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AuthModule,
     AppRoutingModule,
     DefaultModule,
     BrowserAnimationsModule,
@@ -63,8 +70,10 @@ import { DeviceStatus, MapDetails } from './models/entities/interfaces/maps.inte
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterOutlet,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
   mapBootcamp: MapDetails = {

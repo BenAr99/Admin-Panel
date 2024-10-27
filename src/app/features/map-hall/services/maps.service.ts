@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MapDetails, Organization } from '../../../models/entities/interfaces/maps.interface';
+import {
+  Device,
+  MapDetails,
+  Organization,
+} from '../../../models/entities/interfaces/maps.interface';
 import { map, Observable, of, tap, timer } from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { Booking, BookingForm } from '../../../models/entities/interfaces/bookingForm';
+import { Booking, BookingForm } from '../../../models/entities/interfaces/bookingForm.interface';
+import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Injectable({
   providedIn: 'root',
@@ -76,22 +81,17 @@ export class MapsService {
   postBooking(bookingFormGroup: Booking) {
     return timer(300).pipe(
       tap((): void => {
-        if (bookingFormGroup.zone === '4ab2ac8e-b459-411b-a15c-524b00945c6d') {
-          const mapBootcamp: MapDetails = JSON.parse(localStorage.getItem('mapBootcamp') as string);
-          mapBootcamp.devices.find((value) => {
-            console.log(value.name === bookingFormGroup.device);
-            if (value.name === bookingFormGroup.device) {
-              value.user = {
-                name: bookingFormGroup.name,
-                phone: bookingFormGroup.phone,
-                tariff: bookingFormGroup.packet,
-                time: bookingFormGroup.time,
-                level: 0.05,
-              };
-            }
-          });
-          localStorage.setItem('mapBootcamp', JSON.stringify(mapBootcamp));
-        }
+        const mapBootcamp: MapDetails = JSON.parse(localStorage.getItem('mapBootcamp') as string);
+        mapBootcamp.devices[0].user = {
+          name: bookingFormGroup.name,
+          phone: bookingFormGroup.phone,
+          tariff: bookingFormGroup.packet,
+          time: bookingFormGroup.time,
+          level: 0.0556778567856,
+        };
+        localStorage.setItem('mapBootcamp', JSON.stringify(mapBootcamp));
+
+        console.log(mapBootcamp);
       }),
     );
   }

@@ -1,0 +1,28 @@
+:host {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  top: 25%;
+  right: 40%;
+  h1 {
+    text-align: center;
+  }
+}
+
+.example-form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.error {
+  padding: 5px;
+}
+
+.auth-button {
+  margin-top: 8px;
+  border-radius: 10px;
+  height: 48px;
+}

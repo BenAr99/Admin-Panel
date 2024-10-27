@@ -5,11 +5,14 @@ import { MapHallComponent } from './features/map-hall/map-hall.component';
 import { ZoneTariffsComponent } from './features/zone-tariffs/zone-tariffs.component';
 import { HistoryComponent } from './features/history/history.component';
 import { UsersComponent } from './features/users/users.component';
+import { AuthComponent } from './auth/pages/auth/auth.component';
+import { AuthGuard } from './auth/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
     component: DefaultComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'map-hall',
@@ -28,6 +31,10 @@ const routes: Routes = [
         component: UsersComponent,
       },
     ],
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
   },
 ];
 
