@@ -35,6 +35,7 @@ import { AuthModule } from './auth/auth.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { firebaseConfig } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     AuthModule,
     AppRoutingModule,
     DefaultModule,

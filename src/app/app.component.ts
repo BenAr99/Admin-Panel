@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {collection, collectionData} from "@angular/fire/firestore";
+import firebase from "firebase/compat";
+import Firestore = firebase.firestore.Firestore;
 
 @Component({
   selector: 'app-root',
@@ -8,5 +11,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'reverse-place-admin-panel-web';
-  constructor() {}
+  firestore: Firestore = inject(Firestore);
+
+  constructor() {
+    const aCollection = collection(this.firestore, 'device');
+
+    collectionData(aCollection).subscribe((v) => {
+      console.log(v);
+    });
+  }
 }
