@@ -32,10 +32,6 @@ import { BookingModalComponent } from './features/booking-modal/booking-modal.co
 import { DeviceStatus, MapDetails } from './models/entities/interfaces/maps.interface';
 import { RouterOutlet } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
-import { AngularFireModule } from '@angular/fire/compat';
-import { firebaseConfig } from '../environments/environment';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 
 @NgModule({
   declarations: [
@@ -54,9 +50,6 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
     AuthModule,
     AppRoutingModule,
     DefaultModule,

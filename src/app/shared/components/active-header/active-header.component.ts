@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HeaderService } from '../../services/header.service';
+import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-active-header',
@@ -7,16 +9,13 @@ import { HeaderService } from '../../services/header.service';
   styleUrl: './active-header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
+  imports: [AsyncPipe],
 })
 export class ActiveHeaderComponent implements OnInit {
-  header = '';
+  header?: Observable<string>;
   constructor(private headerService: HeaderService) {}
 
   ngOnInit() {
-    this.headerService.header.subscribe({
-      next: (value) => {
-        this.header = value;
-      },
-    });
+    this.header = this.headerService.header;
   }
 }

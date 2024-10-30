@@ -7,8 +7,7 @@ import {
   Router,
   UrlTree,
 } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { filter, map, Observable, switchMap, tap } from 'rxjs';
+import { filter, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +15,12 @@ import { filter, map, Observable, switchMap, tap } from 'rxjs';
 export class AuthGuard implements CanActivate {
   url?: string;
 
-  constructor(
-    private afAuth: AngularFireAuth,
-    private router: Router,
-  ) {}
+  constructor(private router: Router) {
+    console.log('test');
+  }
 
-  canActivate(): Observable<boolean | UrlTree> {
+  canActivate(): boolean | UrlTree {
+    console.log('test');
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationStart),
@@ -30,14 +29,10 @@ export class AuthGuard implements CanActivate {
         }),
       )
       .subscribe();
-    return this.afAuth.authState.pipe(
-      map((user) => {
-        if (user) {
-          return true;
-        } else {
-          return this.router.createUrlTree(['auth'], { queryParams: { currentUrl: this.url } });
-        }
-      }),
-    );
+    if (localStorage.getItem('accessToken') !== null) {
+      return true;
+    }
+
+    return this.router.createUrlTree(['auth'], { queryParams: { currentUrl: this.url } });
   }
 }

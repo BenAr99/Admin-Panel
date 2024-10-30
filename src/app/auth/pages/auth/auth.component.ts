@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthForm } from '../../../models/entities/interfaces/auth.interface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { upLowCase } from '../../../shared/validators/upLowCase';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -16,9 +16,9 @@ export class AuthComponent {
   previousUrl?: string;
 
   constructor(
-    private afAuth: AngularFireAuth,
     private router: Router,
     private activeRoute: ActivatedRoute,
+    private authService: AuthService,
   ) {
     this.auth = new FormGroup<AuthForm>({
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -32,19 +32,11 @@ export class AuthComponent {
   }
 
   onSubmit() {
-    console.log(this.auth.errors, 'this.auth.errors');
-    console.log(this.auth.controls['password'].errors, "this.auth.controls['password'].errors");
-    console.log(this.auth, 'auth');
-    console.log(this.auth.hasError('upLowCase'), 'hasError');
-    console.log(
-      this.auth.controls['password'].hasError('upLowCase').valueOf(),
-      "hasError('password')",
-    );
     if (this.auth.valid) {
-      console.log(this.auth.value.login, this.auth.value.password);
-      this.afAuth
-        .createUserWithEmailAndPassword(this.auth.value.login, this.auth.value.password)
-        .then(() => {
+      this.authService
+        .postAuth({ email: this.auth.value.email, password: this.auth.value.password })
+        .subscribe((value) => {
+          this.authService.setToken(value.access_token, value.refresh_token);
           const params = this.activeRoute.snapshot.queryParams;
           this.previousUrl = params['currentUrl'] || '/';
           this.router.navigate([this.previousUrl]);
