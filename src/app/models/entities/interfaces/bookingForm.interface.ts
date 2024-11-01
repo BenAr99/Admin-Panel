@@ -1,7 +1,7 @@
 import { FormControl } from '@angular/forms';
 
 export interface BookingForm {
-  name: FormControl<string | null>;
+  userName: FormControl<string | null>;
   phone: FormControl<number | null>;
   login: FormControl<string | null>;
   packet: FormControl<Packet | null>;
@@ -21,8 +21,8 @@ export interface Booking {
 }
 
 export enum Packet {
-  one = 'one',
-  three = 'three',
-  night = 'night',
-  allDay = 'all day',
+  one = 'По часовой',
+  three = 'Три часа',
+  night = 'Ночной',
+  allDay = 'Весь день',
 }

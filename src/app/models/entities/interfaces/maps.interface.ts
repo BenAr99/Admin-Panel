@@ -16,10 +16,12 @@ export interface Device {
 
 export interface User {
   name: string;
+  login: string;
   phone: number;
   tariff: string;
   time: string;
   level: number;
+  balance: number;
 }
 
 // enum с type pc/ps

@@ -1,13 +1,13 @@
 <div class="container-cell">
 
-  <span class="title-cell">{{ cell.user?.tariff }}</span>
-  <span class="title-hall">{{ cell.name }}</span>
+  <span class="title-cell">{{ cell.user?.login }}</span>
+  <span class="title-hall">Устройство {{ cell.name }}</span>
 
   <app-booking-preview-block [title]="'Тариф'" [value]="cell.user?.tariff"></app-booking-preview-block>
 
   <app-booking-preview-block [title]="'Осталось времени'" [value]="cell.user?.time"></app-booking-preview-block>
 
-  <app-booking-preview-block [title]="'Остаток по счету'" [value]="'Не знаю, смотреть избранное'"></app-booking-preview-block>
+  <app-booking-preview-block [title]="'Остаток по счету'" [value]="cell.user?.balance"></app-booking-preview-block>
 
   <app-booking-preview-block [title]="'Уровень (скидка)'" [value]="cell.user?.level"></app-booking-preview-block>
 </div>

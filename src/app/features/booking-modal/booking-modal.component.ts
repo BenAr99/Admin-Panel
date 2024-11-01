@@ -27,7 +27,7 @@ export class BookingModalComponent {
   ) {
     this.mapSubject = this.mapsService.getMaps();
     this.booking = new FormGroup<BookingForm>({
-      name: new FormControl(null, [Validators.required]),
+      userName: new FormControl(null, [Validators.required]),
       phone: new FormControl(null, [Validators.required]),
       packet: new FormControl(null, [Validators.required]),
       login: new FormControl(null, []),
@@ -38,14 +38,14 @@ export class BookingModalComponent {
   }
 
   createBooking() {
-    // if (this.booking.valid) {
-    //   this.mapsService.postBooking(this.booking.value).subscribe(() => {
-    //     this.changeDetectionRef.detectChanges();
-    //   });
-    //   this.changeDetectionRef.detectChanges();
-    //   this.dialog.close();
-    // } else {
-    //   this.booking.markAllAsTouched();
-    // }
+    if (this.booking.valid) {
+      console.log(this.booking.value);
+      this.mapsService.postBooking(this.booking.value).subscribe(() => {
+        this.changeDetectionRef.detectChanges();
+      });
+      this.dialog.close();
+    } else {
+      this.booking.markAllAsTouched();
+    }
   }
 }
