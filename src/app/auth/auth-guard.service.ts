@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRoute,
-  CanActivate,
-  NavigationEnd,
-  NavigationStart,
-  Router,
-  UrlTree,
-} from '@angular/router';
+import { CanActivate, NavigationStart, Router, UrlTree } from '@angular/router';
 import { filter, tap } from 'rxjs';
 
 @Injectable({
@@ -15,12 +8,9 @@ import { filter, tap } from 'rxjs';
 export class AuthGuard implements CanActivate {
   url?: string;
 
-  constructor(private router: Router) {
-    console.log('test');
-  }
+  constructor(private router: Router) {}
 
   canActivate(): boolean | UrlTree {
-    console.log('test');
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationStart),

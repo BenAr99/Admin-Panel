@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Organization } from '../../models/entities/interfaces/maps.interface';
 import { MapsService } from '../map-hall/services/maps.service';
 import { BookingForm, Packet } from '../../models/entities/interfaces/bookingForm.interface';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { MapDetails } from '../../models/entities/interfaces/maps.interface';
 
 @Component({
   selector: 'app-booking-modal',
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class BookingModalComponent {
   booking: FormGroup;
-  mapSubject: Observable<Organization>;
+  mapSubject: Observable<MapDetails[]>;
 
   enums = {
     Packet,
@@ -25,7 +25,7 @@ export class BookingModalComponent {
     private dialog: MatDialogRef<BookingModalComponent>,
     private changeDetectionRef: ChangeDetectorRef,
   ) {
-    this.mapSubject = this.mapsService.getOrganizationNoBack();
+    this.mapSubject = this.mapsService.getMaps();
     this.booking = new FormGroup<BookingForm>({
       name: new FormControl(null, [Validators.required]),
       phone: new FormControl(null, [Validators.required]),
@@ -38,14 +38,14 @@ export class BookingModalComponent {
   }
 
   createBooking() {
-    if (this.booking.valid) {
-      this.mapsService.postBooking(this.booking.value).subscribe(() => {
-        this.changeDetectionRef.detectChanges();
-      });
-      this.changeDetectionRef.detectChanges();
-      this.dialog.close();
-    } else {
-      this.booking.markAllAsTouched();
-    }
+    // if (this.booking.valid) {
+    //   this.mapsService.postBooking(this.booking.value).subscribe(() => {
+    //     this.changeDetectionRef.detectChanges();
+    //   });
+    //   this.changeDetectionRef.detectChanges();
+    //   this.dialog.close();
+    // } else {
+    //   this.booking.markAllAsTouched();
+    // }
   }
 }

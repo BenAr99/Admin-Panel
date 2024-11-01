@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {
-  Device,
-  MapDetails,
-  Organization,
-} from '../../../models/entities/interfaces/maps.interface';
-import { map, Observable, of, tap, timer } from 'rxjs';
-import { FormGroup } from '@angular/forms';
-import { Booking, BookingForm } from '../../../models/entities/interfaces/bookingForm.interface';
-import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Device, MapDetails } from '../../../models/entities/interfaces/maps.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,83 +9,53 @@ import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 export class MapsService {
   constructor(private http: HttpClient) {}
 
-  organization: Organization = {
-    uuid: '5ec0f1a9-c31b-472b-aa00-263098179b91',
-    name: 'Name org',
-    map: [
-      {
-        uuid: '4ab2ac8e-b459-411b-a15c-524b00945c6d',
-        name: 'Bootcamp',
-      },
-      {
-        uuid: '5401f19d-cb0e-4524-a99c-e7b7c3694396',
-        name: 'VIP',
-      },
-      {
-        uuid: 'bddd5aba-2a20-4f7d-903f-107260c2373d',
-        name: 'Normal',
-      },
-    ],
-  };
-
-  getMaps(id: string): Observable<Organization> {
-    return this.http.get<Organization>(`http://localhost:8080/maps/${id}`);
-  }
-
   // Берем карты всей организации, т.е тут id - индефикация организация
-  getOrganizationNoBack(): Observable<Organization> {
-    return timer(100).pipe(
-      map((): Organization => {
-        return this.organization;
-      }),
-    );
+  getMaps(): Observable<MapDetails[]> {
+    return this.http.get<MapDetails[]>('https://eyxrmhvbutmdcycshzni.supabase.co/rest/v1/zones', {
+      headers: {
+        apikey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5eHJtaHZidXRtZGN5Y3Noem5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAxMTYxMzYsImV4cCI6MjA0NTY5MjEzNn0.JDrmn5pNWxLzhQU7maIsJStZhXjmvdwXI3ws3yds6iY',
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5eHJtaHZidXRtZGN5Y3Noem5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAxMTYxMzYsImV4cCI6MjA0NTY5MjEzNn0.JDrmn5pNWxLzhQU7maIsJStZhXjmvdwXI3ws3yds6iY',
+      },
+    });
   }
 
   // Как бы если запрос будет идти от какого-либо uuid, это будет вставляться,
   // будет выдаваться нужныая карта
 
-  getMapNoBack(uuid: string): Observable<MapDetails | null> {
-    if (uuid === '4ab2ac8e-b459-411b-a15c-524b00945c6d') {
-      return timer(200).pipe(
-        map((): MapDetails => {
-          return JSON.parse(localStorage.getItem('mapBootcamp') as string);
-          //плохая практика as string вместо if (null)?
-          // иль getItem('mapBootcamp') ?? '[]'
-        }),
-      );
-    }
-    if (uuid === '5401f19d-cb0e-4524-a99c-e7b7c3694396') {
-      return timer(200).pipe(
-        map((): MapDetails => {
-          return JSON.parse(localStorage.getItem('mapVip') as string);
-        }),
-      );
-    }
-    if (uuid === 'bddd5aba-2a20-4f7d-903f-107260c2373d') {
-      return timer(200).pipe(
-        map((): MapDetails => {
-          return JSON.parse(localStorage.getItem('mapNormal') as string);
-        }),
-      );
-    }
-    return of(null);
-  }
-
-  postBooking(bookingFormGroup: Booking) {
-    return timer(300).pipe(
-      tap((): void => {
-        const mapBootcamp: MapDetails = JSON.parse(localStorage.getItem('mapBootcamp') as string);
-        mapBootcamp.devices[0].user = {
-          name: bookingFormGroup.name,
-          phone: bookingFormGroup.phone,
-          tariff: bookingFormGroup.packet,
-          time: bookingFormGroup.time,
-          level: 0.0556778567856,
-        };
-        localStorage.setItem('mapBootcamp', JSON.stringify(mapBootcamp));
-
-        console.log(mapBootcamp);
-      }),
+  getDevices(uuid: string): Observable<Device[] | null> {
+    let params = new HttpParams();
+    params = params.append('zone_id', `eq.${uuid}`);
+    return this.http.get<Device[]>(
+      'https://eyxrmhvbutmdcycshzni.supabase.co/rest/v1/device_with_user',
+      {
+        params,
+        headers: {
+          apikey:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5eHJtaHZidXRtZGN5Y3Noem5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAxMTYxMzYsImV4cCI6MjA0NTY5MjEzNn0.JDrmn5pNWxLzhQU7maIsJStZhXjmvdwXI3ws3yds6iY',
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkJxTGpaTjM0K0Y3c2U4bkYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2V5eHJtaHZidXRtZGN5Y3Noem5pLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5MmY3MDE4ZS1kMmI5LTRmYWUtOGNiYS04YmJkYTEzZGRlOTMiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzMwNDQ0NjM1LCJpYXQiOjE3MzA0NDEwMzUsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7fSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTczMDQ0MTAzNX1dLCJzZXNzaW9uX2lkIjoiNjFiODA2NWYtN2U1ZS00YzgyLTg1YjUtNWQyZWFlNzA1MWExIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.yuCXOxLxAHLKAZdH7FGD6JpF6zsXH_7N5r-8QJFpP7E',
+        },
+      },
     );
   }
+  //
+  // postBooking(bookingFormGroup: Booking) {
+  //   return timer(300).pipe(
+  //     tap((): void => {
+  //       const mapBootcamp: MapDetails = JSON.parse(localStorage.getItem('mapBootcamp') as string);
+  //       mapBootcamp.devices[0].user = {
+  //         name: bookingFormGroup.name,
+  //         phone: bookingFormGroup.phone,
+  //         tariff: bookingFormGroup.packet,
+  //         time: bookingFormGroup.time,
+  //         level: 0.0556778567856,
+  //       };
+  //       localStorage.setItem('mapBootcamp', JSON.stringify(mapBootcamp));
+  //
+  //       console.log(mapBootcamp);
+  //     }),
+  //   );
+  // }
 }

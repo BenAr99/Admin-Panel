@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { HeaderService } from '../../services/header.service';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';

@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MapsService } from './services/maps.service';
-import { MapDetails, Organization } from '../../models/entities/interfaces/maps.interface';
+import { Device, MapDetails } from '../../models/entities/interfaces/maps.interface';
 import { MapsStateService } from './services/maps-state.service';
-import { Observable, Subject, switchMap } from 'rxjs';
+import { map, Observable, Subject, switchMap, tap } from 'rxjs';
 
 // SR: В модуль всю эту логику
 
@@ -14,49 +14,47 @@ import { Observable, Subject, switchMap } from 'rxjs';
   providers: [MapsService],
 })
 export class MapHallComponent implements OnInit {
-  mapMetas?: Observable<Organization>;
-  map?: MapDetails;
-  mapTypeValue?: string;
+  maps!: Observable<MapDetails[]>;
 
-  mapSubject = new Subject<string>();
-  mapSource: Observable<MapDetails | null>;
+  selectedMapId?: string;
+  selectedMap!: MapDetails | null;
+
+  devicesSubject = new Subject<string>();
+  devices: Observable<Device[] | null>;
   constructor(
     private mapsService: MapsService,
     private mapsStateService: MapsStateService,
   ) {
-    this.mapSource = this.mapSubject.pipe(
+    this.devices = this.devicesSubject.pipe(
       switchMap((value) => {
-        return this.mapsService.getMapNoBack(value);
+        return this.mapsService.getDevices(value).pipe(tap((value1) => console.log(value1)));
       }),
     );
   }
 
   ngOnInit() {
-    this.mapMetas = this.mapsService.getOrganizationNoBack();
+    this.maps = this.mapsService.getMaps();
 
-    this.mapTypeValue = this.mapsStateService.mapTypeValue;
+    this.selectedMapId = this.mapsStateService.mapTypeValue;
 
-    if (this.mapTypeValue) {
-      this.mapLoad({ value: this.mapTypeValue });
+    if (this.selectedMapId) {
+      this.mapLoad(this.selectedMapId);
     }
   }
 
-  mapLoad(event: { value: string }) {
-    this.mapSubject.next(event.value);
-    this.mapsStateService.mapTypeValue = event.value;
+  mapLoad(eventId: string) {
+    this.getSelectedMap().subscribe((value) => {
+      this.selectedMap = value;
+    });
+    this.devicesSubject.next(eventId);
+    this.mapsStateService.mapTypeValue = eventId;
   }
 
-  // Оставил для примера async
-  // mapLoad(event: { value: string }) {
-  //   this.mapsStateService.mapTypeValue = event.value;
-  //   this.mapsService
-  //     .getMapNoBack(event.value)
-  //     .pipe(filter((value) => Boolean(value)))
-  //     .subscribe((value) => {
-  //       if (value) {
-  //         this.map = value;
-  //         this.changeDetectionRef.detectChanges();
-  //       }
-  //     });
-  // }
+  getSelectedMap(): Observable<MapDetails | null> {
+    return this.maps.pipe(
+      map((value): MapDetails | null => {
+        return value.find((value) => value.id === this.selectedMapId) ?? null;
+      }),
+    );
+  }
 }

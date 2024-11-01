@@ -5,9 +5,8 @@
 }
 
 @if (cell.status && cell.user) {
-  <div class="device-status" (mouseover)="hidden(true)" (mouseleave)="hidden(false)" >{{ cell.user.name }}</div>
+  <div class="device-status" (mouseover)="hidden(true)" (mouseleave)="hidden(false)" >{{ cell.user.name  }}</div>
 
-<!--  снизу hidden тригер идет на каждый дочерний компонент, исправить -->
   <div class="hover" *ngIf="hover" (mouseover)="hidden(true)"  (mouseleave)="hidden(false)">
     <app-device-booking-preview [cell]="cell"></app-device-booking-preview>
   </div>

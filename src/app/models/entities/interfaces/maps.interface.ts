@@ -1,21 +1,9 @@
-export interface Organization {
-  uuid: string;
-  name: string;
-  map: MapMeta[];
-}
-
 export interface MapDetails {
-  uuid: string;
+  id: string;
   name: string;
   width: number;
   height: number;
   price: number;
-  devices: Device[];
-}
-
-export interface MapMeta {
-  uuid: string;
-  name: string;
 }
 
 export interface Device {
@@ -33,6 +21,8 @@ export interface User {
   time: string;
   level: number;
 }
+
+// enum с type pc/ps
 
 export enum DeviceStatus {
   Free,

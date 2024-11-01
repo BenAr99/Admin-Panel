@@ -23,6 +23,7 @@ export class AuthService {
   }
 
   setToken(accessToken: string, refreshToken: string): void {
+    console.log(accessToken);
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
   }
