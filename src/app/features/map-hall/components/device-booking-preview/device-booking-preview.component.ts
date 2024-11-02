@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Device } from '../../../../models/entities/interfaces/maps.interface';
 
 @Component({
@@ -7,11 +7,7 @@ import { Device } from '../../../../models/entities/interfaces/maps.interface';
   styleUrl: './device-booking-preview.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeviceBookingPreviewComponent implements OnInit {
+export class DeviceBookingPreviewComponent {
   @Input() cell!: Device;
   constructor() {}
-
-  ngOnInit() {
-    console.log(this.cell, 'celllllllll');
-  }
 }

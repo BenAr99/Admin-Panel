@@ -8,8 +8,8 @@ export interface BookingForm {
 }
 
 export interface Booking {
-  name: string;
+  userName: string;
   phone: number;
   zone: string;
-  device: string;
+  device: number;
 }

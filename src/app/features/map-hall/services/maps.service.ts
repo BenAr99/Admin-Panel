@@ -42,10 +42,15 @@ export class MapsService {
     );
   }
 
-  postBooking(booking: object): Observable<object> {
+  postBooking(booking: Booking): Observable<object> {
     return this.http.post(
       'https://eyxrmhvbutmdcycshzni.supabase.co/rest/v1/rpc/assign_user_to_device',
-      booking,
+      {
+        new_zone: booking.zone,
+        new_name_device: booking.device,
+        new_phone: booking.phone,
+        new_username: booking.userName,
+      },
       {
         headers: {
           apikey:

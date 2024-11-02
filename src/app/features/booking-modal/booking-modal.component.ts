@@ -32,17 +32,9 @@ export class BookingModalComponent {
 
   createBooking() {
     if (this.booking.valid) {
-      console.log(this.booking.value);
-      this.mapsService
-        .postBooking({
-          NEW_zone_id: this.booking.value.zone_id,
-          NEW_nameDevice: this.booking.value.nameDevice,
-          NEW_user_phone: this.booking.value.userPhone,
-          NEW_user_name: this.booking.value.userName,
-        })
-        .subscribe(() => {
-          this.changeDetectionRef.detectChanges();
-        });
+      this.mapsService.postBooking(this.booking.value).subscribe(() => {
+        this.changeDetectionRef.detectChanges();
+      });
       this.dialog.close();
     } else {
       this.booking.markAllAsTouched();
