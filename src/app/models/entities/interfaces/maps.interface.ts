@@ -27,8 +27,9 @@ export interface User {
 // enum с type pc/ps
 
 export enum DeviceStatus {
-  Free,
-  Busy,
-  Empty,
+  Active = 'active',
+  Inactive = 'inactive',
+  Service = 'service',
+  Empty = 'empty',
 }
 // возможно стоит в отделньый файл статусы

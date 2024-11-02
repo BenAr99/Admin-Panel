@@ -29,9 +29,9 @@ import { DeviceCellComponent } from './features/map-hall/components/device-cell/
 import { DeviceBookingPreviewComponent } from './features/map-hall/components/device-booking-preview/device-booking-preview.component';
 import { BookingPreviewBlockComponent } from './features/map-hall/components/booking-preview-block/booking-preview-block.component';
 import { BookingModalComponent } from './features/booking-modal/booking-modal.component';
-import { DeviceStatus, MapDetails } from './models/entities/interfaces/maps.interface';
 import { RouterOutlet } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
+import { StatusDeviceDirective } from './features/map-hall/directives/status-device.directive';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import { AuthModule } from './auth/auth.module';
     DeviceBookingPreviewComponent,
     BookingPreviewBlockComponent,
     BookingModalComponent,
+    StatusDeviceDirective,
   ],
   imports: [
     BrowserModule,

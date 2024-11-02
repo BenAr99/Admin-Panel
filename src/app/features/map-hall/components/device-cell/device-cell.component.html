@@ -1,15 +1,19 @@
-@if (cell.type === 'pc') {
-  <img alt="" src="../../../../../assets/icons/pc.svg" width="90px" height="90px">
-} @else if (cell.type === 'ps') {
-  <img alt="" src="../../../../../assets/image/ps.png" width="90px" height="90px">
-}
+<!--<div class="color-device">-->
+  @if (cell.type === 'pc') {
+    <img alt="" src="../../../../../assets/icons/pc.svg" width="90px" height="90px">
+  } @else if (cell.type === 'ps') {
+    <img alt="" src="../../../../../assets/image/ps.png" width="90px" height="90px">
+  }
 
-@if (cell.status && cell.user) {
-  <div class="device-status" (mouseover)="hidden(true)" (mouseleave)="hidden(false)" >{{ cell.user.name  }}</div>
+  @if (cell.status === 'active' && cell.user) {
+    <div class="device-status" (mouseover)="hidden(true)" (mouseleave)="hidden(false)">{{ cell.user.name }}</div>
 
-  <div class="hover" *ngIf="hover" (mouseover)="hidden(true)"  (mouseleave)="hidden(false)">
-    <app-device-booking-preview [cell]="cell"></app-device-booking-preview>
-  </div>
-} @else if (cell.status === enums.DeviceStatus.Free ) {
-  <div class="device-status"><span>Доступен</span></div>
-}
+    <div class="hover" *ngIf="hover" (mouseover)="hidden(true)" (mouseleave)="hidden(false)">
+      <app-device-booking-preview [cell]="cell"></app-device-booking-preview>
+    </div>
+  } @else if (cell.status === enums.DeviceStatus.Inactive) {
+    <div class="device-status"><span>Доступен</span></div>
+  } @else if (cell.status === enums.DeviceStatus.Service) {
+    <div class="device-status"><span>Тех. обслуж.</span></div>
+  }
+<!--</div>-->

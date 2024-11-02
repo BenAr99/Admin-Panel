@@ -1,5 +1,5 @@
 @if (cells) {
-  <app-device-cell [cell]="cell" *ngFor="let cell of cells">
+  <app-device-cell [appStatusDevice]="cell.status" [cell]="cell" *ngFor="let cell of cells">
   </app-device-cell>
 }
 
