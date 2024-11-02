@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MapsService } from '../map-hall/services/maps.service';
-import { BookingForm, Packet } from '../../models/entities/interfaces/bookingForm.interface';
+import { BookingForm } from '../../models/entities/interfaces/bookingForm.interface';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { MapDetails } from '../../models/entities/interfaces/maps.interface';
@@ -16,10 +16,6 @@ export class BookingModalComponent {
   booking: FormGroup;
   mapSubject: Observable<MapDetails[]>;
 
-  enums = {
-    Packet,
-  };
-
   constructor(
     private mapsService: MapsService,
     private dialog: MatDialogRef<BookingModalComponent>,
@@ -29,10 +25,7 @@ export class BookingModalComponent {
     this.booking = new FormGroup<BookingForm>({
       userName: new FormControl(null, [Validators.required]),
       phone: new FormControl(null, [Validators.required]),
-      packet: new FormControl(null, [Validators.required]),
-      login: new FormControl(null, []),
       zone: new FormControl(null, [Validators.required]),
-      time: new FormControl(null, [Validators.required]),
       device: new FormControl(null, [Validators.required]),
     });
   }
@@ -40,9 +33,16 @@ export class BookingModalComponent {
   createBooking() {
     if (this.booking.valid) {
       console.log(this.booking.value);
-      this.mapsService.postBooking(this.booking.value).subscribe(() => {
-        this.changeDetectionRef.detectChanges();
-      });
+      this.mapsService
+        .postBooking({
+          NEW_zone_id: this.booking.value.zone_id,
+          NEW_nameDevice: this.booking.value.nameDevice,
+          NEW_user_phone: this.booking.value.userPhone,
+          NEW_user_name: this.booking.value.userName,
+        })
+        .subscribe(() => {
+          this.changeDetectionRef.detectChanges();
+        });
       this.dialog.close();
     } else {
       this.booking.markAllAsTouched();

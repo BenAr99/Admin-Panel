@@ -13,21 +13,6 @@
   </mat-form-field>
 
   <mat-form-field appearance="outline">
-    <mat-label>Игровой пакет</mat-label>
-    <mat-select formControlName="packet">
-      <mat-option [value]="enums.Packet.one">{{ enums.Packet.one }}</mat-option>
-      <mat-option [value]="enums.Packet.three">{{ enums.Packet.three }}</mat-option>
-      <mat-option [value]="enums.Packet.night">{{ enums.Packet.night }}</mat-option>
-      <mat-option [value]="enums.Packet.allDay">{{ enums.Packet.allDay }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline" class="example-full-width">
-    <mat-label>Логин</mat-label>
-    <input matInput formControlName="login">
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
     <mat-label>Зона</mat-label>
     <mat-select formControlName="zone">
       @if (mapSubject | async; as mapSubject) {
@@ -37,11 +22,7 @@
       }
     </mat-select>
   </mat-form-field>
-
-  <mat-form-field appearance="outline" class="example-full-width">
-    <mat-label>Время</mat-label>
-    <input matInput formControlName="time">
-  </mat-form-field>
+  
 
   <mat-form-field appearance="outline" class="example-full-width">
     <mat-label>Номер устройства</mat-label>
