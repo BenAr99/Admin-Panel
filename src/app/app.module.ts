@@ -32,6 +32,7 @@ import { BookingModalComponent } from './features/booking-modal/booking-modal.co
 import { RouterOutlet } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 import { StatusDeviceDirective } from './features/map-hall/directives/status-device.directive';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { StatusDeviceDirective } from './features/map-hall/directives/status-dev
   ],
   imports: [
     BrowserModule,
+    CoreModule,
     AuthModule,
     AppRoutingModule,
     DefaultModule,

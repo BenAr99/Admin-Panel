@@ -1,30 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { LocalStorageService } from './local-storage.service';
+import { getToken } from '../../models/entities/interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private localStorageService: LocalStorageService,
+  ) {}
 
-  // По сути должен быть интерфейс, но повторять его мне лень. Я полениця
-  postAuth(credentials: Record<string, string>): Observable<any> {
-    return this.http.post(
-      'https://eyxrmhvbutmdcycshzni.supabase.co/auth/v1/token?grant_type=password',
-      credentials,
-      {
-        headers: {
-          apikey:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5eHJtaHZidXRtZGN5Y3Noem5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAxMTYxMzYsImV4cCI6MjA0NTY5MjEzNn0.JDrmn5pNWxLzhQU7maIsJStZhXjmvdwXI3ws3yds6iY',
-        },
-      },
-    );
+  timeUpdateRefreshToken() {
+    const oneHour = 3600000;
+    setInterval(() => {
+      this.updateRefreshToken();
+    }, oneHour);
   }
 
-  setToken(accessToken: string, refreshToken: string): void {
-    console.log(accessToken);
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
+  postAuth(credentials: Record<string, string>): Observable<getToken> {
+    return this.http.post<getToken>('/auth/v1/token?grant_type=password', credentials, {});
   }
+
+  updateRefreshToken(): Observable<void> {
+    return this.http
+      .post<getToken>(`/auth/v1/token?grant_type=refresh_token`, {
+        refresh_token: this.localStorageService.getRefreshTokenLocalStorage(),
+      })
+      .pipe(
+        map((response) => {
+          const newAccessToken = response.access_token;
+          const newRefreshToken = response.refresh_token;
+
+          this.localStorageService.setToken(newAccessToken, newRefreshToken);
+
+          return undefined;
+        }),
+      );
+  }
+  // Создать сервис, который записывает что то в локал и читает
+  // Раздельные сервисы с работой по запросу токена и обработки его
+  // По раздельности сделать возможно
 }

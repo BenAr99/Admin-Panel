@@ -6,3 +6,4 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
 })
 export class AuthRoutingModule {}
+// нахуя нужен? забыл зачем создавал

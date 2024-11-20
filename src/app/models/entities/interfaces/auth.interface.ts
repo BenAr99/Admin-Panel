@@ -9,3 +9,8 @@ export interface AuthForm {
   email: FormControl<string | null>;
   password: FormControl<string | null>;
 }
+
+export interface getToken {
+  access_token: string;
+  refresh_token: string;
+}

@@ -34,7 +34,6 @@ export class MapHallComponent implements OnInit {
 
   ngOnInit() {
     this.maps = this.mapsService.getMaps();
-
     this.selectedMapId = this.mapsStateService.mapTypeValue;
 
     if (this.selectedMapId) {

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { upLowCase } from '../../../shared/validators/upLowCase';
 import { AuthService } from '../../service/auth.service';
+import { LocalStorageService } from '../../service/local-storage.service';
 
 @Component({
   selector: 'app-auth',
@@ -19,6 +20,7 @@ export class AuthComponent {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private authService: AuthService,
+    private localStorageService: LocalStorageService,
   ) {
     this.auth = new FormGroup<AuthForm>({
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -36,7 +38,8 @@ export class AuthComponent {
       this.authService
         .postAuth({ email: this.auth.value.email, password: this.auth.value.password })
         .subscribe((value) => {
-          this.authService.setToken(value.access_token, value.refresh_token);
+          this.localStorageService.setToken(value.access_token, value.refresh_token);
+          this.authService.timeUpdateRefreshToken();
           const params = this.activeRoute.snapshot.queryParams;
           this.previousUrl = params['currentUrl'] || '/';
           this.router.navigate([this.previousUrl]);
