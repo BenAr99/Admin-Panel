@@ -38,8 +38,9 @@ export class AuthComponent {
       this.authService
         .postAuth({ email: this.auth.value.email, password: this.auth.value.password })
         .subscribe((value) => {
+          console.log(value);
           this.localStorageService.setToken(value.access_token, value.refresh_token);
-          this.authService.timeUpdateRefreshToken();
+          this.authService.updateRefreshTokenAfter(value.expires_in);
           const params = this.activeRoute.snapshot.queryParams;
           this.previousUrl = params['currentUrl'] || '/';
           this.router.navigate([this.previousUrl]);

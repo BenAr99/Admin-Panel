@@ -13,11 +13,10 @@ export class AuthService {
     private localStorageService: LocalStorageService,
   ) {}
 
-  timeUpdateRefreshToken() {
-    const oneHour = 3600000;
+  updateRefreshTokenAfter(time: number) {
     setInterval(() => {
       this.updateRefreshToken();
-    }, oneHour);
+    }, time * 1000);
   }
 
   postAuth(credentials: Record<string, string>): Observable<getToken> {
