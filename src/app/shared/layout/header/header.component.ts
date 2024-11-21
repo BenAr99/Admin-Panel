@@ -42,6 +42,7 @@ export class HeaderComponent implements OnInit {
       position: { top: '70px', right: '220px' },
     });
   }
+
   openDialogBooking() {
     this.booking = !this.booking;
 

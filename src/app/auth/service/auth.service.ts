@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { getToken } from '../../models/entities/interfaces/auth.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',

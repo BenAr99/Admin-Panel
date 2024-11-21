@@ -8,9 +8,10 @@ import { MatButton } from '@angular/material/button';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
+import { ExitComponent } from './pages/exit/exit.component';
 
 @NgModule({
-  declarations: [AuthComponent],
+  declarations: [AuthComponent, ExitComponent],
   imports: [
     CommonModule,
     MatLabel,

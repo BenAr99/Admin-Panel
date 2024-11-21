@@ -14,10 +14,12 @@
 @include media.mobile-only {
   :host {
     font-size: 8px;
-    img {
+    .button-icon, .profile-icon {
       width: 24px;
       height: 24px;
-      margin-left: 4px;
+    }
+    .button-icon {
+      margin-left: 8px;
     }
   }
 }
@@ -25,10 +27,12 @@
 @include media.tablet-landscape-up {
   :host {
     font-size: 12px;
-    img {
+    .button-icon, .profile-icon {
       width: 36px;
       height: 36px;
-      margin-left: 6px;
+    }
+    .button-icon {
+      margin-left: 8px;
     }
   }
 }
@@ -36,15 +40,26 @@
 @include media.desktop-up {
   :host {
     font-size: 16px;
-    img {
+    .button-icon, .profile-icon {
       width: 48px;
       height: 48px;
+    }
+    .button-icon {
       margin-left: 8px;
     }
   }
+}
+
+.button-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background: #f7f9fc;
 }
 
 .rank {
   font-size: 0.85em;
   color: #828282;
 }
+

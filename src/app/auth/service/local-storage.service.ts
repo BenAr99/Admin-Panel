@@ -21,4 +21,8 @@ export class LocalStorageService {
   getAccessTokenLocalStorage() {
     return localStorage.getItem(this.accessTokenKey);
   }
+
+  deleteToken(token: string): void {
+    localStorage.removeItem(token);
+  }
 }
