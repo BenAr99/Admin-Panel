@@ -1,5 +1,13 @@
-<ng-content></ng-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+<h1 class="title">
+  <ng-content select="title"></ng-content>
+</h1>
+
+<div class="content-container">
+  <ng-content>
+
+  </ng-content>
+</div>
+
+<mat-dialog-actions class="buttons-end" align="end">
+  <ng-content select="buttons-end"></ng-content>
 </mat-dialog-actions>

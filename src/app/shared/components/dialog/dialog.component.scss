@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.content-container {
+  margin: 20px 0;
+}

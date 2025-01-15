@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
-import { User } from '../../models/entities/interfaces/maps.interface';
+import { User, UserForm } from '../../models/entities/interfaces/maps.interface';
 import { UsersService } from './services/users.service';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { MatDialog } from '@angular/material/dialog';
+import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Component({
   selector: 'app-users',
@@ -30,10 +31,14 @@ export class UsersComponent {
     const dialogRef = this.dialog.open(AddUserComponent, {
       panelClass: 'modal-dialog',
     });
+
+    dialogRef.afterClosed().subscribe((result: User) => {
+      this.addUser(result.name, result.phone, result.login);
+    });
   }
 
-  addUser() {
-    this.usersService.addUsers('1', 2, '3').subscribe();
+  addUser(name: string, phone: number, login: string) {
+    this.usersService.addUsers(name, phone, login).subscribe();
     this.usersRefresh.next();
   }
 

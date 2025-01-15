@@ -9,12 +9,13 @@
       Добавить
     </button>
     <button mat-mini-fab>
-      <mat-icon (click)="refreshTable()"> refresh icon </mat-icon>
+      <mat-icon (click)="refreshTable()"> refresh icon</mat-icon>
     </button>
   </div>
 </header>
 
 <div class="user-table">
-    <app-user-table (rowDeleted)="this.deleteUser($event)" *ngIf="dataUsers | async as data" [dataUsers]="data"></app-user-table>
+  <app-user-table (rowDeleted)="this.deleteUser($event)" *ngIf="dataUsers | async as data"
+                  [dataUsers]="data"></app-user-table>
 </div>
 

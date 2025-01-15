@@ -1,8 +1,7 @@
-
 <app-dialog>
-  <h1 class="title">Добавить пользователя</h1>
+  <span ngProjectAs="title">Добавить пользователя</span>
 
-  <form [formGroup]="userForm" class="example-form">
+  <form [formGroup]="userForm" class="form">
     <mat-form-field appearance="outline" class="example-full-width">
       <mat-label>Имя</mat-label>
       <input matInput formControlName="name">
@@ -19,5 +18,12 @@
       <input matInput formControlName="login">
     </mat-form-field>
   </form>
+
+
+  <div ngProjectAs="buttons-end">
+    <button mat-raised-button mat-dialog-close>Отменить</button>
+    <button mat-raised-button color="primary" (click)="add()" cdkFocusInitial>Подтвердить</button>
+  </div>
+
 </app-dialog>
 
