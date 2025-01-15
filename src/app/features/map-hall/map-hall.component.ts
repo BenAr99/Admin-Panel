@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MapsService } from './services/maps.service';
 import { Device, MapDetails } from '../../models/entities/interfaces/maps.interface';
 import { MapsStateService } from './services/maps-state.service';
-import { map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 
 // SR: В модуль всю эту логику
 
@@ -19,18 +19,12 @@ export class MapHallComponent implements OnInit {
   selectedMapId?: string;
   selectedMap!: MapDetails | null;
 
-  devicesSubject = new Subject<string>();
-  devices: Observable<Device[] | null>;
+  devices: Observable<Device[]> = of([]);
+
   constructor(
     private mapsService: MapsService,
     private mapsStateService: MapsStateService,
-  ) {
-    this.devices = this.devicesSubject.pipe(
-      switchMap((value) => {
-        return this.mapsService.getDevices(value).pipe(tap((value1) => console.log(value1)));
-      }),
-    );
-  }
+  ) {}
 
   ngOnInit() {
     if (this.selectedMapId) {
@@ -42,10 +36,7 @@ export class MapHallComponent implements OnInit {
   }
 
   mapLoad(eventId: string) {
-    this.getSelectedMap().subscribe((value) => {
-      this.selectedMap = value;
-    });
-    this.devicesSubject.next(eventId);
+    this.devices = this.mapsService.getDevices(eventId);
     this.mapsStateService.mapTypeValue = eventId;
   }
 

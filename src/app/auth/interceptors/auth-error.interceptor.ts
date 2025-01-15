@@ -38,6 +38,8 @@ export class AuthErrorInterceptor implements HttpInterceptor {
         }
 
         // Если ошибка не 401, пробрасываем ее дальше
+        console.log(error.error);
+        console.log(error.message);
         return throwError(() => error);
       }),
     );

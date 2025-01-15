@@ -10,15 +10,11 @@ import { Booking } from '../../../models/entities/interfaces/bookingForm.interfa
 export class MapsService {
   constructor(private http: HttpClient) {}
 
-  // Берем карты всей организации, т.е тут id - индефикация организация
   getMaps(): Observable<MapDetails[]> {
     return this.http.get<MapDetails[]>('/rest/v1/zones', {});
   }
 
-  // Как бы если запрос будет идти от какого-либо uuid, это будет вставляться,
-  // будет выдаваться нужныая карта
-
-  getDevices(uuid: string): Observable<Device[] | null> {
+  getDevices(uuid: string): Observable<Device[]> {
     let params = new HttpParams();
     params = params.append('zone_id', `eq.${uuid}`);
     return this.http.get<Device[]>('/rest/v1/device_with_user', {

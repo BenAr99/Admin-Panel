@@ -33,6 +33,22 @@ import { RouterOutlet } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 import { StatusDeviceDirective } from './features/map-hall/directives/status-device.directive';
 import { CoreModule } from './core/core.module';
+import { UserTableComponent } from './features/users/components/user-table/user-table.component';
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable,
+} from '@angular/material/table';
+import { NgOptimizedImage } from '@angular/common';
+import { AddUserComponent } from './features/users/components/add-user/add-user.component';
+import { DialogComponent } from './shared/components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +65,9 @@ import { CoreModule } from './core/core.module';
     BookingPreviewBlockComponent,
     BookingModalComponent,
     StatusDeviceDirective,
+    UserTableComponent,
+    AddUserComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +88,17 @@ import { CoreModule } from './core/core.module';
     FormsModule,
     ReactiveFormsModule,
     RouterOutlet,
+    MatColumnDef,
+    MatHeaderCell,
+    MatCell,
+    MatTable,
+    MatHeaderRow,
+    MatRow,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatRowDef,
+    MatHeaderRowDef,
+    NgOptimizedImage,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],

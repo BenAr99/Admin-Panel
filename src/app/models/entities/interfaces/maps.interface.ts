@@ -1,3 +1,5 @@
+import { FormControl } from '@angular/forms';
+
 export interface MapDetails {
   id: string;
   name: string;
@@ -22,6 +24,12 @@ export interface User {
   time: string;
   level: number;
   balance: number;
+}
+
+export interface UserForm {
+  name: FormControl<string | null>;
+  login: FormControl<string | null>;
+  phone: FormControl<string | null>;
 }
 
 // enum с type pc/ps

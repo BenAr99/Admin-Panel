@@ -1,1 +1,20 @@
-<p>users works!</p>
+<header>
+  <form class="example-form">
+    <img src="assets/icons/find-icon.svg" height="22" width="22">
+    <input class="find-users" placeholder="Поиск пользователя">
+  </form>
+
+  <div class="header-buttons">
+    <button (click)="openDialog()" class="add-button" mat-raised-button>
+      Добавить
+    </button>
+    <button mat-mini-fab>
+      <mat-icon (click)="refreshTable()"> refresh icon </mat-icon>
+    </button>
+  </div>
+</header>
+
+<div class="user-table">
+    <app-user-table (rowDeleted)="this.deleteUser($event)" *ngIf="dataUsers | async as data" [dataUsers]="data"></app-user-table>
+</div>
+

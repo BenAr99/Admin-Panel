@@ -4,7 +4,7 @@ import {
   ElementRef,
   HostBinding,
   Input,
-  OnChanges,
+  OnInit,
 } from '@angular/core';
 import { Device, MapDetails } from '../../../../models/entities/interfaces/maps.interface';
 import { MapsService } from '../../services/maps.service';
@@ -16,7 +16,7 @@ import { MapsService } from '../../services/maps.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MapsService],
 })
-export class TableMapComponent implements OnChanges {
+export class TableMapComponent implements OnInit {
   @Input() cells!: Device[] | null;
   @Input() map!: MapDetails | null;
 
@@ -24,7 +24,7 @@ export class TableMapComponent implements OnChanges {
   @HostBinding('style.gridTemplateRows') tableRows?: string;
   @HostBinding('style.gridTemplateColumns') tableColumn?: string;
 
-  ngOnChanges() {
+  ngOnInit() {
     this.tableRows = `repeat(${this.map?.height}, 128px)`;
     this.tableColumn = `repeat(${this.map?.width}, 128px)`;
   }

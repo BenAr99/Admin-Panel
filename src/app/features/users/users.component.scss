@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+}
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-button {
+  margin-right: 8px;
+}
+
+.example-form {
+  display: flex;
+  width: 200px;
+  padding: 6px 5px;
+  border-radius: 6px;
+  border: solid 1px #828282;
+}
+
+.find-users {
+  width: 90%;
+  font-size: 14px;
+  margin-left: 5px;
+  border: none;
+}
+
+.find-users:focus {
+  outline: none;
+}
