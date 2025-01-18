@@ -22,6 +22,8 @@
     "@angular/platform-browser": "^18.0.3",
     "@angular/platform-browser-dynamic": "^18.0.3",
     "@angular/router": "^18.0.3",
+    "@maskito/angular": "^3.2.1",
+    "@maskito/kit": "^3.2.1",
     "@supabase/supabase-js": "^2.45.6",
     "firebase": "^10.14.0",
     "rxjs": "~7.8.0",

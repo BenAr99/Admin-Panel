@@ -12,7 +12,7 @@ export class UsersService {
   addUsers(name: string, phone: number, login: string): Observable<void> {
     return this.http.post<void>('/rest/v1/rpc/add_user', {
       p_name: name,
-      p_phone: phone,
+      p_phone: Number(phone),
       p_login: login,
     });
   }

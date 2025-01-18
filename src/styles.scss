@@ -48,6 +48,22 @@ body .mat-mdc-raised-button {
   border: 1px solid #2948e9;
 }
 
+// фикс размера отступов у инпутов
+.mat-mdc-form-field {
+  margin-bottom: 10px;
+}
+
+// <mat-error> - вывод ошибки
+body .mat-mdc-form-field-error, body .mat-mdc-form-field-hint-wrapper, body .mat-mdc-form-field-error-wrapper {
+  font-size: 11px;
+  padding: 0 0 0 2px;
+  height: 24px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+//
+
 .modal-dialog {
   .mat-mdc-dialog-container,
   .mat-mdc-dialog-container .mdc-dialog__container,

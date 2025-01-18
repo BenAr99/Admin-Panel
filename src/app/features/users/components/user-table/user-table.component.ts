@@ -19,4 +19,3 @@ export class UserTableComponent {
     this.rowDeleted.emit(uuid);
   }
 }
-//todo Нужно с помозью эвент эмитера перенести функ. в род. элемент, дабы компонент был простой

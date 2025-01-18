@@ -1,39 +1,41 @@
-<span class="title">Забронировать вручную</span>
+<app-dialog>
+  <span ngProjectAs="title">Забронировать вручную</span>
 
-<form [formGroup]="booking" class="example-form">
+  <form [formGroup]="booking" class="example-form">
 
-  <mat-form-field appearance="outline" class="example-full-width">
-    <mat-label>Имя</mat-label>
-    <input matInput formControlName="userName">
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Имя</mat-label>
+      <input matInput formControlName="userName">
+    </mat-form-field>
 
-  <mat-form-field appearance="outline" class="example-full-width">
-    <mat-label>Телефон</mat-label>
-    <input matInput formControlName="phone">
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Телефон</mat-label>
+      <input matInput formControlName="phone">
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Зона</mat-label>
-    <mat-select formControlName="zone">
-      @if (mapSubject | async; as mapSubject) {
-        @for (map of mapSubject; track map) {
-          <mat-option [value]="map.id">{{ map.name }}</mat-option>
+    <mat-form-field appearance="outline">
+      <mat-label>Зона</mat-label>
+      <mat-select formControlName="zone">
+        @if (mapSubject | async; as mapSubject) {
+          @for (map of mapSubject; track map) {
+            <mat-option [value]="map.id">{{ map.name }}</mat-option>
+          }
         }
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Номер устройства</mat-label>
+      <input matInput formControlName="device">
+      @if (booking.controls['device'].hasError('required')) {
+        <mat-error>Устройство не доступно</mat-error>
       }
-    </mat-select>
-  </mat-form-field>
+    </mat-form-field>
+  </form>
 
-
-  <mat-form-field appearance="outline" class="example-full-width">
-    <mat-label>Номер устройства</mat-label>
-    <input matInput formControlName="device">
-    @if (booking.controls['device'].hasError('required')) {
-      <mat-error>Устройство не доступно</mat-error>
-    }
-  </mat-form-field>
-</form>
-
-<mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close>Отменить</button>
-  <button mat-raised-button color="primary" (click)="createBooking()">Подтвердить</button>
-</mat-dialog-actions>
+    <div ngProjectAs="buttons-end">
+      <button mat-raised-button mat-dialog-close>Отменить</button>
+      <button mat-raised-button color="primary" (click)="createBooking()">Подтвердить</button>
+    </div>
+</app-dialog>

@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
-import { User, UserForm } from '../../models/entities/interfaces/maps.interface';
+import { User } from '../../models/entities/interfaces/maps.interface';
 import { UsersService } from './services/users.service';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { MatDialog } from '@angular/material/dialog';
-import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Component({
   selector: 'app-users',

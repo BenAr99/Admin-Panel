@@ -49,6 +49,7 @@ import {
 import { NgOptimizedImage } from '@angular/common';
 import { AddUserComponent } from './features/users/components/add-user/add-user.component';
 import { DialogComponent } from './shared/components/dialog/dialog.component';
+import { MaskitoDirective } from '@maskito/angular';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { DialogComponent } from './shared/components/dialog/dialog.component';
     MatRowDef,
     MatHeaderRowDef,
     NgOptimizedImage,
+    MaskitoDirective,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],
