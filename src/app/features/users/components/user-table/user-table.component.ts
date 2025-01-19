@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../../../../models/entities/interfaces/maps.interface';
-import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-user-table',
@@ -13,7 +12,7 @@ export class UserTableComponent {
   @Input() dataUsers: User[] = [];
   titleColumns: string[] = ['position', 'name', 'login', 'phone', 'deleteIcon'];
 
-  constructor(private usersService: UsersService) {}
+  constructor() {}
 
   onDeleteClick(uuid: string) {
     this.rowDeleted.emit(uuid);

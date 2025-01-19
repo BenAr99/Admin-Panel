@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { BehaviorSubject, debounceTime, Observable, of, startWith, Subject, switchMap } from 'rxjs';
 import { User } from '../../models/entities/interfaces/maps.interface';
 import { UsersService } from './services/users.service';
 import { AddUserComponent } from './components/add-user/add-user.component';
@@ -13,15 +13,17 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class UsersComponent {
   dataUsers: Observable<User[]>;
-  usersRefresh = new BehaviorSubject<void>(undefined);
+  searchValue = '';
+  usersRefresh = new BehaviorSubject<Observable<User[]>>(this.usersService.getUsers());
 
   constructor(
     private usersService: UsersService,
     private dialog: MatDialog,
   ) {
     this.dataUsers = this.usersRefresh.pipe(
-      switchMap(() => {
-        return this.usersService.getUsers();
+      debounceTime(300),
+      switchMap((value) => {
+        return value;
       }),
     );
   }
@@ -38,16 +40,20 @@ export class UsersComponent {
 
   addUser(name: string, phone: number, login: string) {
     this.usersService.addUsers(name, phone, login).subscribe();
-    this.usersRefresh.next();
+    this.usersRefresh.next(this.usersService.getUsers());
   }
 
   refreshTable() {
-    this.usersRefresh.next();
+    this.usersRefresh.next(this.usersService.getUsers());
   }
 
   deleteUser(uuid: string): void {
     this.usersService.deleteUser(uuid).subscribe(() => {
-      this.usersRefresh.next();
+      this.usersRefresh.next(this.usersService.getUsers());
     });
+  }
+
+  search(text: string): void {
+    this.usersRefresh.next(this.usersService.searchUser(text));
   }
 }

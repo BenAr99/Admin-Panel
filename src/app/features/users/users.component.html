@@ -1,8 +1,8 @@
 <header>
-  <form class="example-form">
-    <img src="assets/icons/find-icon.svg" height="22" width="22">
-    <input class="find-users" placeholder="Поиск пользователя">
-  </form>
+  <div class="example-form">
+    <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
+    <input (input)="search(searchValue)" [(ngModel)]="searchValue" class="search-users" placeholder="Поиск пользователя">
+  </div>
 
   <div class="header-buttons">
     <button (click)="openDialog()" class="add-button" mat-raised-button>
@@ -19,3 +19,4 @@
                   [dataUsers]="data"></app-user-table>
 </div>
 
+<!--todo Передавать функцию в next?-->
