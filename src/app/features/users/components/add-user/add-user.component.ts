@@ -25,8 +25,6 @@ export class AddUserComponent {
   }
 
   add() {
-    console.log(this.userForm.value.phone.length);
-    console.log(this.userForm.get('phone')?.hasError('phone'));
     if (this.userForm.valid) {
       this.matDialogRef.close(this.userForm.value);
     }

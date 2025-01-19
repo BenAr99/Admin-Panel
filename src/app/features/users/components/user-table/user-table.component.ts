@@ -14,7 +14,7 @@ export class UserTableComponent {
 
   constructor() {}
 
-  onDeleteClick(uuid: string) {
-    this.rowDeleted.emit(uuid);
+  onDeleteClick(id: string) {
+    this.rowDeleted.emit(id);
   }
 }

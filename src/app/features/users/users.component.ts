@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { BehaviorSubject, debounceTime, Observable, of, startWith, Subject, switchMap } from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BehaviorSubject, debounceTime, Observable, switchMap } from 'rxjs';
 import { User } from '../../models/entities/interfaces/maps.interface';
 import { UsersService } from './services/users.service';
 import { AddUserComponent } from './components/add-user/add-user.component';
@@ -48,6 +48,7 @@ export class UsersComponent {
   }
 
   deleteUser(uuid: string): void {
+    console.log(uuid);
     this.usersService.deleteUser(uuid).subscribe(() => {
       this.usersRefresh.next(this.usersService.getUsers());
     });
