@@ -38,8 +38,6 @@ export class AuthComponent {
       this.authService
         .postAuth({ email: this.auth.value.email, password: this.auth.value.password })
         .subscribe((value) => {
-          debugger;
-          console.log(value);
           this.localStorageService.setToken(value.access_token, value.refresh_token);
           this.authService.updateRefreshTokenAfter(value.expires_in);
           const params = this.activeRoute.snapshot.queryParams;

@@ -1,6 +1,5 @@
 :host {
   display: block;
-  height: 100%;
 }
 
 header {
@@ -40,4 +39,10 @@ header {
 
 .search-users:focus {
   outline: none;
+}
+
+.loading {
+  position: absolute;
+  top: 46%;
+  right: 36%;
 }

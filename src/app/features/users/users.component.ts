@@ -1,9 +1,25 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BehaviorSubject, debounceTime, Observable, switchMap } from 'rxjs';
-import { User } from '../../models/entities/interfaces/maps.interface';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { User, UserSearchParams } from '../../models/entities/interfaces/maps.interface';
 import { UsersService } from './services/users.service';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { MatDialog } from '@angular/material/dialog';
+import {
+  BehaviorSubject,
+  debounceTime,
+  filter,
+  map,
+  startWith,
+  Subject,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs';
+import { LoadingService } from '../../shared/services/loading.service';
 
 @Component({
   selector: 'app-users',
@@ -11,21 +27,59 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './users.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersComponent {
-  dataUsers: Observable<User[]>;
+export class UsersComponent implements OnInit, OnDestroy {
+  target?: HTMLElement;
+  loading = this.loadingService.loading;
+  skip = 20;
+  dataUsers: User[] = [];
   searchValue = '';
-  usersRefresh = new BehaviorSubject<Observable<User[]>>(this.usersService.getUsers());
+  scrolling = new Subject<void>();
+  dataSubject = new BehaviorSubject<User[]>([]);
 
   constructor(
     private usersService: UsersService,
     private dialog: MatDialog,
-  ) {
-    this.dataUsers = this.usersRefresh.pipe(
-      debounceTime(300),
-      switchMap((value) => {
-        return value;
-      }),
-    );
+    private change: ChangeDetectorRef,
+    private loadingService: LoadingService,
+  ) {}
+
+  ngOnInit() {
+    this.loadingService.show();
+    this.scrolling
+      .pipe(
+        debounceTime(1000),
+        map(() => {
+          const startItem = 10;
+          this.skip += 10;
+          return {
+            searchValue: this.searchValue,
+            startItem,
+            skip: this.skip - startItem,
+          };
+        }),
+        startWith({ searchValue: '', startItem: 20, skip: 0 }),
+        switchMap((value: UserSearchParams) => {
+          return this.usersService
+            .getUsersTest(value.searchValue, value.startItem, value.skip)
+            .pipe(
+              filter((value) => {
+                return Array.isArray(value.users);
+              }),
+              map((value) => {
+                return value.users;
+              }),
+              withLatestFrom(this.dataSubject),
+            );
+        }),
+        map((value) => {
+          this.loadingService.hide();
+          return [...value[1], ...value[0]];
+        }),
+      )
+      .subscribe((value) => {
+        console.log(value);
+        this.dataSubject.next(value);
+      });
   }
 
   openDialog() {
@@ -39,22 +93,43 @@ export class UsersComponent {
   }
 
   addUser(name: string, phone: number, login: string) {
-    this.usersService.addUsers(name, phone, login).subscribe();
-    this.usersRefresh.next(this.usersService.getUsers());
+    this.usersService.addUsers(name, phone, login).subscribe(() => {});
+    this.refreshTable();
   }
 
   refreshTable() {
-    this.usersRefresh.next(this.usersService.getUsers());
-  }
-
-  deleteUser(uuid: string): void {
-    console.log(uuid);
-    this.usersService.deleteUser(uuid).subscribe(() => {
-      this.usersRefresh.next(this.usersService.getUsers());
+    if (this.target?.scrollTop) {
+      this.target.scrollTop = 0;
+    }
+    this.skip = 20;
+    this.usersService.getUsersTest(this.searchValue, 20, 0).subscribe((value) => {
+      this.dataSubject.next(value.users);
     });
   }
 
-  search(text: string): void {
-    this.usersRefresh.next(this.usersService.searchUser(text));
+  deleteUser(uuid: string): void {
+    this.usersService.deleteUser(uuid).subscribe();
+    this.refreshTable();
+  }
+
+  search(): void {
+    this.skip = 20;
+    if (this.target?.scrollTop) {
+      this.target.scrollTop = 0;
+    }
+    this.usersService
+      .getUsersTest(this.searchValue, 20, 0)
+      .subscribe((value) => this.dataSubject.next(value.users));
+  }
+
+  uploading(event: Event): void {
+    this.target = event.target as HTMLElement;
+    if (this.target.scrollHeight - this.target.scrollTop <= this.target.clientHeight * 1.09) {
+      this.scrolling.next();
+    }
+  }
+
+  ngOnDestroy() {
+    console.log('умер компонент');
   }
 }

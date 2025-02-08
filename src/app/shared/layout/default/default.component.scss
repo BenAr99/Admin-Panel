@@ -1,6 +1,6 @@
 :host {
   display: flex;
-  height: 100%;
+  height: 100vh;
 }
 
 .default-content {
@@ -18,13 +18,13 @@
   padding: 12px 14px;
 }
 
-.content::-webkit-scrollbar {
-  width: 7px;
-  background-color: #272728;
-}
-
-.content::-webkit-scrollbar-track {
-  width: 7px;
-  background-color: #2e2e70;
-}
+//.content::-webkit-scrollbar {
+//  width: 7px;
+//  background-color: #272728;
+//}
+//
+//.content::-webkit-scrollbar-track {
+//  width: 7px;
+//  background-color: #2e2e70;
+//}
 

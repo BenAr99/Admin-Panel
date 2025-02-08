@@ -1,5 +1,12 @@
+:host {
+  display: block;
+  overflow-y: auto;
+  height: 640px;
+}
+
 .table {
   border: solid 1px #f4f4f4;
+  overflow-y: scroll;
 }
 
 .small-cell {

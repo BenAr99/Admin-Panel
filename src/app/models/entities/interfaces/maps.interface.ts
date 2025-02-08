@@ -26,6 +26,17 @@ export interface User {
   balance: number;
 }
 
+export interface UsersData {
+  totalCount: number;
+  users: User[];
+}
+
+export interface UserSearchParams {
+  searchValue: string;
+  startItem: number;
+  skip: number;
+}
+
 export interface UserForm {
   name: FormControl<string | null>;
   login: FormControl<string | null>;

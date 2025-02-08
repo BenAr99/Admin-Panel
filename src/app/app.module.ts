@@ -50,6 +50,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { AddUserComponent } from './features/users/components/add-user/add-user.component';
 import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { MaskitoDirective } from '@maskito/angular';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { MaskitoDirective } from '@maskito/angular';
     MatHeaderRowDef,
     NgOptimizedImage,
     MaskitoDirective,
+    MatProgressSpinner,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],
