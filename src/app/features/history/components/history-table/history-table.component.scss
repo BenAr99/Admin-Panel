@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  overflow-y: auto;
+  height: 640px;
+}
+
+.table {
+  border: solid 1px #f4f4f4;
+  overflow-y: scroll;
+}
+
+.small-cell {
+  width: 30px;
+  padding: 4px 10px;
+}
+
+._hidden {
+  visibility: hidden;
+}
+
+.hidden:hover {
+  ._hidden {
+    visibility: visible;
+  }
+}
+
+.delete-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: #ff2121;
+}
+
+.delete-icon {
+  padding-top: 4px;
+  font-size: 18px;
+}
+
+.table:nth-child(even) {
+  background: #f7f9fc;
+}
+
+.title:nth-child(even){
+  background: #f7f9fc;
+}

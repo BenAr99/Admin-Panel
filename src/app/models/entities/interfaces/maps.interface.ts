@@ -26,15 +26,11 @@ export interface User {
   balance: number;
 }
 
-export interface UsersData {
-  totalCount: number;
-  users: User[];
-}
-
-export interface UserSearchParams {
-  searchValue: string;
-  startItem: number;
-  skip: number;
+export interface History {
+  device: Device;
+  user: User;
+  start_date: Date;
+  end_date: Date;
 }
 
 export interface UserForm {

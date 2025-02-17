@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User, UsersData } from '../../../models/entities/interfaces/maps.interface';
+import { User } from '../../../models/entities/interfaces/maps.interface';
+import { ListData, PaginationService, SearchParams } from '../../../shared/table/table.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class UsersService implements PaginationService<User> {
   constructor(private http: HttpClient) {}
 
   addUsers(name: string, phone: number, login: string): Observable<void> {
@@ -17,27 +18,17 @@ export class UsersService {
     });
   }
 
-  getUsersTest(filter: string = '', limit: number = 10, offset: number = 0): Observable<UsersData> {
-    return this.http.post<UsersData>('/rest/v1/rpc/get_userstest', {
-      filter_value: filter,
-      limit_value: limit,
-      offset_value: offset,
+  getList(params: SearchParams): Observable<ListData<User>> {
+    return this.http.post<ListData<User>>('/rest/v1/rpc/get_users', {
+      filter_value: params.filter,
+      limit_value: params.startItem,
+      offset_value: params.skip,
     });
-  }
-
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('/rest/v1/rpc/get_all_users');
   }
 
   deleteUser(id: string): Observable<void> {
     return this.http.post<void>(`/rest/v1/rpc/delete_user`, {
       row_id: id,
-    });
-  }
-
-  searchUser(text: string): Observable<User[]> {
-    return this.http.post<User[]>(`/rest/v1/rpc/search_users`, {
-      filter_value: text,
     });
   }
 }

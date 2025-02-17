@@ -1,28 +1,27 @@
-<!--<header>-->
-<!--  <div class="example-form">-->
-<!--    <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">-->
-<!--    <input (input)="search(searchValue)" [(ngModel)]="searchValue" class="search-users"-->
-<!--           placeholder="Поиск пользователя">-->
-<!--  </div>-->
+<header>
+  <div class="example-form">
+    <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
+    <input (input)="search()" [(ngModel)]="tableService.filter" class="search-users"
+           placeholder="Поиск пользователя">
+  </div>
 
-<!--  <div class="header-buttons">-->
-<!--    <button (click)="openDialog()" class="add-button" mat-raised-button>-->
-<!--      Добавить-->
-<!--    </button>-->
-<!--    <button mat-mini-fab class="refresh-icon">-->
-<!--      <mat-icon (click)="refreshTable()"> refresh icon</mat-icon>-->
-<!--    </button>-->
-<!--  </div>-->
-<!--</header>-->
+  <div class="header-buttons">
+    <button mat-mini-fab class="refresh-icon">
+      <mat-icon (click)="refreshTable()"> refresh icon</mat-icon>
+    </button>
+  </div>
+</header>
 
-<!--<div class="user-table">-->
+<div class="history-table">
 
-<!--  <div class="loading" *ngIf="loading | async">-->
-<!--    <mat-spinner></mat-spinner>-->
-<!--  </div>-->
-<!--  &lt;!&ndash;    (scroll)="uploading($event)"&ndash;&gt;-->
-<!--  <app-user-table-->
-<!--    *ngIf="dataSubject | async as dataUsers"-->
-<!--    [dataUsers]="dataUsers">-->
-<!--  </app-user-table>-->
-<!--</div>-->
+  <div class="loading" *ngIf="loading | async">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <app-history-table
+    appScrollPagination
+    (scroll)="tableService.uploading()"
+    *ngIf="tableService.dataSubject | async as dataUsers"
+    [dataUsers]="dataUsers">
+  </app-history-table>
+</div>

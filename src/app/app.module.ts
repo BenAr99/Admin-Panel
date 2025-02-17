@@ -51,6 +51,8 @@ import { AddUserComponent } from './features/users/components/add-user/add-user.
 import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { MaskitoDirective } from '@maskito/angular';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { ScrollPaginationDirective } from './shared/table/scroll-pagination.directive';
+import { HistoryTableComponent } from './features/history/components/history-table/history-table.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     UserTableComponent,
     AddUserComponent,
     DialogComponent,
+    HistoryTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,6 +106,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     NgOptimizedImage,
     MaskitoDirective,
     MatProgressSpinner,
+    ScrollPaginationDirective,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],

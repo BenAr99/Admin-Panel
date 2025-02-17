@@ -6,8 +6,7 @@ import { DeviceStatus } from '../../../models/entities/interfaces/maps.interface
 })
 export class StatusDeviceDirective implements OnChanges {
   @Input() appStatusDevice?: DeviceStatus;
-  @HostBinding('style.border')
-  border?: string;
+  @HostBinding('style.border') border?: string;
   constructor() {}
 
   ngOnChanges() {
