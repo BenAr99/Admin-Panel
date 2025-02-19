@@ -54,6 +54,13 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { ScrollPaginationDirective } from './shared/table/scroll-pagination.directive';
 import { HistoryTableComponent } from './features/history/components/history-table/history-table.component';
 import { ShellHistoryDetailsComponent } from './features/history/components/shell-history-details/shell-history-details.component';
+import {
+  MatCalendar,
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerToggle,
+} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -109,6 +116,11 @@ import { ShellHistoryDetailsComponent } from './features/history/components/shel
     MaskitoDirective,
     MatProgressSpinner,
     ScrollPaginationDirective,
+    MatDatepicker,
+    MatDatepickerToggle,
+    MatDatepickerInput,
+    MatNativeDateModule,
+    MatCalendar,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],

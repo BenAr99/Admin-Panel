@@ -4,11 +4,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { ShellHistoryDetailsComponent } from '../shell-history-details/shell-history-details.component';
 import { HistoryService } from '../../services/history.service';
 import { map } from 'rxjs';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-history-table',
   templateUrl: './history-table.component.html',
   styleUrl: './history-table.component.scss',
+  providers: [[provideNativeDateAdapter()]],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HistoryTableComponent {

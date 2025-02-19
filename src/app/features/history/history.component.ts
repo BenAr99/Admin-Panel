@@ -19,11 +19,13 @@ export class HistoryComponent implements OnDestroy {
   constructor(
     private loadingService: LoadingService,
     public tableService: TableService<History>,
-  ) {
-    console.log(false);
-  }
+  ) {}
+
   refreshTable() {
-    this.tableService.filter = '';
+    this.tableService.filter = {
+      text: '',
+      date: null,
+    };
     this.tableService.refreshTable();
   }
 

@@ -13,7 +13,10 @@ import {
 import { LoadingService } from '../services/loading.service';
 
 export interface SearchParams {
-  filter: string;
+  filter: {
+    text: string;
+    date: Date | null;
+  };
   startItem: number;
   skip: number;
 }
@@ -34,7 +37,10 @@ export const PAGINATION_SERVICE_INJECTION_TOKEN = new InjectionToken(
 @Injectable()
 export class TableService<T> {
   scrollTarget?: HTMLElement;
-  filter = '';
+  filter = {
+    text: '',
+    date: null,
+  };
   skip = 20;
   dataSubject = new BehaviorSubject<T[]>([]);
   scrolling = new Subject<void>();
@@ -56,8 +62,16 @@ export class TableService<T> {
             skip: this.skip - startItem,
           };
         }),
-        startWith({ filter: '', startItem: 20, skip: 0 }),
+        startWith({
+          filter: {
+            text: '',
+            date: null,
+          },
+          startItem: 20,
+          skip: 0,
+        }),
         switchMap((value: SearchParams) => {
+          this.loadingService.show();
           return this.dataService.getList(value).pipe(
             map((value) => {
               return value.list;

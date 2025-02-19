@@ -41,7 +41,10 @@ export class UsersComponent implements OnDestroy {
   }
 
   refreshTable() {
-    this.tableService.filter = '';
+    this.tableService.filter = {
+      text: '',
+      date: null,
+    };
     this.tableService.refreshTable();
   }
 

@@ -9,10 +9,15 @@ header {
   padding-bottom: 8px;
 }
 
+
 .header-buttons {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.none-input {
+  display: none;
 }
 
 .add-button {
@@ -21,24 +26,31 @@ header {
 
 .example-form {
   display: flex;
+  align-items: center;
+  height: 30px;
   width: 200px;
   padding: 6px 5px;
+  margin: 0 20px 0 0;
   border-radius: 6px;
   border: solid 1px #828282;
+}
+
+.datepicker-icon {
+  color: #2948E9;
 }
 
 .refresh-icon {
   background: #e62769;
 }
 
-.search-users {
+.input-header {
   width: 90%;
   font-size: 14px;
   margin-left: 5px;
   border: none;
 }
 
-.search-users:focus {
+.input-header:focus {
   outline: none;
 }
 

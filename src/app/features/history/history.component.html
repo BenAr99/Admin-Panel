@@ -1,25 +1,32 @@
 <header>
-  <div class="example-form">
-    <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
-    <input (input)="search()" [(ngModel)]="tableService.filter" class="search-users"
-           placeholder="Поиск пользователя">
+  <div class="header-buttons">
+    <div class="example-form">
+      <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
+      <input (input)="search()" [(ngModel)]="tableService.filter.text" class="input-header"
+             placeholder="Поиск пользователя">
+    </div>
+
+    <div class="example-form">
+      <input matInput class="input-header" (dateChange)="search()" [(ngModel)]="tableService.filter.date" [matDatepicker]="picker" placeholder="Выберите дату">
+      <mat-datepicker-toggle class="datepicker-icon" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </div>
   </div>
 
-  <div class="header-buttons">
-    <button mat-mini-fab class="refresh-icon">
-      <mat-icon (click)="refreshTable()"> refresh icon</mat-icon>
-    </button>
-  </div>
+
+  <button mat-mini-fab class="refresh-icon">
+    <mat-icon (click)="refreshTable()"> refresh icon</mat-icon>
+  </button>
 </header>
 
 
-  <div class="loading" *ngIf="loading | async">
-    <mat-spinner></mat-spinner>
-  </div>
+<div class="loading" *ngIf="loading | async">
+  <mat-spinner></mat-spinner>
+</div>
 
-  <app-history-table
-    appScrollPagination
-    (scroll)="tableService.uploading()"
-    *ngIf="tableService.dataSubject | async as dataUsers"
-    [dataUsers]="dataUsers">
-  </app-history-table>
+<app-history-table
+  appScrollPagination
+  (scroll)="tableService.uploading()"
+  *ngIf="tableService.dataSubject | async as dataUsers"
+  [dataUsers]="dataUsers">
+</app-history-table>

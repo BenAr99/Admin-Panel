@@ -24,7 +24,10 @@ export class HistoryService implements PaginationService<History> {
 
   getList(params: SearchParams): Observable<ListData<History>> {
     return this.http.post<ListData<History>>('/rest/v1/rpc/get_history', {
-      filter_value: params.filter,
+      filter: {
+        text: params.filter.text,
+        date: params.filter.date,
+      },
       limit_value: params.startItem,
       offset_value: params.skip,
     });

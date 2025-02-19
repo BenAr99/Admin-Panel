@@ -1,7 +1,7 @@
 <header>
   <div class="example-form">
     <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
-    <input (input)="search()" [(ngModel)]="tableService.filter" class="search-users"
+    <input (input)="search()" [(ngModel)]="tableService.filter.text" class="search-users"
            placeholder="Поиск пользователя">
   </div>
 

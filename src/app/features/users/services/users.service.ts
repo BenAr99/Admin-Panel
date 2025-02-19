@@ -20,7 +20,10 @@ export class UsersService implements PaginationService<User> {
 
   getList(params: SearchParams): Observable<ListData<User>> {
     return this.http.post<ListData<User>>('/rest/v1/rpc/get_users', {
-      filter_value: params.filter,
+      filter: {
+        text: params.filter.text,
+        date: params.filter.date,
+      },
       limit_value: params.startItem,
       offset_value: params.skip,
     });
