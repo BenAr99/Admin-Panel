@@ -8,9 +8,8 @@ describe('ShellHistoryDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShellHistoryDetailsComponent]
-    })
-    .compileComponents();
+      declarations: [ShellHistoryDetailsComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ShellHistoryDetailsComponent);
     component = fixture.componentInstance;

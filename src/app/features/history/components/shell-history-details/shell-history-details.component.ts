@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { HistoryService } from '../../services/history.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Device, User } from '../../../../models/entities/interfaces/maps.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
