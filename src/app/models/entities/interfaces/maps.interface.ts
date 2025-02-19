@@ -22,7 +22,7 @@ export interface Device {
 export interface User {
   name: string;
   login: string;
-  phone: number;
+  phone: string;
   tariff: string;
   time: string;
   level: number;

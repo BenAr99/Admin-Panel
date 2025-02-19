@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { History } from '../../../../models/entities/interfaces/maps.interface';
-import { HistoryService } from '../../services/history.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ShellHistoryDetailsComponent } from '../shell-history-details/shell-history-details.component';
+import { HistoryService } from '../../services/history.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-history-table',
@@ -15,16 +16,48 @@ export class HistoryTableComponent {
   titleColumns: string[] = ['position', 'type', 'login', 'start_date', 'end_date'];
 
   constructor(
-    private historyService: HistoryService,
     private dialog: MatDialog,
+    private historyService: HistoryService,
   ) {}
 
-  openDialog(event: MouseEvent, id: string, entityType: string) {
+  openDialogUser(event: MouseEvent, id: string) {
     const target = event.currentTarget as HTMLElement;
+    this.historyService
+      .getUser(id)
+      .pipe(
+        map((value) => {
+          return [
+            ['Устройство:', value.name],
+            ['Зона:', value.login],
+            ['Баланс:', value.balance.toString()],
+            ['Телефон:', value.phone],
+          ];
+        }),
+      )
+      .subscribe((value) => this.openDialog(target, value));
+  }
+  openDialogDevice(event: MouseEvent, id: string) {
+    const target = event.currentTarget as HTMLElement;
+    this.historyService
+      .getDevice(id)
+      .pipe(
+        map((value) => {
+          return [
+            ['Устройство:', value.name],
+            ['Зона:', value.zone_id],
+            ['MAC:', value.mac_ip],
+            ['IP:', value.ip_address],
+          ];
+        }),
+      )
+      .subscribe((value) => this.openDialog(target, value));
+  }
+
+  openDialog(target: HTMLElement, entity: (string | undefined)[][]) {
     const rect = target.getBoundingClientRect();
     this.dialog.open(ShellHistoryDetailsComponent, {
       panelClass: 'modal-dialog',
-      data: { id, entityType: entityType },
+      data: { entity },
       backdropClass: 'no-backdrop',
       position: {
         left: `${rect.left}px`, // Устанавливаем по горизонтали относительно элемента

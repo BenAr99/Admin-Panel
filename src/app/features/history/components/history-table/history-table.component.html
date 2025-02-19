@@ -7,11 +7,12 @@
 
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef> Устройство</th>
-      <td mat-cell (click)="openDialog($event, element.device.id, 'device')" class="device-item item-click" *matCellDef="let element">{{ element.device.type }}</td>
+      <td mat-cell (click)="openDialogDevice($event, element.device.id)" class="device-item item-click" *matCellDef="let element">{{ element.device.type }}</td>
     </ng-container>
+
     <ng-container matColumnDef="login">
       <th mat-header-cell *matHeaderCellDef> Пользователь</th>
-      <td mat-cell (click)="openDialog($event, element.user.id, 'user')" class="item-click" *matCellDef="let element"> {{ element.user.login }}</td>
+      <td mat-cell (click)="openDialogUser($event, element.user.id)" class="item-click" *matCellDef="let element"> {{ element.user.login }}</td>
     </ng-container>
 
     <ng-container matColumnDef="start_date">

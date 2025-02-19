@@ -31,7 +31,7 @@ export class UsersComponent implements OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result: User) => {
-      this.addUser(result.name, result.phone, result.login);
+      this.addUser(result.name, Number(result.phone), result.login);
     });
   }
 

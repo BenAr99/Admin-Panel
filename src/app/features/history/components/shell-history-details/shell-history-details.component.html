@@ -1,9 +1,5 @@
-<app-entity-details *ngIf="entity | async as items">
-  @for (item of items; track item) {
+<app-entity-details>
+  @for (item of data.entity; track item) {
     <app-entity-details-block [title]="item[0]" [value]="item[1]"></app-entity-details-block>
   }
 </app-entity-details>
-
-@if (loading | async) {
-  <mat-spinner></mat-spinner>
-}
