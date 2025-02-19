@@ -34,6 +34,8 @@ export class HistoryComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('умер компонент');
+    // todo Правильная ли отписка? Обрати внимание, что они не в компоненте
+    this.tableService.unsubscribe.next();
+    this.tableService.unsubscribe.complete();
   }
 }

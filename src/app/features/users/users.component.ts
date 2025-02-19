@@ -5,6 +5,7 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LoadingService } from '../../shared/services/loading.service';
 import { PAGINATION_SERVICE_INJECTION_TOKEN, TableService } from '../../shared/table/table.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -17,6 +18,7 @@ import { PAGINATION_SERVICE_INJECTION_TOKEN, TableService } from '../../shared/t
   ],
 })
 export class UsersComponent implements OnDestroy {
+  unsubscribe = new Subject<void>();
   loading = this.loadingService.loading;
   constructor(
     private usersService: UsersService,
@@ -30,13 +32,19 @@ export class UsersComponent implements OnDestroy {
       panelClass: 'modal-dialog',
     });
 
-    dialogRef.afterClosed().subscribe((result: User) => {
-      this.addUser(result.name, Number(result.phone), result.login);
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((result: User) => {
+        this.addUser(result.name, Number(result.phone), result.login);
+      });
   }
 
   addUser(name: string, phone: number, login: string) {
-    this.usersService.addUsers(name, phone, login).subscribe(() => {});
+    this.usersService
+      .addUsers(name, phone, login)
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(() => {});
     this.refreshTable();
   }
 
@@ -49,7 +57,7 @@ export class UsersComponent implements OnDestroy {
   }
 
   deleteUser(uuid: string): void {
-    this.usersService.deleteUser(uuid).subscribe();
+    this.usersService.deleteUser(uuid).pipe(takeUntil(this.unsubscribe)).subscribe();
     this.refreshTable();
   }
 
@@ -58,6 +66,7 @@ export class UsersComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('умер компонент');
+    this.tableService.unsubscribe.next(); // Отправляем сигнал для отписки
+    this.tableService.unsubscribe.complete();
   }
 }

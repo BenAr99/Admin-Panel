@@ -8,6 +8,7 @@ import {
   startWith,
   Subject,
   switchMap,
+  takeUntil,
   withLatestFrom,
 } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
@@ -36,6 +37,7 @@ export const PAGINATION_SERVICE_INJECTION_TOKEN = new InjectionToken(
 
 @Injectable()
 export class TableService<T> {
+  unsubscribe = new Subject<void>();
   scrollTarget?: HTMLElement;
   filter = {
     text: '',
@@ -86,6 +88,7 @@ export class TableService<T> {
           this.loadingService.hide();
           return [...value[1], ...value[0]];
         }),
+        takeUntil(this.unsubscribe),
       )
       .subscribe((value) => {
         this.dataSubject.next(value);
