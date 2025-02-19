@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { History } from '../../../../models/entities/interfaces/maps.interface';
 import { HistoryService } from '../../services/history.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,7 +10,7 @@ import { ShellHistoryDetailsComponent } from '../shell-history-details/shell-his
   styleUrl: './history-table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HistoryTableComponent implements OnInit {
+export class HistoryTableComponent {
   @Input() dataUsers: History[] = [];
   titleColumns: string[] = ['position', 'type', 'login', 'start_date', 'end_date'];
 
@@ -19,15 +19,11 @@ export class HistoryTableComponent implements OnInit {
     private dialog: MatDialog,
   ) {}
 
-  ngOnInit() {
-    console.log(this.dataUsers);
-  }
-
   openDialog(event: MouseEvent, id: string, entityType: string) {
     console.log(id, 'тут');
-    const target = event.currentTarget as HTMLElement; // Получаем HTML-элемент, на который кликнули
+    const target = event.currentTarget as HTMLElement;
     const rect = target.getBoundingClientRect();
-    const dialogRef = this.dialog.open(ShellHistoryDetailsComponent, {
+    this.dialog.open(ShellHistoryDetailsComponent, {
       panelClass: 'modal-dialog',
       data: { id, entityType: entityType },
       backdropClass: 'no-backdrop',
