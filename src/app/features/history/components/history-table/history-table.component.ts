@@ -20,7 +20,6 @@ export class HistoryTableComponent {
   ) {}
 
   openDialog(event: MouseEvent, id: string, entityType: string) {
-    console.log(id, 'тут');
     const target = event.currentTarget as HTMLElement;
     const rect = target.getBoundingClientRect();
     this.dialog.open(ShellHistoryDetailsComponent, {

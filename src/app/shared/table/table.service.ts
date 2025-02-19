@@ -63,7 +63,6 @@ export class TableService<T> {
               return value.list;
             }),
             filter((value) => {
-              console.log(value);
               return Array.isArray(value);
             }),
             withLatestFrom(this.dataSubject),
@@ -75,7 +74,6 @@ export class TableService<T> {
         }),
       )
       .subscribe((value) => {
-        console.log(value);
         this.dataSubject.next(value);
       });
   }
