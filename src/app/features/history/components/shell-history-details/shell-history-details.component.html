@@ -1,0 +1,5 @@
+<app-entity-details *ngIf="entity | async as items">
+  @for (item of items; track item) {
+    <app-entity-details-block [title]="item[0]" [value]="item[1]"></app-entity-details-block>
+  }
+</app-entity-details>

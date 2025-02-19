@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeviceBookingPreviewComponent } from './device-booking-preview.component';
+import { EntityDetailsComponent } from './entity-details.component';
 
 describe('CellHoverComponent', () => {
-  let component: DeviceBookingPreviewComponent;
-  let fixture: ComponentFixture<DeviceBookingPreviewComponent>;
+  let component: EntityDetailsComponent;
+  let fixture: ComponentFixture<EntityDetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DeviceBookingPreviewComponent],
+      declarations: [EntityDetailsComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DeviceBookingPreviewComponent);
+    fixture = TestBed.createComponent(EntityDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

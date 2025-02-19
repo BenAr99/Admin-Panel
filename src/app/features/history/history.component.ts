@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { History, User } from '../../models/entities/interfaces/maps.interface';
+import { History } from '../../models/entities/interfaces/maps.interface';
 import { LoadingService } from '../../shared/services/loading.service';
 import { PAGINATION_SERVICE_INJECTION_TOKEN, TableService } from '../../shared/table/table.service';
 import { HistoryService } from './services/history.service';
@@ -23,6 +23,7 @@ export class HistoryComponent implements OnDestroy {
     console.log(false);
   }
   refreshTable() {
+    this.tableService.filter = '';
     this.tableService.refreshTable();
   }
 

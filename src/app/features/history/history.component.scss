@@ -1,5 +1,6 @@
 :host {
   display: block;
+  height: 100%;
 }
 
 header {
@@ -45,4 +46,9 @@ header {
   position: absolute;
   top: 46%;
   right: 36%;
+}
+
+.test {
+  position: absolute;
+  z-index: 0  ;
 }

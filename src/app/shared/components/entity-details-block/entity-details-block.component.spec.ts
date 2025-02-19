@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BookingPreviewBlockComponent } from './booking-preview-block.component';
+import { EntityDetailsBlockComponent } from './entity-details-block.component';
 
 describe('CellBlockComponent', () => {
-  let component: BookingPreviewBlockComponent;
-  let fixture: ComponentFixture<BookingPreviewBlockComponent>;
+  let component: EntityDetailsBlockComponent;
+  let fixture: ComponentFixture<EntityDetailsBlockComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BookingPreviewBlockComponent],
+      declarations: [EntityDetailsBlockComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(BookingPreviewBlockComponent);
+    fixture = TestBed.createComponent(EntityDetailsBlockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

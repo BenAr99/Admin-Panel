@@ -4,7 +4,6 @@ import {
   Component,
   Input,
   OnDestroy,
-  OnInit,
 } from '@angular/core';
 import { Device, DeviceStatus } from '../../../../models/entities/interfaces/maps.interface';
 import { debounceTime, Subject } from 'rxjs';
@@ -26,6 +25,7 @@ export class DeviceCellComponent implements OnDestroy {
       this.changeDetectionRef.detectChanges();
     });
   }
+
   hidden(value: boolean) {
     this.mouseEnterSubject.next(value);
   }

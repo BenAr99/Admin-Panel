@@ -1,19 +1,24 @@
-<!--<div class="color-device">-->
-  @if (cell.type === 'pc') {
-    <img alt="" src="../../../../../assets/icons/pc.svg" width="90px" height="90px">
-  } @else if (cell.type === 'ps') {
-    <img alt="" src="../../../../../assets/image/ps.png" width="90px" height="90px">
-  }
+@if (cell.type === 'pc') {
+  <img alt="" src="../../../../../assets/icons/pc.svg" width="90px" height="90px">
+} @else if (cell.type === 'ps') {
+  <img alt="" src="../../../../../assets/image/ps.png" width="90px" height="90px">
+}
 
-  @if (cell.status === 'active' && cell.user) {
-    <div class="device-status" (mouseover)="hidden(true)" (mouseleave)="hidden(false)">{{ cell.user.name }}</div>
+@if (cell.status === 'active' && cell.user) {
+  <div class="device-status" (mouseover)="hidden(true)" (mouseleave)="hidden(false)">{{ cell.user.name }}</div>
 
-    <div class="hover" *ngIf="hover" (mouseover)="hidden(true)" (mouseleave)="hidden(false)">
-      <app-device-booking-preview [cell]="cell"></app-device-booking-preview>
-    </div>
-  } @else if (cell.status === enums.DeviceStatus.Inactive) {
-    <div class="device-status"><span>Доступен</span></div>
-  } @else if (cell.status === enums.DeviceStatus.Service) {
-    <div class="device-status"><span>Тех. обслуж.</span></div>
-  }
-<!--</div>-->
+  <div class="hover" *ngIf="hover" (mouseover)="hidden(true)" (mouseleave)="hidden(false)">
+    <app-entity-details>
+      <app-entity-details-block [title]="'Устройство:'" [value]="cell.name"></app-entity-details-block>
+      <app-entity-details-block [title]="'Логин:'" [value]="cell.user.login"></app-entity-details-block>
+      <app-entity-details-block [title]="'MAC:'" [value]="cell.mac_ip"></app-entity-details-block>
+      <app-entity-details-block [title]="'IP:'" [value]="cell.ip_address"></app-entity-details-block>
+      <app-entity-details-block [title]="'Осталось времени:'" [value]="cell.user?.time"></app-entity-details-block>
+      <app-entity-details-block [title]="'Телефон:'" [value]="cell.user?.phone"></app-entity-details-block>
+    </app-entity-details>
+  </div>
+} @else if (cell.status === enums.DeviceStatus.Inactive) {
+  <div class="device-status"><span>Доступен</span></div>
+} @else if (cell.status === enums.DeviceStatus.Service) {
+  <div class="device-status"><span>Тех. обслуж.</span></div>
+}

@@ -12,8 +12,11 @@ export interface Device {
   uuid: string;
   type: string;
   name: string;
-  user: User | null;
+  user?: User;
   status: DeviceStatus;
+  mac_ip: string;
+  ip_address: string;
+  zone_id?: string;
 }
 
 export interface User {

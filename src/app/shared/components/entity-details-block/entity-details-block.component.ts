@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-booking-preview-block',
-  templateUrl: './booking-preview-block.component.html',
-  styleUrl: './booking-preview-block.component.scss',
+  selector: 'app-entity-details-block',
+  templateUrl: './entity-details-block.component.html',
+  styleUrl: './entity-details-block.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BookingPreviewBlockComponent {
+export class EntityDetailsBlockComponent {
   @Input() value?: string | number;
   @Input() title?: string;
 }

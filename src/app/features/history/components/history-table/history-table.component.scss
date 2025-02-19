@@ -1,12 +1,21 @@
 :host {
   display: block;
   overflow-y: auto;
-  height: 640px;
+  height: 740px;
 }
 
 .table {
+  display: table;
   border: solid 1px #f4f4f4;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.device-item {
+  text-transform: uppercase;
+}
+
+.item-click {
+  cursor: pointer;
 }
 
 .small-cell {

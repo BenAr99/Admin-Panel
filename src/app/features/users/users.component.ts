@@ -5,7 +5,6 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LoadingService } from '../../shared/services/loading.service';
 import { PAGINATION_SERVICE_INJECTION_TOKEN, TableService } from '../../shared/table/table.service';
-import { HistoryService } from '../history/services/history.service';
 
 @Component({
   selector: 'app-users',
@@ -42,6 +41,7 @@ export class UsersComponent implements OnDestroy {
   }
 
   refreshTable() {
+    this.tableService.filter = '';
     this.tableService.refreshTable();
   }
 

@@ -26,8 +26,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeviceCellComponent } from './features/map-hall/components/device-cell/device-cell.component';
-import { DeviceBookingPreviewComponent } from './features/map-hall/components/device-booking-preview/device-booking-preview.component';
-import { BookingPreviewBlockComponent } from './features/map-hall/components/booking-preview-block/booking-preview-block.component';
+import { EntityDetailsComponent } from './shared/components/entity-details-component/entity-details.component';
+import { EntityDetailsBlockComponent } from './shared/components/entity-details-block/entity-details-block.component';
 import { BookingModalComponent } from './features/booking-modal/booking-modal.component';
 import { RouterOutlet } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
@@ -53,6 +53,7 @@ import { MaskitoDirective } from '@maskito/angular';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { ScrollPaginationDirective } from './shared/table/scroll-pagination.directive';
 import { HistoryTableComponent } from './features/history/components/history-table/history-table.component';
+import { ShellHistoryDetailsComponent } from './features/history/components/shell-history-details/shell-history-details.component';
 
 @NgModule({
   declarations: [
@@ -65,14 +66,15 @@ import { HistoryTableComponent } from './features/history/components/history-tab
     CardBookingComponent,
     TableMapComponent,
     DeviceCellComponent,
-    DeviceBookingPreviewComponent,
-    BookingPreviewBlockComponent,
+    EntityDetailsComponent,
+    EntityDetailsBlockComponent,
     BookingModalComponent,
     StatusDeviceDirective,
     UserTableComponent,
     AddUserComponent,
     DialogComponent,
     HistoryTableComponent,
+    ShellHistoryDetailsComponent,
   ],
   imports: [
     BrowserModule,
