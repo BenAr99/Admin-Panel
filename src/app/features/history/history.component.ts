@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { History } from '../../models/entities/interfaces/maps.interface';
 import { LoadingService } from '../../shared/services/loading.service';
 import { PAGINATION_SERVICE_INJECTION_TOKEN, TableService } from '../../shared/table/table.service';
@@ -14,7 +14,7 @@ import { HistoryService } from './services/history.service';
     TableService,
   ],
 })
-export class HistoryComponent implements OnDestroy {
+export class HistoryComponent {
   loading = this.loadingService.loading;
   constructor(
     private loadingService: LoadingService,
@@ -31,11 +31,5 @@ export class HistoryComponent implements OnDestroy {
 
   search(): void {
     this.tableService.search();
-  }
-
-  ngOnDestroy() {
-    // todo Правильная ли отписка? Обрати внимание, что они не в компоненте
-    this.tableService.unsubscribe.next();
-    this.tableService.unsubscribe.complete();
   }
 }

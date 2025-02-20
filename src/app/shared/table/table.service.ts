@@ -7,11 +7,14 @@ import {
   Observable,
   startWith,
   Subject,
+  Subscription,
   switchMap,
-  takeUntil,
+  tap,
+  timer,
   withLatestFrom,
 } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export interface SearchParams {
   filter: {
@@ -37,7 +40,7 @@ export const PAGINATION_SERVICE_INJECTION_TOKEN = new InjectionToken(
 
 @Injectable()
 export class TableService<T> {
-  unsubscribe = new Subject<void>();
+  private timer?: Subscription;
   scrollTarget?: HTMLElement;
   filter = {
     text: '',
@@ -88,7 +91,7 @@ export class TableService<T> {
           this.loadingService.hide();
           return [...value[1], ...value[0]];
         }),
-        takeUntil(this.unsubscribe),
+        takeUntilDestroyed(),
       )
       .subscribe((value) => {
         this.dataSubject.next(value);
@@ -102,15 +105,28 @@ export class TableService<T> {
   }
 
   search(): void {
-    this.skip = 20;
-    if (this.scrollTarget?.scrollTop) {
-      this.scrollTarget.scrollTop = 0;
+    if (this.timer) {
+      this.timer.unsubscribe();
     }
-    this.loadingService.show();
-    this.dataService.getList({ filter: this.filter, startItem: 20, skip: 0 }).subscribe((value) => {
-      this.dataSubject.next(value.list);
-      this.loadingService.hide();
-    });
+    this.timer = timer(300)
+      .pipe(
+        tap(() => {
+          this.skip = 20;
+          if (this.scrollTarget?.scrollTop) {
+            this.scrollTarget.scrollTop = 0;
+          }
+          this.loadingService.show();
+        }),
+        switchMap(() => {
+          return this.dataService.getList({ filter: this.filter, startItem: 20, skip: 0 });
+        }),
+      )
+      .subscribe((value) => {
+        this.timer?.unsubscribe();
+        this.timer = undefined;
+        this.dataSubject.next(value.list);
+        this.loadingService.hide();
+      });
   }
 
   refreshTable() {
