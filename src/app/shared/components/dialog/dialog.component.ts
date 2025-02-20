@@ -4,8 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogComponent {
-
-}
+export class DialogComponent {}

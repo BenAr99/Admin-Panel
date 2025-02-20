@@ -13,8 +13,8 @@
       <app-entity-details-block [title]="'Логин:'" [value]="cell.user.login"></app-entity-details-block>
       <app-entity-details-block [title]="'MAC:'" [value]="cell.mac_ip"></app-entity-details-block>
       <app-entity-details-block [title]="'IP:'" [value]="cell.ip_address"></app-entity-details-block>
-      <app-entity-details-block [title]="'Осталось времени:'" [value]="cell.user?.time"></app-entity-details-block>
-      <app-entity-details-block [title]="'Телефон:'" [value]="cell.user?.phone"></app-entity-details-block>
+      <app-entity-details-block [title]="'Осталось времени:'" [value]="cell.user.time"></app-entity-details-block>
+      <app-entity-details-block [title]="'Телефон:'" [value]="cell.user.phone"></app-entity-details-block>
     </app-entity-details>
   </div>
 } @else if (cell.status === enums.DeviceStatus.Inactive) {

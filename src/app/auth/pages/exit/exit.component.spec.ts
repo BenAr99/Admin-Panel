@@ -8,9 +8,8 @@ describe('ExitComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ExitComponent]
-    })
-    .compileComponents();
+      declarations: [ExitComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ExitComponent);
     component = fixture.componentInstance;

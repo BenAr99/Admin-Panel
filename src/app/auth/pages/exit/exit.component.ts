@@ -4,8 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-exit',
   templateUrl: './exit.component.html',
   styleUrl: './exit.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExitComponent {
-
-}
+export class ExitComponent {}
