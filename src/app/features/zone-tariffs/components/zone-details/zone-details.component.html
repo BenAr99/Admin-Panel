@@ -1,0 +1,49 @@
+<header>
+  <div class="example-button-container">
+    <button (click)="backspace()" class="button-backspace" mat-mini-fab
+            aria-label="Example icon button with a menu icon">
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+  </div>
+
+  <div class="example-button-container">
+    <button (click)="backspace()" class="edit" mat-mini-fab color="primary"
+            aria-label="Example icon button with a menu icon">
+      <mat-icon>edit</mat-icon>
+    </button>
+
+
+    <button mat-mini-fab>
+      <mat-icon> refresh icon</mat-icon>
+    </button>
+  </div>
+</header>
+
+@if (data | async; as devices) {
+  <table mat-table [dataSource]="devices" class="table">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell class="cell" *matHeaderCellDef> Имя</th>
+      <td class="cell" mat-cell *matCellDef="let element"> {{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell class="cell" *matHeaderCellDef> Устройство</th>
+      <td mat-cell class="cell" *matCellDef="let element"> {{ element.type }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="ip_address">
+      <th mat-header-cell class="cell" *matHeaderCellDef>IP</th>
+      <td mat-cell class="cell" *matCellDef="let element">{{ element.ip_address }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="mac_ip">
+      <th mat-header-cell class="cell" *matHeaderCellDef>MAC</th>
+      <td mat-cell class="cell" *matCellDef="let element">{{ element.mac_ip }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="titleColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: titleColumns;" class="hidden"></tr>
+  </table>
+
+}

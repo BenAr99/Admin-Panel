@@ -1,0 +1,38 @@
+@if (data) {
+  <table mat-table [dataSource]="data" class="table">
+    <ng-container  matColumnDef="position">
+      <th mat-header-cell class="cell" *matHeaderCellDef> No.</th>
+      <td mat-cell class="cell" *matCellDef="let element, let i = index"> {{ i + 1 }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="zone">
+      <th mat-header-cell class="cell" *matHeaderCellDef> Имя</th>
+      <td class="cell" mat-cell *matCellDef="let element"> {{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="width">
+      <th mat-header-cell class="cell" *matHeaderCellDef> Ширина </th>
+      <td mat-cell class="cell" *matCellDef="let element"> {{ element.width }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="height">
+      <th mat-header-cell class="cell" *matHeaderCellDef> Высота </th>
+      <td mat-cell class="cell" *matCellDef="let element"> {{ element.height }}</td>
+    </ng-container>
+
+
+    <ng-container  matColumnDef="price">
+      <th mat-header-cell class="cell" *matHeaderCellDef >Цена за час</th>
+      <td mat-cell class="cell" *matCellDef="let element" >{{ element.price }}</td>
+    </ng-container>
+
+    <ng-container  matColumnDef="count">
+      <th mat-header-cell class="cell" *matHeaderCellDef > Количество устройств </th>
+      <td mat-cell class="cell" *matCellDef="let element" >{{ element.device_count }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="titleColumns"></tr>
+    <tr (click)="selected(row.id)" mat-row *matRowDef="let row; columns: titleColumns;" class="hidden"></tr>
+  </table>
+
+}

@@ -1,0 +1,28 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+}
+
+.edit {
+  margin-right: 8px;
+}
+
+.button-backspace {
+  color: #3f51b5;
+  background: white;
+  border: 2px solid #3f51b5;
+  border-radius: 12px;
+}
+
+
+.table {
+  display: table;
+  border: solid 1px #f4f4f4;
+  overflow-y: auto;
+}
+
+.cell {
+  text-align: center;
+  cursor: pointer;
+}
