@@ -7,6 +7,7 @@ import { HistoryComponent } from './features/history/history.component';
 import { UsersComponent } from './features/users/users.component';
 import { AuthComponent } from './auth/pages/auth/auth.component';
 import { AuthGuard } from './auth/auth-guard.service';
+import { ZoneDetailsComponent } from './features/zone-tariffs/components/zone-details/zone-details.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,16 @@ const routes: Routes = [
       },
       {
         path: 'zones-tariffs',
-        component: ZoneTariffsComponent,
+        children: [
+          {
+            path: '',
+            component: ZoneTariffsComponent,
+          },
+          {
+            path: ':zone',
+            component: ZoneDetailsComponent,
+          },
+        ],
       },
       {
         path: 'history',

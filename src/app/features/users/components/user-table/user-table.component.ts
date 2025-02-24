@@ -9,7 +9,7 @@ import { User } from '../../../../models/entities/interfaces/maps.interface';
 })
 export class UserTableComponent {
   @Output() rowDeleted: EventEmitter<string> = new EventEmitter();
-  @Input() dataUsers: User[] = [];
+  @Input() data: User[] = [];
   titleColumns: string[] = ['position', 'name', 'login', 'phone', 'deleteIcon'];
 
   constructor() {}

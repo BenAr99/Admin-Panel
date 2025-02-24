@@ -6,6 +6,7 @@ export interface MapDetails {
   width: number;
   height: number;
   price: number;
+  count_device?: number;
 }
 
 export interface Device {

@@ -61,6 +61,8 @@ import {
   MatDatepickerToggle,
 } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ZoneTableComponent } from './features/zone-tariffs/components/zone-table/zone-table.component';
+import { ZoneDetailsComponent } from './features/zone-tariffs/components/zone-details/zone-details.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     DialogComponent,
     HistoryTableComponent,
     ShellHistoryDetailsComponent,
+    ZoneTableComponent,
+    ZoneDetailsComponent,
   ],
   imports: [
     BrowserModule,

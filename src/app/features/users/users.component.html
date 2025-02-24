@@ -9,7 +9,7 @@
     <button (click)="openDialog()" class="add-button" mat-raised-button>
       Добавить
     </button>
-    <button mat-mini-fab class="refresh-icon">
+    <button mat-mini-fab>
       <mat-icon (click)="refreshTable()"> refresh icon</mat-icon>
     </button>
   </div>
@@ -25,6 +25,6 @@
     (scroll)="tableService.uploading()"
     (rowDeleted)="deleteUser($event)"
     *ngIf="tableService.dataSubject | async as dataUsers"
-    [dataUsers]="dataUsers">
+    [data]="dataUsers">
   </app-user-table>
 </div>

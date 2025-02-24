@@ -14,7 +14,7 @@
   </div>
 
 
-  <button mat-mini-fab class="refresh-icon">
+  <button mat-mini-fab>
     <mat-icon (click)="refreshTable()"> refresh icon</mat-icon>
   </button>
 </header>
@@ -28,5 +28,5 @@
   appScrollPagination
   (scroll)="tableService.uploading()"
   *ngIf="tableService.dataSubject | async as dataUsers"
-  [dataUsers]="dataUsers">
+  [data]="dataUsers">
 </app-history-table>

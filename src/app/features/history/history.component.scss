@@ -9,7 +9,6 @@ header {
   padding-bottom: 8px;
 }
 
-
 .header-buttons {
   display: flex;
   align-items: center;
@@ -39,10 +38,6 @@ header {
   color: #2948E9;
 }
 
-.refresh-icon {
-  background: #e62769;
-}
-
 .input-header {
   width: 90%;
   font-size: 14px;
@@ -60,7 +55,7 @@ header {
   right: 36%;
 }
 
-.test {
+.cell {
   position: absolute;
   z-index: 0  ;
 }

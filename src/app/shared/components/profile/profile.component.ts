@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';
-import { LocalStorageService } from '../../../auth/service/local-storage.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ExitComponent } from '../../../auth/pages/exit/exit.component';
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +13,19 @@ import { LocalStorageService } from '../../../auth/service/local-storage.service
   imports: [MatIcon, MatButton, MatIconButton],
 })
 export class ProfileComponent {
-  constructor(private localStorageService: LocalStorageService) {}
-  test() {
-    this.localStorageService.deleteToken(this.localStorageService.refreshTokenKey);
-    this.localStorageService.deleteToken(this.localStorageService.accessTokenKey);
+  constructor(private dialog: MatDialog) {}
+
+  openDialog(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const rect = target.getBoundingClientRect();
+    this.dialog.open(ExitComponent, {
+      panelClass: 'modal-dialog',
+      backdropClass: 'no-backdrop',
+      autoFocus: false,
+      position: {
+        left: `${rect.left - 10}px`, // Устанавливаем по горизонтали относительно элемента
+        top: `${rect.bottom + window.scrollY + 8}px`, // Открываем сразу под элементом, учитывая скролл
+      },
+    });
   }
 }

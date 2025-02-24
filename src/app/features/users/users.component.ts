@@ -17,7 +17,7 @@ import { Subject, takeUntil } from 'rxjs';
     TableService,
   ],
 })
-export class UsersComponent implements OnDestroy {
+export class UsersComponent {
   unsubscribe = new Subject<void>();
   loading = this.loadingService.loading;
   constructor(
@@ -63,10 +63,5 @@ export class UsersComponent implements OnDestroy {
 
   search(): void {
     this.tableService.search();
-  }
-
-  ngOnDestroy() {
-    this.tableService.unsubscribe.next(); // Отправляем сигнал для отписки
-    this.tableService.unsubscribe.complete();
   }
 }

@@ -14,7 +14,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HistoryTableComponent {
-  @Input() dataUsers: History[] = [];
+  @Input() data: History[] = [];
   titleColumns: string[] = ['position', 'type', 'login', 'start_date', 'end_date'];
 
   constructor(
@@ -28,6 +28,7 @@ export class HistoryTableComponent {
       .getUser(id)
       .pipe(
         map((value) => {
+          console.log(value);
           return [
             ['Устройство:', value.name],
             ['Зона:', value.login],
