@@ -22,6 +22,12 @@ export class MapsService {
     });
   }
 
+  // getDevices(id: string): Observable<Device[]> {
+  //   return this.http.post<Device[]>('/rest/v1/rpc/get_devices_by_zone', {
+  //     p_zone_id: id,
+  //   });
+  // }
+
   postBooking(booking: Booking): Observable<object> {
     return this.http.post('/rest/v1/rpc/assign_user_to_device', {
       new_zone: booking.zone,

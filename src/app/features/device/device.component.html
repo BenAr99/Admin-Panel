@@ -1,0 +1,8 @@
+<header></header>
+<app-device-table
+  appScrollPagination
+  (scroll)="tableService.uploading()"
+  (rowDeleted)="deleteUser($event)"
+  *ngIf="tableService.dataSubject | async as data"
+  [data]="data"
+></app-device-table>

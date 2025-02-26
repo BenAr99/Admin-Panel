@@ -16,17 +16,14 @@ import {
 import { LoadingService } from '../services/loading.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-export interface SearchParams {
-  filter: {
-    text: string;
-    date: Date | null;
-  };
+export interface SearchParams<TFilter> {
+  filter: TFilter | undefined;
   startItem: number;
   skip: number;
 }
 
-export interface PaginationService<T> {
-  getList(params: SearchParams): Observable<ListData<T>>;
+export interface PaginationService<T, TFilter> {
+  getList(params: SearchParams<Partial<TFilter>>): Observable<ListData<T>>;
 }
 
 export interface ListData<T> {
@@ -39,20 +36,17 @@ export const PAGINATION_SERVICE_INJECTION_TOKEN = new InjectionToken(
 );
 
 @Injectable()
-export class TableService<T> {
+export class TableService<T, TFilter extends {}> {
   private timer?: Subscription;
   scrollTarget?: HTMLElement;
-  filter = {
-    text: '',
-    date: null,
-  };
+  filter: Partial<TFilter> = {};
   skip = 20;
   dataSubject = new BehaviorSubject<T[]>([]);
   scrolling = new Subject<void>();
 
   constructor(
     private loadingService: LoadingService,
-    @Inject(PAGINATION_SERVICE_INJECTION_TOKEN) private dataService: PaginationService<T>,
+    @Inject(PAGINATION_SERVICE_INJECTION_TOKEN) private dataService: PaginationService<T, TFilter>,
   ) {
     this.scrolling
       .pipe(
@@ -68,14 +62,11 @@ export class TableService<T> {
           };
         }),
         startWith({
-          filter: {
-            text: '',
-            date: null,
-          },
+          filter: {},
           startItem: 20,
           skip: 0,
         }),
-        switchMap((value: SearchParams) => {
+        switchMap((value: SearchParams<Partial<TFilter>>) => {
           this.loadingService.show();
           return this.dataService.getList(value).pipe(
             map((value) => {

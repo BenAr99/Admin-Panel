@@ -28,7 +28,8 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/ban-types": "off"
       }
     },
     {

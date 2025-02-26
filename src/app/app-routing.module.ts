@@ -7,7 +7,8 @@ import { HistoryComponent } from './features/history/history.component';
 import { UsersComponent } from './features/users/users.component';
 import { AuthComponent } from './auth/pages/auth/auth.component';
 import { AuthGuard } from './auth/auth-guard.service';
-import { ZoneDetailsComponent } from './features/zone-tariffs/components/zone-details/zone-details.component';
+import { ZoneDetailsComponent } from './features/zone-tariffs/page/zone-details/zone-details.component';
+import { DeviceComponent } from './features/device/device.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
             component: ZoneDetailsComponent,
           },
         ],
+      },
+      {
+        path: 'device',
+        component: DeviceComponent,
       },
       {
         path: 'history',

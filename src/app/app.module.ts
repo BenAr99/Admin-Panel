@@ -62,7 +62,9 @@ import {
 } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ZoneTableComponent } from './features/zone-tariffs/components/zone-table/zone-table.component';
-import { ZoneDetailsComponent } from './features/zone-tariffs/components/zone-details/zone-details.component';
+import { ZoneDetailsComponent } from './features/zone-tariffs/page/zone-details/zone-details.component';
+import { DeviceTableComponent } from './features/device/device-table/device-table.component';
+import { DeviceComponent } from './features/device/device.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,8 @@ import { ZoneDetailsComponent } from './features/zone-tariffs/components/zone-de
     ShellHistoryDetailsComponent,
     ZoneTableComponent,
     ZoneDetailsComponent,
+    DeviceComponent,
+    DeviceTableComponent,
   ],
   imports: [
     BrowserModule,

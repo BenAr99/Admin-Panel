@@ -8,6 +8,33 @@ header {
   margin-right: 8px;
 }
 
+.small-cell {
+  width: 30px;
+  padding: 4px 10px;
+}
+
+.button-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: #ff2121;
+}
+
+.icons {
+  padding-top: 4px;
+  font-size: 18px;
+}
+
+._hidden {
+  visibility: hidden;
+}
+
+.hidden:hover {
+  ._hidden {
+    visibility: visible;
+  }
+}
+
 .button-backspace {
   color: #3f51b5;
   background: white;

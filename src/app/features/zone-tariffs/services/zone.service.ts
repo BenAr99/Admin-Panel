@@ -18,4 +18,8 @@ export class ZoneService {
       p_zone_id: zone_id,
     });
   }
+
+  // editDevice(data) {
+  //   this.http.post<Device>(`/rest/v1/rpc/assign_user_to_device`, { data });
+  // }
 }

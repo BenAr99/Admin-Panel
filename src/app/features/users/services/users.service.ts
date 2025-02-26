@@ -4,10 +4,14 @@ import { Observable } from 'rxjs';
 import { User } from '../../../models/entities/interfaces/maps.interface';
 import { ListData, PaginationService, SearchParams } from '../../../shared/table/table.service';
 
+export interface UsersFilter {
+  text: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService implements PaginationService<User> {
+export class UsersService implements PaginationService<User, UsersFilter> {
   constructor(private http: HttpClient) {}
 
   addUsers(name: string, phone: number, login: string): Observable<void> {
@@ -18,9 +22,10 @@ export class UsersService implements PaginationService<User> {
     });
   }
 
-  getList(params: SearchParams): Observable<ListData<User>> {
+  getList(params: SearchParams<UsersFilter>): Observable<ListData<User>> {
     return this.http.post<ListData<User>>('/rest/v1/rpc/get_users', {
-      filter_value: params.filter.text,
+      // мб ошибка бэке
+      filter: params.filter,
       limit_value: params.startItem,
       offset_value: params.skip,
     });

@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { User } from '../../models/entities/interfaces/maps.interface';
-import { UsersService } from './services/users.service';
+import { UsersFilter, UsersService } from './services/users.service';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LoadingService } from '../../shared/services/loading.service';
 import { PAGINATION_SERVICE_INJECTION_TOKEN, TableService } from '../../shared/table/table.service';
-import { Subject, takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-users',
@@ -18,13 +18,12 @@ import { Subject, takeUntil } from 'rxjs';
   ],
 })
 export class UsersComponent {
-  unsubscribe = new Subject<void>();
   loading = this.loadingService.loading;
   constructor(
     private usersService: UsersService,
     private dialog: MatDialog,
     private loadingService: LoadingService,
-    public tableService: TableService<User>,
+    public tableService: TableService<User, UsersFilter>,
   ) {}
 
   openDialog() {
@@ -34,7 +33,7 @@ export class UsersComponent {
 
     dialogRef
       .afterClosed()
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(takeUntilDestroyed())
       .subscribe((result: User) => {
         this.addUser(result.name, Number(result.phone), result.login);
       });
@@ -43,7 +42,7 @@ export class UsersComponent {
   addUser(name: string, phone: number, login: string) {
     this.usersService
       .addUsers(name, phone, login)
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(takeUntilDestroyed())
       .subscribe(() => {});
     this.refreshTable();
   }
@@ -51,13 +50,12 @@ export class UsersComponent {
   refreshTable() {
     this.tableService.filter = {
       text: '',
-      date: null,
     };
     this.tableService.refreshTable();
   }
 
   deleteUser(uuid: string): void {
-    this.usersService.deleteUser(uuid).pipe(takeUntil(this.unsubscribe)).subscribe();
+    this.usersService.deleteUser(uuid).pipe(takeUntilDestroyed()).subscribe();
     this.refreshTable();
   }
 

@@ -4,10 +4,15 @@ import { Observable } from 'rxjs';
 import { ListData, PaginationService, SearchParams } from '../../../shared/table/table.service';
 import { Device, History, User } from '../../../models/entities/interfaces/maps.interface';
 
+export interface HistoryFilter {
+  text: string;
+  date: Date;
+}
+
 @Injectable({
   providedIn: 'root',
 })
-export class HistoryService implements PaginationService<History> {
+export class HistoryService implements PaginationService<History, HistoryFilter> {
   constructor(private http: HttpClient) {}
 
   getDevice(id: string): Observable<Device> {
@@ -22,12 +27,9 @@ export class HistoryService implements PaginationService<History> {
     });
   }
 
-  getList(params: SearchParams): Observable<ListData<History>> {
+  getList(params: SearchParams<HistoryFilter>): Observable<ListData<History>> {
     return this.http.post<ListData<History>>('/rest/v1/rpc/get_history', {
-      filter: {
-        text: params.filter.text,
-        date: params.filter.date,
-      },
+      filter: params.filter,
       limit_value: params.startItem,
       offset_value: params.skip,
     });

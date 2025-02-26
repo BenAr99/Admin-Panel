@@ -9,5 +9,5 @@ export class ScrollPaginationDirective<T> {
   @HostListener('scroll', ['$event']) scroll(event: Event) {
     this.tableService.scrollTarget = (event.target as HTMLElement) ?? undefined;
   }
-  constructor(private tableService: TableService<T>) {}
+  constructor(private tableService: TableService<T, {}>) {}
 }
