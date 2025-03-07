@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ZoneService } from '../../services/zone.service';
+import { ZoneDevicesResponse, ZoneService } from '../../services/zone.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, map, Observable, switchMap, takeUntil } from 'rxjs';
+import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
 import { Device } from '../../../../models/entities/interfaces/maps.interface';
+import { LoadingService } from '../../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-zone-details',
@@ -11,33 +12,42 @@ import { Device } from '../../../../models/entities/interfaces/maps.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZoneDetailsComponent implements OnInit {
+  header = new BehaviorSubject('');
   data = new BehaviorSubject<Device[]>([]);
+  loading = this.loadingService.loading;
   titleColumns: string[] = ['name', 'type', 'status', 'ip_address', 'mac_ip', 'edit', 'delete'];
+
   constructor(
     private zoneService: ZoneService,
+    private loadingService: LoadingService,
     private route: ActivatedRoute,
     private router: Router,
   ) {}
 
   ngOnInit() {
+    this.loadingService.show();
     this.route.paramMap
       .pipe(
         map((paramMap) => {
           return paramMap.get('zone');
         }),
-        switchMap((id): Observable<Device[]> => {
+        switchMap((id): Observable<ZoneDevicesResponse> => {
           return this.zoneService.getDevices(id);
         }),
       )
       .subscribe((value) => {
-        this.data.next(value);
+        this.data.next(value.devices);
+        this.header.next(value.zone_name);
+        this.loadingService.hide();
       });
   }
 
   add() {}
 
   edit(id: string) {
-    // this.zoneService.
+    this.router.navigate(['/device'], {
+      queryParams: { id }, // Добавляем queryParams
+    });
   }
 
   delete(id: string): void {

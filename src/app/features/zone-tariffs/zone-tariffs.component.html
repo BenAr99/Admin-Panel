@@ -1,1 +1,4 @@
 <app-zone-table *ngIf="data | async as data" [data]="data"></app-zone-table>
+<div class="loading" *ngIf="loading | async">
+  <mat-spinner></mat-spinner>
+</div>

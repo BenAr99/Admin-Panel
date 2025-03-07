@@ -4,7 +4,18 @@ header {
   padding-bottom: 8px;
 }
 
-.edit {
+.title {
+  font-weight: 500;
+}
+
+
+.example-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-button-container :first-child {
   margin-right: 8px;
 }
 
@@ -47,9 +58,21 @@ header {
   display: table;
   border: solid 1px #f4f4f4;
   overflow-y: auto;
+  tr:hover {
+    background-color: #f0f0f0;
+  }
+  th {
+    background-color: white;
+  }
 }
 
 .cell {
   text-align: center;
   cursor: pointer;
+}
+
+.loading {
+  position: absolute;
+  top: 46%;
+  right: 36%;
 }

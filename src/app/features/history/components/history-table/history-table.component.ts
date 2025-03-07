@@ -45,11 +45,12 @@ export class HistoryTableComponent {
       .getDevice(id)
       .pipe(
         map((value) => {
+          console.log(value);
           return [
             ['Устройство:', value.name],
-            ['Зона:', value.zone_id],
-            ['MAC:', value.mac_ip],
-            ['IP:', value.ip_address],
+            ['Зона:', value.zone?.name],
+            ['mac_ip:', value.mac_ip],
+            ['ip_address:', value.ip_address],
           ];
         }),
       )

@@ -1,8 +1,33 @@
-<header></header>
+<header>
+  <div class="example-form">
+    <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
+    <input (input)="search()" [(ngModel)]="tableService.filter.text" class="input-header"
+           placeholder="Поиск устройства">
+  </div>
+
+  <div class="header-buttons">
+    <button (click)="create()" class="add-button" mat-mini-fab color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <div class="header-buttons">
+      <button (click)="refreshTable()" mat-mini-fab>
+        <mat-icon> refresh icon</mat-icon>
+      </button>
+    </div>
+  </div>
+
+</header>
+
+<div class="loading" *ngIf="loading | async">
+  <mat-spinner></mat-spinner>
+</div>
+
 <app-device-table
   appScrollPagination
   (scroll)="tableService.uploading()"
-  (rowDeleted)="deleteUser($event)"
+  (dialogEdit)="edit($event)"
+  (rowDeleted)="delete($event)"
   *ngIf="tableService.dataSubject | async as data"
   [data]="data"
 ></app-device-table>

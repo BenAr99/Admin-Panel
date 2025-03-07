@@ -73,6 +73,7 @@ export class TableService<T, TFilter extends {}> {
               return value.list;
             }),
             filter((value) => {
+              this.loadingService.hide();
               return Array.isArray(value);
             }),
             withLatestFrom(this.dataSubject),

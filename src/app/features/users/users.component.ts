@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { User } from '../../models/entities/interfaces/maps.interface';
 import { UsersFilter, UsersService } from './services/users.service';
 import { AddUserComponent } from './components/add-user/add-user.component';
@@ -18,6 +18,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   ],
 })
 export class UsersComponent {
+  private destroyRef = inject(DestroyRef);
   loading = this.loadingService.loading;
   constructor(
     private usersService: UsersService,
@@ -42,21 +43,21 @@ export class UsersComponent {
   addUser(name: string, phone: number, login: string) {
     this.usersService
       .addUsers(name, phone, login)
-      .pipe(takeUntilDestroyed())
+      .pipe()
       .subscribe(() => {});
     this.refreshTable();
   }
 
   refreshTable() {
-    this.tableService.filter = {
-      text: '',
-    };
+    this.tableService.filter = {};
     this.tableService.refreshTable();
   }
 
   deleteUser(uuid: string): void {
-    this.usersService.deleteUser(uuid).pipe(takeUntilDestroyed()).subscribe();
-    this.refreshTable();
+    this.usersService
+      .deleteUser(uuid)
+      .pipe()
+      .subscribe(() => this.refreshTable());
   }
 
   search(): void {

@@ -63,8 +63,10 @@ import {
 import { MatNativeDateModule } from '@angular/material/core';
 import { ZoneTableComponent } from './features/zone-tariffs/components/zone-table/zone-table.component';
 import { ZoneDetailsComponent } from './features/zone-tariffs/page/zone-details/zone-details.component';
-import { DeviceTableComponent } from './features/device/device-table/device-table.component';
+import { DeviceTableComponent } from './features/device/components/device-table/device-table.component';
 import { DeviceComponent } from './features/device/device.component';
+import { DeviceEditComponent } from './features/device/components/device-edit/device-edit.component';
+import { DeviceCreateComponent } from './features/device/components/device-create/device-create.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { DeviceComponent } from './features/device/device.component';
     ZoneDetailsComponent,
     DeviceComponent,
     DeviceTableComponent,
+    DeviceEditComponent,
+    DeviceCreateComponent,
   ],
   imports: [
     BrowserModule,

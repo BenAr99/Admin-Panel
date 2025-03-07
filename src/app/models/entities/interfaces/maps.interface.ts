@@ -1,5 +1,7 @@
 import { FormControl } from '@angular/forms';
 
+//todo Так и оставить тут интерфейсы? Или разделить по их папкам?
+
 export interface MapDetails {
   id: string;
   name: string;
@@ -10,14 +12,17 @@ export interface MapDetails {
 }
 
 export interface Device {
-  uuid: string;
+  id: string;
   type: string;
   name: string;
   user?: User;
   status: DeviceStatus;
   mac_ip: string;
   ip_address: string;
-  zone_id?: string;
+  zone?: {
+    name: string;
+    id: string;
+  };
 }
 
 export interface User {
