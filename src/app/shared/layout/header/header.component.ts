@@ -4,7 +4,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { routeHeaderTextDictionary } from '../../constants/route-header-text-dictionary';
 import { HeaderService } from '../../services/header.service';
 import { filter, map, startWith } from 'rxjs';
-import { NotificationModalComponent } from '../../../features/notification-modal/notification-modal.component';
 import { BookingModalComponent } from '../../../features/booking-modal/booking-modal.component';
 
 @Component({
@@ -34,13 +33,6 @@ export class HeaderComponent implements OnInit {
       .subscribe((headerText) => {
         this.headerService.header.next(headerText as string);
       });
-  }
-
-  openDialogNotification() {
-    this.dialog.open(NotificationModalComponent, {
-      panelClass: 'modal-dialog',
-      position: { top: '70px', right: '220px' },
-    });
   }
 
   openDialogBooking() {

@@ -4,6 +4,7 @@ import {
   Component,
   Input,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { Device, DeviceStatus } from '../../../../models/entities/interfaces/maps.interface';
 import { debounceTime, Subject } from 'rxjs';
@@ -14,7 +15,7 @@ import { debounceTime, Subject } from 'rxjs';
   styleUrl: './device-cell.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeviceCellComponent implements OnDestroy {
+export class DeviceCellComponent implements OnDestroy, OnInit {
   @Input() cell!: Device;
   hover?: boolean;
   private mouseEnterSubject = new Subject<boolean>();
@@ -24,6 +25,10 @@ export class DeviceCellComponent implements OnDestroy {
       this.hover = value;
       this.changeDetectionRef.detectChanges();
     });
+  }
+
+  ngOnInit() {
+    console.log(this.cell);
   }
 
   hidden(value: boolean) {

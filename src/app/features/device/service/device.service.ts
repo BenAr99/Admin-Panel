@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 export interface DeviceFilter {
+  name: string;
   text: string;
   status: string;
   type: string;
@@ -51,7 +52,7 @@ export class DeviceService implements PaginationService<Device, DeviceFilter> {
         id: device.id,
         status: device.status,
         name: device.name,
-        IP: device.ip_address,
+        ip_address: device.ip_address,
         zone_id: device.zone,
       },
     });

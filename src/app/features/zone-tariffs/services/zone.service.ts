@@ -24,7 +24,15 @@ export class ZoneService {
     });
   }
 
-  // editDevice(data) {
-  //   this.http.post<Device>(`/rest/v1/rpc/assign_user_to_device`, { data });
-  // }
+  deleteDeviceFromZone(device: Device): Observable<Device> {
+    return this.http.post<Device>(`/rest/v1/rpc/update_device`, {
+      device_data: {
+        id: device.id,
+        status: device.status,
+        name: device.name,
+        ip_address: device.ip_address,
+        zone_id: null,
+      },
+    });
+  }
 }

@@ -31,6 +31,7 @@ export class DeviceEditComponent {
 
   edit() {
     if (this.deviceForm.valid) {
+      console.log(this.deviceForm.value);
       this.matDialogRef.close(this.deviceForm.value);
     }
   }

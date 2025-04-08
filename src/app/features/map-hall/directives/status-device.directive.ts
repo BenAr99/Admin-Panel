@@ -11,10 +11,10 @@ export class StatusDeviceDirective implements OnChanges {
 
   ngOnChanges() {
     if (this.appStatusDevice === DeviceStatus.Active) {
-      this.border = '2px solid rgba(0, 100, 0, 0.8)';
+      this.border = '2px solid rgba(255, 100, 100, 1)';
     }
     if (this.appStatusDevice === DeviceStatus.Inactive) {
-      this.border = '2px solid rgba(255, 100, 100, 0.5)';
+      this.border = '2px solid rgba(0, 100, 0, 0.8)';
     }
     if (this.appStatusDevice === DeviceStatus.Service) {
       this.border = '2px solid rgb(255, 165, 0)';

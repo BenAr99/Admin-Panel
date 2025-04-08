@@ -9,8 +9,6 @@ import { MapHallComponent } from './features/map-hall/map-hall.component';
 import { ZoneTariffsComponent } from './features/zone-tariffs/zone-tariffs.component';
 import { HistoryComponent } from './features/history/history.component';
 import { UsersComponent } from './features/users/users.component';
-import { NotificationModalComponent } from './features/notification-modal/notification-modal.component';
-import { CardBookingComponent } from './features/card-booking/card-booking.component';
 import {
   MatDialogActions,
   MatDialogClose,
@@ -75,8 +73,6 @@ import { DeviceCreateComponent } from './features/device/components/device-creat
     ZoneTariffsComponent,
     HistoryComponent,
     UsersComponent,
-    NotificationModalComponent,
-    CardBookingComponent,
     TableMapComponent,
     DeviceCellComponent,
     EntityDetailsComponent,

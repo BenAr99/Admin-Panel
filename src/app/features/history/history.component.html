@@ -1,12 +1,12 @@
 <header>
-  <div class="header-buttons">
-    <div class="example-form">
+  <div class="button-container">
+    <div class="input-form">
       <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
       <input (ngModelChange)="onTextChange()" [(ngModel)]="text" class="input-header"
              placeholder="Поиск пользователя">
     </div>
 
-    <div class="example-form">
+    <div class="input-form">
       <input matInput class="input-header"  (ngModelChange)="onDateChange()" [(ngModel)]="date" [matDatepicker]="picker" placeholder="Выберите дату">
       <mat-datepicker-toggle class="datepicker-icon" matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>

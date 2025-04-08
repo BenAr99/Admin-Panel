@@ -50,6 +50,11 @@ export interface UserForm {
 
 // enum с type pc/ps
 
+export enum DeviceType {
+  ps = 'ps',
+  pc = 'pc',
+}
+
 export enum DeviceStatus {
   Active = 'active',
   Inactive = 'inactive',

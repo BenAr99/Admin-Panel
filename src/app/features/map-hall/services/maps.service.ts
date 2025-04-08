@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Device, MapDetails } from '../../../models/entities/interfaces/maps.interface';
 import { Observable } from 'rxjs';
 import { Booking } from '../../../models/entities/interfaces/bookingForm.interface';
@@ -14,19 +14,11 @@ export class MapsService {
     return this.http.get<MapDetails[]>('/rest/v1/zones', {});
   }
 
-  getDevices(uuid: string): Observable<Device[]> {
-    let params = new HttpParams();
-    params = params.append('zone_id', `eq.${uuid}`);
-    return this.http.get<Device[]>('/rest/v1/device_with_user', {
-      params,
+  getDevices(id: string): Observable<Device[]> {
+    return this.http.post<Device[]>('/rest/v1/rpc/get_sorted_data_by_name', {
+      zone_id_param: id,
     });
   }
-
-  // getDevices(id: string): Observable<Device[]> {
-  //   return this.http.post<Device[]>('/rest/v1/rpc/get_devices_by_zone', {
-  //     p_zone_id: id,
-  //   });
-  // }
 
   postBooking(booking: Booking): Observable<object> {
     return this.http.post('/rest/v1/rpc/assign_user_to_device', {

@@ -1,15 +1,27 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ZoneDevicesResponse, ZoneService } from '../../services/zone.service';
+import { ZoneService } from '../../services/zone.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { Device } from '../../../../models/entities/interfaces/maps.interface';
 import { LoadingService } from '../../../../shared/services/loading.service';
+import {
+  PAGINATION_SERVICE_INJECTION_TOKEN,
+  TableService,
+} from '../../../../shared/table/table.service';
+import { DeviceDetailsFilter, ZoneDetailsService } from '../../services/zone-details.service';
 
 @Component({
   selector: 'app-zone-details',
   templateUrl: './zone-details.component.html',
   styleUrl: './zone-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: PAGINATION_SERVICE_INJECTION_TOKEN,
+      useExisting: ZoneDetailsService,
+    },
+    TableService,
+  ],
 })
 export class ZoneDetailsComponent implements OnInit {
   header = new BehaviorSubject('');
@@ -22,6 +34,7 @@ export class ZoneDetailsComponent implements OnInit {
     private loadingService: LoadingService,
     private route: ActivatedRoute,
     private router: Router,
+    public tableService: TableService<Device, DeviceDetailsFilter>,
   ) {}
 
   ngOnInit() {
@@ -31,18 +44,19 @@ export class ZoneDetailsComponent implements OnInit {
         map((paramMap) => {
           return paramMap.get('zone');
         }),
-        switchMap((id): Observable<ZoneDevicesResponse> => {
-          return this.zoneService.getDevices(id);
-        }),
       )
-      .subscribe((value) => {
-        this.data.next(value.devices);
-        this.header.next(value.zone_name);
+      .subscribe((id) => {
+        this.tableService.filter.text = id!;
+        this.tableService.search();
         this.loadingService.hide();
       });
   }
 
   add() {}
+
+  refreshTable() {
+    this.tableService.refreshTable();
+  }
 
   edit(id: string) {
     this.router.navigate(['/device'], {
@@ -50,9 +64,8 @@ export class ZoneDetailsComponent implements OnInit {
     });
   }
 
-  delete(id: string): void {
-    // this.usersService.deleteUser(uuid).pipe(takeUntil(this.unsubscribe)).subscribe();
-    // this.refreshTable();
+  delete(device: Device): void {
+    this.zoneService.deleteDeviceFromZone(device).subscribe();
   }
 
   backspace() {

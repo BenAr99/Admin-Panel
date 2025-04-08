@@ -24,7 +24,6 @@ export class UsersService implements PaginationService<User, UsersFilter> {
 
   getList(params: SearchParams<UsersFilter>): Observable<ListData<User>> {
     return this.http.post<ListData<User>>('/rest/v1/rpc/get_users', {
-      // мб ошибка бэке
       filter: params.filter,
       limit_value: params.startItem,
       offset_value: params.skip,

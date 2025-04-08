@@ -1,10 +1,10 @@
 <header>
-  @if (maps | async; as mapMetas ) {
+  @if (maps | async; as mapMetas) {
     <mat-form-field appearance="outline">
       <mat-label>Выберите карту</mat-label>
       <mat-select [(ngModel)]="selectedMapId" (selectionChange)="mapLoad($event.value)">
         @for (item of mapMetas; track item) {
-          <mat-option [value]="item.id">{{item.name}}</mat-option>
+          <mat-option [value]="item.id">{{ item.name }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -14,8 +14,10 @@
 
 <div class="table">
   @if (devices | async; as device) {
-      <app-table-map  [map]="this.selectedMap" [cells]="device"></app-table-map>
+    <app-table-map [map]="this.selectedMap" [cells]="device"></app-table-map>
   }
 </div>
 
-
+<div class='loading' *ngIf="loading | async">
+  <mat-spinner></mat-spinner>
+</div>

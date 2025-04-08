@@ -2,29 +2,32 @@ header {
   display: flex;
   justify-content: space-between;
   padding-bottom: 8px;
+  font-size: 14px;
 }
 
-.header-buttons {
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-form {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.add-button {
-  margin-right: 8px;
-}
-
-.example-form {
-  display: flex;
+  height: 30px;
   width: 200px;
   padding: 6px 5px;
   border-radius: 6px;
   border: solid 1px #828282;
 }
 
+.input-margin {
+  margin: 0 8px 0 0;
+}
+
+
 .input-header {
   width: 90%;
-  font-size: 14px;
   margin-left: 5px;
   border: none;
 }

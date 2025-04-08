@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DeviceFilter, DeviceService } from './service/device.service';
 import { PAGINATION_SERVICE_INJECTION_TOKEN, TableService } from '../../shared/table/table.service';
 import { Device, MapDetails } from '../../models/entities/interfaces/maps.interface';
@@ -6,8 +6,9 @@ import { LoadingService } from '../../shared/services/loading.service';
 import { DeviceEditComponent } from './components/device-edit/device-edit.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, switchMap, tap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { DeviceCreateComponent } from './components/device-create/device-create.component';
+import { STATUS_OPTION, TYPE_OPTION } from '../../shared/constants/DeviceOptions';
 
 @Component({
   selector: 'app-device',
@@ -23,6 +24,8 @@ import { DeviceCreateComponent } from './components/device-create/device-create.
   ],
 })
 export class DeviceComponent implements OnInit {
+  type_option = TYPE_OPTION;
+  status_option = STATUS_OPTION;
   zones: MapDetails[] = [];
   loading = this.loadingService.loading;
 
@@ -40,14 +43,10 @@ export class DeviceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParamMap
-      .pipe(
-        map((queryParamMap) => queryParamMap.get('id')),
-        filter((id) => id !== null),
-      )
-      .subscribe((id) => {
-        this.edit(id!);
-      });
+    const id = this.route.snapshot.queryParamMap.get('id');
+    if (id) {
+      this.openEditDialog(id);
+    }
   }
 
   refreshTable() {
@@ -55,10 +54,8 @@ export class DeviceComponent implements OnInit {
     this.tableService.refreshTable();
   }
 
-  // не тестил делит, сделаю когда смогу создавать устройства, так же в зоне надо удалять
-
   delete(id: string): void {
-    this.deviceService.deleteDevice(id).pipe().subscribe();
+    this.deviceService.deleteDevice(id).subscribe();
     this.refreshTable();
   }
 
@@ -68,22 +65,22 @@ export class DeviceComponent implements OnInit {
       autoFocus: false,
     });
 
-    dialogRef.afterClosed().subscribe((device) => {
-      this.deviceService.createDevice(device).subscribe();
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(
+        switchMap((device: Device) => {
+          return this.deviceService.createDevice(device);
+        }),
+      )
+      .subscribe(() => this.refreshTable());
   }
-
-  // openCreateDialog() {}
 
   edit(id: string) {
-    this.updateUrl(id);
-
-    this.deviceService.getDevice(id).subscribe((device) => {
-      this.openEditDialog(device);
-    });
+    this.urlUpdate(id);
+    this.openEditDialog(id);
   }
 
-  updateUrl(id: string) {
+  urlUpdate(id: string) {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { id },
@@ -91,20 +88,26 @@ export class DeviceComponent implements OnInit {
     });
   }
 
-  openEditDialog(device: Device) {
-    const dialogRef = this.matDialog.open(DeviceEditComponent, {
-      data: {
-        device: device,
-        zones: this.zones,
-      },
-      autoFocus: false,
-    });
-    // todo Это считается вложенностью подписок?
-    dialogRef.afterClosed().subscribe((device: Device) => {
-      this.deviceService.edit(device).subscribe(() => {
-        this.router.navigate(['device']);
-      });
-    });
+  openEditDialog(id: string) {
+    this.deviceService
+      .getDevice(id)
+      .pipe(
+        switchMap((device: Device) => {
+          return this.matDialog
+            .open(DeviceEditComponent, {
+              data: {
+                device: device,
+                zones: this.zones,
+              },
+              autoFocus: false,
+            })
+            .afterClosed();
+        }),
+        switchMap((device: Device) => {
+          return this.deviceService.edit(device);
+        }),
+      )
+      .subscribe(() => this.router.navigate(['device']));
   }
 
   search(): void {

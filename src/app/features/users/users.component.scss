@@ -8,17 +8,17 @@ header {
   padding-bottom: 8px;
 }
 
-.header-buttons {
+.button-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
-.add-button {
+.button-container :first-child {
   margin-right: 8px;
 }
 
-.example-form {
+.input-form {
   display: flex;
   width: 200px;
   padding: 6px 5px;

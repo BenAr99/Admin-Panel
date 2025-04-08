@@ -64,6 +64,22 @@ body .mat-mdc-form-field-error, body .mat-mdc-form-field-hint-wrapper, body .mat
 }
 //
 
+body .device-component .mat-mdc-form-field-subscript-wrapper, .mat-mdc-form-field-bottom-align::before {
+  height: 1px;
+}
+body .device-component  .mat-mdc-text-field-wrapper{
+  height: 45px;
+  width: 160px;
+}
+
+body .device-component .mat-mdc-form-field:not(.mat-form-field-disabled) .mat-mdc-floating-label.mdc-floating-label, .mat-mdc-select-min-line{
+  padding-bottom: 9px;
+}
+
+body .device-component .mdc-text-field--outlined .mat-mdc-form-field-infix, .mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding-top: 11px;
+}
+
 .modal-dialog {
   .mat-mdc-dialog-container,
   .mat-mdc-dialog-container .mdc-dialog__container,

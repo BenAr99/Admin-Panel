@@ -9,13 +9,13 @@ header {
 }
 
 
-.example-button-container {
+.button-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.example-button-container :first-child {
+.button-container :first-child {
   margin-right: 8px;
 }
 

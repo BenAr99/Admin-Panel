@@ -9,21 +9,21 @@ header {
   padding-bottom: 8px;
 }
 
-.header-buttons {
+.button-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+}
+
+.button-container :first-child {
+  margin-right: 8px;
 }
 
 .none-input {
   display: none;
 }
 
-.add-button {
-  margin-right: 8px;
-}
-
-.example-form {
+.input-form {
   display: flex;
   align-items: center;
   height: 30px;

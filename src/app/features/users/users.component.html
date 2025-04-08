@@ -1,12 +1,12 @@
 <header>
-  <div class="example-form">
+  <div class="input-form">
     <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
     <input (input)="search()" [(ngModel)]="tableService.filter.text" class="input-header"
            placeholder="Поиск пользователя">
   </div>
 
-  <div class="header-buttons">
-    <button (click)="openDialog()" class="add-button" mat-raised-button>
+  <div class="button-container">
+    <button (click)="openDialog()" mat-raised-button>
       Добавить
     </button>
     <button mat-mini-fab>
