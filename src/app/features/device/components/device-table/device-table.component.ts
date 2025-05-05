@@ -26,8 +26,6 @@ export class DeviceTableComponent {
   constructor() {}
 
   edit(id: string) {
-    console.log(this.data);
-
     this.dialogEdit.emit(id);
   }
 

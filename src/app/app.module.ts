@@ -65,6 +65,7 @@ import { DeviceTableComponent } from './features/device/components/device-table/
 import { DeviceComponent } from './features/device/device.component';
 import { DeviceEditComponent } from './features/device/components/device-edit/device-edit.component';
 import { DeviceCreateComponent } from './features/device/components/device-create/device-create.component';
+import { SelectDialogComponent } from './shared/components/select-dialog/select-dialog.component';
 
 @NgModule({
   declarations: [

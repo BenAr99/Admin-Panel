@@ -14,7 +14,7 @@ import { LocalStorageService } from '../../service/local-storage.service';
 })
 export class AuthComponent {
   auth: FormGroup;
-  previousUrl?: string;
+  previousUrl: string = '';
 
   constructor(
     private router: Router,

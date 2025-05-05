@@ -28,7 +28,6 @@ export class HistoryTableComponent {
       .getUser(id)
       .pipe(
         map((value) => {
-          console.log(value);
           return [
             ['Устройство:', value.name],
             ['Зона:', value.login],
@@ -45,7 +44,6 @@ export class HistoryTableComponent {
       .getDevice(id)
       .pipe(
         map((value) => {
-          console.log(value);
           return [
             ['Устройство:', value.name],
             ['Зона:', value.zone?.name],

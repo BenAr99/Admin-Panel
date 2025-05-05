@@ -34,7 +34,7 @@ export class UsersComponent {
 
     dialogRef
       .afterClosed()
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result: User) => {
         this.addUser(result.name, Number(result.phone), result.login);
       });
@@ -43,7 +43,7 @@ export class UsersComponent {
   addUser(name: string, phone: number, login: string) {
     this.usersService
       .addUsers(name, phone, login)
-      .pipe()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {});
     this.refreshTable();
   }
@@ -56,7 +56,7 @@ export class UsersComponent {
   deleteUser(uuid: string): void {
     this.usersService
       .deleteUser(uuid)
-      .pipe()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => this.refreshTable());
   }
 
