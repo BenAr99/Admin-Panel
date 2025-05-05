@@ -1,0 +1,78 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+}
+
+.title {
+  font-weight: 500;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-container :first-child {
+  margin-right: 8px;
+}
+
+.small-cell {
+  width: 30px;
+  padding: 4px 10px;
+}
+
+.button-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: #ff2121;
+}
+
+.icons {
+  padding-top: 4px;
+  font-size: 18px;
+}
+
+._hidden {
+  visibility: hidden;
+}
+
+.hidden:hover {
+  ._hidden {
+    visibility: visible;
+  }
+}
+
+.button-backspace {
+  color: #3f51b5;
+  background: white;
+  border: 2px solid #3f51b5;
+  border-radius: 12px;
+}
+
+
+.table {
+  display: table;
+  border: solid 1px #f4f4f4;
+  overflow-y: auto;
+  tr:hover {
+    background-color: #f0f0f0;
+  }
+  th {
+    background-color: white;
+  }
+}
+
+.cell {
+  text-align: center;
+  cursor: pointer;
+}
+
+.loading {
+  position: absolute;
+  top: 46%;
+  right: 36%;
+}

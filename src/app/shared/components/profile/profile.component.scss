@@ -1,0 +1,69 @@
+@use '../../styles/media-query' as media;
+
+:host {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+
+@include media.mobile-only {
+  :host {
+    font-size: 8px;
+    .button-icon, .profile-icon {
+      width: 24px;
+      height: 24px;
+    }
+    .button-icon {
+      margin-left: 8px;
+    }
+  }
+}
+
+@include media.tablet-landscape-up {
+  :host {
+    font-size: 12px;
+    .button-icon, .profile-icon {
+      width: 36px;
+      height: 36px;
+    }
+    .button-icon {
+      margin-left: 8px;
+    }
+  }
+}
+
+@include media.desktop-up {
+  :host {
+    font-size: 16px;
+    .button-icon, .profile-icon {
+      width: 48px;
+      height: 48px;
+    }
+    .button-icon {
+      margin-left: 8px;
+    }
+  }
+}
+
+.button-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background: #f7f9fc;
+}
+
+.rank {
+  font-size: 0.85em;
+  color: #828282;
+}
+
+.modal-dialog {
+  border: 0 solid;
+  border-radius: 50%;
+}

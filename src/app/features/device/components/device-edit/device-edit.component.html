@@ -1,0 +1,50 @@
+<app-dialog>
+  <span ngProjectAs="title">Редактирование устройства</span>
+  <form [formGroup]="deviceForm" class="form">
+
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Устройство</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Зона</mat-label>
+      <mat-select formControlName="zone">
+        <mat-option *ngFor="let zone of zones"  [value]="zone.id">{{ zone.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Статус</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="inactive">Inactive</mat-option>
+        <mat-option disabled value="active">Active</mat-option>
+        <mat-option value="service">Service</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+
+
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>IP</mat-label>
+      <input matInput formControlName="ip_address">
+    </mat-form-field>
+
+<!--    <mat-form-field appearance="outline" class="example-full-width">-->
+<!--      <mat-label>Имя</mat-label>-->
+<!--      <input matInput formControlName="name">-->
+<!--      @if (deviceForm.controls['name'].hasError('required')) {-->
+<!--        <mat-error>Заполните поле</mat-error>-->
+<!--      }-->
+<!--    </mat-form-field>-->
+  </form>
+
+
+  <div ngProjectAs="buttons-end">
+    <button mat-raised-button mat-dialog-close>Отменить</button>
+    <button mat-raised-button color="primary" (click)="edit()">Изменить</button>
+  </div>
+
+</app-dialog>
+

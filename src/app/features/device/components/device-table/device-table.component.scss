@@ -1,0 +1,47 @@
+:host {
+  display: block;
+  overflow-y: auto;
+  height: 640px;
+}
+
+.table {
+  border: solid 1px #f4f4f4;
+  overflow-y: scroll;
+  tr:hover {
+    background-color: #f0f0f0;
+  }
+  th {
+    background-color: white;
+  }
+}
+.cell {
+  text-align: center;
+  cursor: pointer;
+}
+
+.small-cell {
+  width: 30px;
+  padding: 4px 10px;
+}
+
+._hidden {
+  visibility: hidden;
+}
+
+.hidden:hover {
+  ._hidden {
+    visibility: visible;
+  }
+}
+
+.button-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: #ff2121;
+}
+
+.icons {
+  padding-top: 4px;
+  font-size: 18px;
+}

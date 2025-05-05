@@ -1,0 +1,41 @@
+<app-dialog>
+  <span ngProjectAs="title">Добавить пользователя</span>
+<!--//todo Какая разница в control[name]/get(name) и есть ли еще вариант?-->
+  <form [formGroup]="userForm" class="form">
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Имя</mat-label>
+      <input matInput formControlName="name">
+      @if (userForm.controls['name'].hasError('required')) {
+        <mat-error>Заполните поле</mat-error>
+      }
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Телефон</mat-label>
+      <input [maskito]="maskitoOptions" type="tel" matInput formControlName="phone">
+      @if (userForm.get('phone')?.hasError('phone')) {
+        <mat-error>{{userForm.get('phone')?.getError('phone')}}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Почта</mat-label>
+      <input matInput formControlName="login">
+      @if (userForm.controls['login'].hasError('required')) {
+        <mat-error>Заполните поле</mat-error>
+      }
+      @if (userForm.controls['login'].hasError('email')) {
+        <mat-error>Введите корректную почту</mat-error>
+      }
+    </mat-form-field>
+  </form>
+
+
+  <div ngProjectAs="buttons-end">
+    <button mat-raised-button mat-dialog-close>Отменить</button>
+    <button mat-raised-button color="primary" (click)="add()" cdkFocusInitial>Подтвердить</button>
+  </div>
+
+</app-dialog>
+

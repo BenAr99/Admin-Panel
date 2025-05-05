@@ -1,0 +1,23 @@
+:host {
+  display: block;
+  overflow-y: auto;
+  height: 740px;
+}
+
+.table {
+  display: table;
+  border: solid 1px #f4f4f4;
+  overflow-y: auto;
+}
+
+.device-item {
+  text-transform: uppercase;
+}
+
+.table:nth-child(even) {
+  background: #f7f9fc;
+}
+
+.title:nth-child(even){
+  background: #f7f9fc;
+}

@@ -1,0 +1,58 @@
+<div class="device-component">
+  <header>
+
+    <div class="button-container">
+      <div class="input-form input-margin">
+        <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
+        <input (input)="search()" [(ngModel)]="tableService.filter.name" class="input-header"
+               placeholder="Номер устройства">
+      </div>
+
+      <div class="input-form input-margin">
+        <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
+        <input (input)="search()" [(ngModel)]="tableService.filter.text" class="input-header"
+               placeholder="Поиск по IP/MAC">
+      </div>
+
+      <mat-form-field class="input-margin" appearance="outline">
+        <mat-label>Статус</mat-label>
+        <mat-select (selectionChange)="search()" [(ngModel)]="tableService.filter.status">
+          <mat-option *ngFor="let status of status_option" [value]="status.value">{{ status.label }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="input-margin" appearance="outline">
+        <mat-label>Тип устройства</mat-label>
+        <mat-select (selectionChange)="search()" [(ngModel)]="tableService.filter.type">
+          <mat-option *ngFor="let type of type_option" [value]="type.value">{{ type.label }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <div class="button-container">
+      <button class="input-margin" (click)="create()" mat-mini-fab color="primary">
+        <mat-icon>add</mat-icon>
+      </button>
+
+      <button (click)="refreshTable()" mat-mini-fab>
+        <mat-icon> refresh icon</mat-icon>
+      </button>
+    </div>
+
+  </header>
+
+  <div class="loading" *ngIf="loading | async">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <app-device-table
+    appScrollPagination
+    (scroll)="tableService.uploading()"
+    (dialogEdit)="edit($event)"
+    (rowDeleted)="delete($event)"
+    *ngIf="tableService.dataSubject | async as data"
+    [data]="data"
+  ></app-device-table>
+
+</div>

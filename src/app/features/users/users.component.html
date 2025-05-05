@@ -1,0 +1,30 @@
+<header>
+  <div class="input-form">
+    <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
+    <input (input)="search()" [(ngModel)]="tableService.filter.text" class="input-header"
+           placeholder="Поиск пользователя">
+  </div>
+
+  <div class="button-container">
+    <button (click)="openDialog()" mat-raised-button>
+      Добавить
+    </button>
+    <button mat-mini-fab>
+      <mat-icon (click)="refreshTable()"> refresh icon</mat-icon>
+    </button>
+  </div>
+</header>
+
+<div class="user-table">
+
+  <div class="loading" *ngIf="loading | async">
+    <mat-spinner></mat-spinner>
+  </div>
+  <app-user-table
+    appScrollPagination
+    (scroll)="tableService.uploading()"
+    (rowDeleted)="deleteUser($event)"
+    *ngIf="tableService.dataSubject | async as dataUsers"
+    [data]="dataUsers">
+  </app-user-table>
+</div>

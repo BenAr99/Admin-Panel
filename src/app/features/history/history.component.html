@@ -1,0 +1,32 @@
+<header>
+  <div class="button-container">
+    <div class="input-form">
+      <img ngSrc="assets/icons/find-icon.svg" alt="find-icon" height="22" width="22">
+      <input (ngModelChange)="onTextChange()" [(ngModel)]="text" class="input-header"
+             placeholder="Поиск пользователя">
+    </div>
+
+    <div class="input-form">
+      <input matInput class="input-header"  (ngModelChange)="onDateChange()" [(ngModel)]="date" [matDatepicker]="picker" placeholder="Выберите дату">
+      <mat-datepicker-toggle class="datepicker-icon" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </div>
+  </div>
+
+
+  <button mat-mini-fab>
+    <mat-icon (click)="refreshTable()"> refresh icon</mat-icon>
+  </button>
+</header>
+
+
+<div class="loading" *ngIf="loading | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<app-history-table
+  appScrollPagination
+  (scroll)="tableService.uploading()"
+  *ngIf="tableService.dataSubject | async as dataUsers"
+  [data]="dataUsers">
+</app-history-table>

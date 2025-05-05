@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-container :first-child {
+  margin-right: 8px;
+}
+
+.input-form {
+  display: flex;
+  width: 200px;
+  padding: 6px 5px;
+  border-radius: 6px;
+  border: solid 1px #828282;
+}
+
+.input-header {
+  width: 90%;
+  font-size: 14px;
+  margin-left: 5px;
+  border: none;
+}
+
+.input-header:focus {
+  outline: none;
+}
+
+.loading {
+  position: absolute;
+  top: 46%;
+  right: 36%;
+}

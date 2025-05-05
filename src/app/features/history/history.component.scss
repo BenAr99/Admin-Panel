@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-container :first-child {
+  margin-right: 8px;
+}
+
+.none-input {
+  display: none;
+}
+
+.input-form {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 200px;
+  padding: 6px 5px;
+  margin: 0 20px 0 0;
+  border-radius: 6px;
+  border: solid 1px #828282;
+}
+
+.datepicker-icon {
+  color: #2948E9;
+}
+
+.input-header {
+  width: 90%;
+  font-size: 14px;
+  margin-left: 5px;
+  border: none;
+}
+
+.input-header:focus {
+  outline: none;
+}
+
+.loading {
+  position: absolute;
+  top: 46%;
+  right: 36%;
+}
+
+.cell {
+  position: absolute;
+  z-index: 0  ;
+}

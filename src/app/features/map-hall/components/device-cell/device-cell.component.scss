@@ -1,0 +1,39 @@
+:host {
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  min-height: 110px;
+  min-width: 64px;
+  border: #6c6c6c solid 2px;
+  border-radius: 8px;
+  position: relative;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.device-status {
+  padding-top: 5px;
+  margin: 5px 0;
+  min-height: 18px;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  font-size: 12px;
+  border: #2e2e70 solid 2px;
+}
+
+.hover {
+  border-radius: 16px;
+  background: white;
+  border: 1px solid #CECECE;
+  position: absolute;
+  padding: 12px 20px 12px 16px;
+  top: 120px;
+  left: 60px;
+  z-index: 1;
+}
+
