@@ -27,10 +27,7 @@ const maskPhone = {
     /\d/,
     /\d/,
   ],
-  postprocessors: [
-    // non-removable country prefix
-    maskitoPrefixPostprocessorGenerator('+7 '),
-  ],
+  postprocessors: [maskitoPrefixPostprocessorGenerator('+7 ')],
   preprocessors: [createCompletePhoneInsertionPreprocessor()],
   plugins: [
     maskitoAddOnFocusPlugin('+7 '),

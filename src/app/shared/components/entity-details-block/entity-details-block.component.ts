@@ -5,6 +5,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   templateUrl: './entity-details-block.component.html',
   styleUrl: './entity-details-block.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class EntityDetailsBlockComponent {
   @Input() value?: string | number;

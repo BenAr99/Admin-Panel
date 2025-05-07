@@ -7,8 +7,6 @@ import { LoadingService } from '../../shared/services/loading.service';
 import { FormControl } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-// SR: В модуль всю эту логику
-
 @Component({
   selector: 'app-map-hall',
   templateUrl: './map-hall.component.html',
