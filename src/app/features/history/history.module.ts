@@ -29,11 +29,13 @@ import {
 import { EntityDetailsComponent } from '../../shared/components/entity-details-component/entity-details.component';
 import { EntityDetailsBlockComponent } from '../../shared/components/entity-details-block/entity-details-block.component';
 import { MatIcon } from '@angular/material/icon';
+import { HistoryRoutingModule } from './history-routing.module';
 
 @NgModule({
   declarations: [HistoryComponent, HistoryTableComponent, ShellHistoryDetailsComponent],
   imports: [
     CommonModule,
+    HistoryRoutingModule,
     FormsModule,
     MatSuffix,
     MatIcon,

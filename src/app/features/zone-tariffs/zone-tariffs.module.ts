@@ -18,11 +18,13 @@ import {
   MatRowDef,
   MatTable,
 } from '@angular/material/table';
+import { ZoneTariffsRoutingModule } from './zone-tariffs-routing.module';
 
 @NgModule({
   declarations: [ZoneTariffsComponent, ZoneDetailsComponent, ZoneTableComponent],
   imports: [
     CommonModule,
+    ZoneTariffsRoutingModule,
     MatProgressSpinner,
     MatIcon,
     MatMiniFabButton,

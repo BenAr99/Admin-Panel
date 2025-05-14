@@ -48,11 +48,6 @@ import {
   MatDatepickerToggle,
 } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { UsersModule } from './features/users/users.module';
-import { ZoneTariffsModule } from './features/zone-tariffs/zone-tariffs.module';
-import { MapHallModule } from './features/map-hall/map-hall.module';
-import { HistoryModule } from './features/history/history.module';
-import { DeviceModule } from './features/device/device.module';
 
 @NgModule({
   declarations: [AppComponent, BookingModalComponent],
@@ -62,11 +57,6 @@ import { DeviceModule } from './features/device/device.module';
     AuthModule,
     AppRoutingModule,
     DefaultModule,
-    UsersModule,
-    ZoneTariffsModule,
-    MapHallModule,
-    HistoryModule,
-    DeviceModule,
     BrowserAnimationsModule,
     MatDialogContent,
     MatDialogTitle,

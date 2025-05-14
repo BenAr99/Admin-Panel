@@ -1,14 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultComponent } from './shared/layout/default/default.component';
-import { MapHallComponent } from './features/map-hall/map-hall.component';
-import { ZoneTariffsComponent } from './features/zone-tariffs/zone-tariffs.component';
-import { HistoryComponent } from './features/history/history.component';
-import { UsersComponent } from './features/users/users.component';
 import { AuthComponent } from './auth/pages/auth/auth.component';
 import { AuthGuard } from './auth/auth-guard.service';
-import { ZoneDetailsComponent } from './features/zone-tariffs/page/zone-details/zone-details.component';
-import { DeviceComponent } from './features/device/device.component';
 
 const routes: Routes = [
   {
@@ -18,32 +12,26 @@ const routes: Routes = [
     children: [
       {
         path: 'map-hall',
-        component: MapHallComponent,
+        loadChildren: () =>
+          import('./features/map-hall/map-hall.module').then((m) => m.MapHallModule),
       },
       {
         path: 'zones-tariffs',
-        children: [
-          {
-            path: '',
-            component: ZoneTariffsComponent,
-          },
-          {
-            path: ':zone',
-            component: ZoneDetailsComponent,
-          },
-        ],
+        loadChildren: () =>
+          import('./features/zone-tariffs/zone-tariffs.module').then((m) => m.ZoneTariffsModule),
       },
       {
         path: 'device',
-        component: DeviceComponent,
+        loadChildren: () => import('./features/device/device.module').then((m) => m.DeviceModule),
       },
       {
         path: 'history',
-        component: HistoryComponent,
+        loadChildren: () =>
+          import('./features/history/history.module').then((m) => m.HistoryModule),
       },
       {
         path: 'users',
-        component: UsersComponent,
+        loadChildren: () => import('./features/users/users.module').then((m) => m.UsersModule),
       },
     ],
   },

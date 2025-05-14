@@ -26,11 +26,13 @@ import {
   MatRowDef,
   MatTable,
 } from '@angular/material/table';
+import { DeviceRoutingModule } from './device-routing.module';
 
 @NgModule({
   declarations: [DeviceComponent, DeviceCreateComponent, DeviceEditComponent, DeviceTableComponent],
   imports: [
     CommonModule,
+    DeviceRoutingModule,
     FormsModule,
     MatFormField,
     MatLabel,

@@ -25,12 +25,14 @@ import { MatInput } from '@angular/material/input';
 import { MatDialogClose } from '@angular/material/dialog';
 import { MaskitoDirective } from '@maskito/angular';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
+import { UsersRoutingModule } from './users-routing.module';
 
 @NgModule({
   declarations: [UsersComponent, UserTableComponent, AddUserComponent],
   imports: [
     CommonModule,
     FormsModule,
+    UsersRoutingModule,
     MatIcon,
     MatProgressSpinner,
     ScrollPaginationDirective,

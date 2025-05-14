@@ -10,11 +10,13 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MapHallRoutingModule } from './map-hall-routing.module';
 
 @NgModule({
   declarations: [MapHallComponent, DeviceCellComponent, TableMapComponent, StatusDeviceDirective],
   imports: [
     CommonModule,
+    MapHallRoutingModule,
     EntityDetailsBlockComponent,
     EntityDetailsComponent,
     MatFormField,
