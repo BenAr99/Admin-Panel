@@ -3,6 +3,7 @@ import { History } from '../../models/entities/interfaces/maps.interface';
 import { LoadingService } from '../../shared/services/loading.service';
 import { PAGINATION_SERVICE_INJECTION_TOKEN, TableService } from '../../shared/table/table.service';
 import { HistoryFilter, HistoryService } from './services/history.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-history',
@@ -21,6 +22,7 @@ export class HistoryComponent {
   text: string = '';
   date: Date | undefined = undefined;
   loading = this.loadingService.loading;
+  test = new Subject<string>();
 
   constructor(
     private loadingService: LoadingService,

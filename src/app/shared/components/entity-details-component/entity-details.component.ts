@@ -5,6 +5,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './entity-details.component.html',
   styleUrl: './entity-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class EntityDetailsComponent {
   constructor() {}

@@ -9,6 +9,8 @@ import {
   TableService,
 } from '../../../../shared/table/table.service';
 import { DeviceDetailsFilter, ZoneDetailsService } from '../../services/zone-details.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SelectDialogComponent } from '../../../../shared/components/select-dialog/select-dialog.component';
 
 @Component({
   selector: 'app-zone-details',
@@ -24,6 +26,7 @@ import { DeviceDetailsFilter, ZoneDetailsService } from '../../services/zone-det
   ],
 })
 export class ZoneDetailsComponent implements OnInit {
+  zone_id = '';
   header = new BehaviorSubject('');
   data = new BehaviorSubject<Device[]>([]);
   loading = this.loadingService.loading;
@@ -35,6 +38,7 @@ export class ZoneDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public tableService: TableService<Device, DeviceDetailsFilter>,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -46,13 +50,26 @@ export class ZoneDetailsComponent implements OnInit {
         }),
       )
       .subscribe((id) => {
+        this.zone_id = id!;
         this.tableService.filter.text = id!;
         this.tableService.search();
         this.loadingService.hide();
       });
   }
 
-  add() {}
+  add() {
+    if (this.zone_id) {
+      this.zoneService.getDevicesExcluding(this.zone_id).subscribe((devices) => {
+        this.dialog.open(SelectDialogComponent, {
+          panelClass: 'modal-dialog',
+          data: devices,
+          backdropClass: 'no-backdrop',
+          width: '250px',
+          height: '250px',
+        });
+      });
+    }
+  }
 
   refreshTable() {
     this.tableService.refreshTable();

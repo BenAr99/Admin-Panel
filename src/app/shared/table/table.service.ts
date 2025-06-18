@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { DestroyRef, Inject, Injectable, InjectionToken } from '@angular/core';
 import {
   BehaviorSubject,
   debounceTime,
@@ -46,6 +46,7 @@ export class TableService<T, TFilter extends {}> {
 
   constructor(
     private loadingService: LoadingService,
+    private destroyRef: DestroyRef,
     @Inject(PAGINATION_SERVICE_INJECTION_TOKEN) private dataService: PaginationService<T, TFilter>,
   ) {
     this.scrolling
@@ -70,7 +71,7 @@ export class TableService<T, TFilter extends {}> {
           this.loadingService.show();
           return this.dataService.getList(value).pipe(
             map((value) => {
-              return value.list;
+              return value?.list;
             }),
             filter((value) => {
               this.loadingService.hide();
@@ -83,7 +84,7 @@ export class TableService<T, TFilter extends {}> {
           this.loadingService.hide();
           return [...value[1], ...value[0]];
         }),
-        takeUntilDestroyed(),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((value) => {
         this.dataSubject.next(value);

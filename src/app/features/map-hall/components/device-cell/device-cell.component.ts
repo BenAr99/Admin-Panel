@@ -2,12 +2,13 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   Input,
   OnDestroy,
-  OnInit,
 } from '@angular/core';
 import { Device, DeviceStatus } from '../../../../models/entities/interfaces/maps.interface';
 import { debounceTime, Subject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-device-cell',
@@ -15,20 +16,21 @@ import { debounceTime, Subject } from 'rxjs';
   styleUrl: './device-cell.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeviceCellComponent implements OnDestroy, OnInit {
-  @Input() cell!: Device;
-  hover?: boolean;
+export class DeviceCellComponent implements OnDestroy {
+  @Input() cell?: Device;
+  hover: boolean;
   private mouseEnterSubject = new Subject<boolean>();
-  constructor(private changeDetectionRef: ChangeDetectorRef) {
+  constructor(
+    private changeDetectionRef: ChangeDetectorRef,
+    private destroyRef: DestroyRef,
+  ) {
     this.hover = false;
-    this.mouseEnterSubject.pipe(debounceTime(300)).subscribe((value) => {
-      this.hover = value;
-      this.changeDetectionRef.detectChanges();
-    });
-  }
-
-  ngOnInit() {
-    console.log(this.cell);
+    this.mouseEnterSubject
+      .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
+      .subscribe((value) => {
+        this.hover = value;
+        this.changeDetectionRef.detectChanges();
+      });
   }
 
   hidden(value: boolean) {

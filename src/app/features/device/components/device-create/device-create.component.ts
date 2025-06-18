@@ -27,7 +27,6 @@ export class DeviceCreateComponent {
 
   create() {
     if (this.deviceForm.valid) {
-      console.log(this.deviceForm.value);
       this.matDialogRef.close(this.deviceForm.value);
     }
   }

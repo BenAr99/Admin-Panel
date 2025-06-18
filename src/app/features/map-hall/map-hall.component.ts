@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit } from '@angular/core';
 import { MapsService } from './services/maps.service';
 import { Device, MapDetails } from '../../models/entities/interfaces/maps.interface';
 import { MapsStateService } from './services/maps-state.service';
-import { map, Observable, of, tap } from 'rxjs';
+import { filter, Observable, of, startWith, tap } from 'rxjs';
 import { LoadingService } from '../../shared/services/loading.service';
-
-// SR: В модуль всю эту логику
+import { FormControl } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-map-hall',
@@ -17,10 +17,8 @@ import { LoadingService } from '../../shared/services/loading.service';
 export class MapHallComponent implements OnInit {
   loading = this.loadingService.loading;
 
-  maps!: Observable<MapDetails[]>;
-
-  selectedMapId?: string;
-  selectedMap!: MapDetails | null;
+  maps: Observable<MapDetails[]> = of([]);
+  selectedMapId = new FormControl(this.mapsStateService.mapTypeValue);
 
   devices: Observable<Device[]> = of([]);
 
@@ -28,30 +26,27 @@ export class MapHallComponent implements OnInit {
     private mapsService: MapsService,
     private mapsStateService: MapsStateService,
     private loadingService: LoadingService,
-  ) {
-    this.selectedMapId = this.mapsStateService.mapTypeValue;
-  }
+    private destroyRef: DestroyRef,
+  ) {}
 
   ngOnInit() {
     this.loadingService.show();
+    this.selectedMapId.valueChanges
+      .pipe(
+        startWith(this.selectedMapId.value),
+        takeUntilDestroyed(this.destroyRef),
+        filter((value) => value !== null && value.length > 0),
+      )
+      .subscribe((value): void => {
+        this.mapLoad(value!);
+      });
+
     this.maps = this.mapsService.getMaps().pipe(tap(() => this.loadingService.hide()));
-    if (this.selectedMapId) {
-      console.log('тут?');
-      this.mapLoad(this.selectedMapId);
-    }
   }
 
   mapLoad(eventId: string) {
     this.loadingService.show();
     this.devices = this.mapsService.getDevices(eventId).pipe(tap(() => this.loadingService.hide()));
     this.mapsStateService.mapTypeValue = eventId;
-  }
-
-  getSelectedMap(): Observable<MapDetails | null> {
-    return this.maps.pipe(
-      map((value): MapDetails | null => {
-        return value.find((value) => value.id === this.selectedMapId) ?? null;
-      }),
-    );
   }
 }

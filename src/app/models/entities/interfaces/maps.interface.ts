@@ -1,7 +1,5 @@
 import { FormControl } from '@angular/forms';
 
-//todo Так и оставить тут интерфейсы? Или разделить по их папкам?
-
 export interface MapDetails {
   id: string;
   name: string;
@@ -48,8 +46,6 @@ export interface UserForm {
   phone: FormControl<string | null>;
 }
 
-// enum с type pc/ps
-
 export enum DeviceType {
   ps = 'ps',
   pc = 'pc',
@@ -61,4 +57,3 @@ export enum DeviceStatus {
   Service = 'service',
   Empty = 'empty',
 }
-// возможно стоит в отделньый файл статусы
