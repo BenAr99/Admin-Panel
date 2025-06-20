@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, DestroyRef, OnInit } from '@angular
 import { MapsService } from './services/maps.service';
 import { Device, MapDetails } from '../../models/entities/interfaces/maps.interface';
 import { MapsStateService } from './services/maps-state.service';
-import { filter, Observable, of, startWith, tap } from 'rxjs';
+import { filter, map, merge, Observable, of, startWith, tap } from 'rxjs';
 import { LoadingService } from '../../shared/services/loading.service';
 import { FormControl } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TriggerBookingService } from '../booking-modal/services/trigger-booking.service';
 
 @Component({
   selector: 'app-map-hall',
@@ -27,18 +28,29 @@ export class MapHallComponent implements OnInit {
     private mapsStateService: MapsStateService,
     private loadingService: LoadingService,
     private destroyRef: DestroyRef,
+    private triggerBookingService: TriggerBookingService,
   ) {}
 
   ngOnInit() {
     this.loadingService.show();
-    this.selectedMapId.valueChanges
-      .pipe(
-        startWith(this.selectedMapId.value),
-        takeUntilDestroyed(this.destroyRef),
-        filter((value) => value !== null && value.length > 0),
-      )
-      .subscribe((value): void => {
-        this.mapLoad(value!);
+
+    const selectedMapObservable = this.selectedMapId.valueChanges.pipe(
+      startWith(this.selectedMapId.value),
+      filter((value) => value !== null && value.length > 0),
+    );
+
+    const triggerChangeDeviceObservable = this.triggerBookingService.triggerObservable.pipe(
+      map((): string | null => {
+        return this.selectedMapId.value;
+      }),
+    );
+
+    merge(selectedMapObservable, triggerChangeDeviceObservable)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((value) => {
+        if (typeof value === 'string') {
+          this.mapLoad(value);
+        }
       });
 
     this.maps = this.mapsService.getMaps().pipe(tap(() => this.loadingService.hide()));

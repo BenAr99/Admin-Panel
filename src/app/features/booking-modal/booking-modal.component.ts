@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MapsService } from '../map-hall/services/maps.service';
 import { BookingForm } from '../../models/entities/interfaces/bookingForm.interface';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { MapDetails } from '../../models/entities/interfaces/maps.interface';
+import { TriggerBookingService } from './services/trigger-booking.service';
 
 @Component({
   selector: 'app-booking-modal',
@@ -19,7 +20,7 @@ export class BookingModalComponent {
   constructor(
     private mapsService: MapsService,
     private dialog: MatDialogRef<BookingModalComponent>,
-    private changeDetectionRef: ChangeDetectorRef,
+    private triggerBookingService: TriggerBookingService,
   ) {
     this.mapSubject = this.mapsService.getMaps();
     this.booking = new FormGroup<BookingForm>({
@@ -33,7 +34,7 @@ export class BookingModalComponent {
   createBooking() {
     if (this.booking.valid) {
       this.mapsService.postBooking(this.booking.value).subscribe(() => {
-        this.changeDetectionRef.detectChanges();
+        this.triggerBookingService.triggerChange();
       });
       this.dialog.close();
     } else {
